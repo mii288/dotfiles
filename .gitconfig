@@ -1,0 +1,17 @@
+[core]
+	editor = vim
+	autocrlf = false
+[color]
+	ui = true
+[alias]
+	tree = log --graph --full-history --all --color --date=short --pretty=format:\"%Cred%x09%h %Creset%ad%Cblue%d %Creset %s %C(bold)(%an)%Creset\"
+  me = !git log --no-merges --branches --pretty='format:%C(yellow)%h %C(green)%cd %C(red)%d %C(reset)%s' --date=iso --author=\"`git config --get user.name`\"
+  br = branch
+	co = checkout
+  cm = commit -m
+  cma = checkout master
+  cdev = checkout develop
+	ap = add -p
+	today = !git log --reverse --no-merges --branches --date=iso --pretty=\"format:%C(yellow)%h %C(green)%cd %C(red)%d %C(reset)%s\" --since=midnight --author=\"`git config --get user.name`\"
+[push]
+	default = current
