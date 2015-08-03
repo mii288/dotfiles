@@ -7,6 +7,7 @@ fi
 
 # User specific aliases and functions
 set completion-ignore-case on
+export TERM=xterm-256color
 
 # スクリプト読み込み
 source $HOME/.git-completion.bash

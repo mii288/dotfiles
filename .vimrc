@@ -13,10 +13,10 @@ set showmatch "括弧入力時の対応する括弧を表示
 syntax on "コードの色分け
 set smartindent "オートインデント
 
-set expandtab
-set tabstop=2
-set softtabstop=2
-set shiftwidth=2
+"set expandtab
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
 
 setlocal formatoptions-=r
 setlocal formatoptions-=o
@@ -30,6 +30,12 @@ set wrapscan "検索時に最後まで行ったら最初に戻る
 set guioptions+=a
 set clipboard+=unnamed
 
+"####タブ設定####
+nnoremap t; t
+nnoremap t <Nop>
+nnoremap to :<C-u>edit<Space>
+nnoremap tt :<C-u>tabnew<Space>
+nnoremap <silent> td :<C-u>tabclose<CR>
 
 "#### keymap ####
 " insertモードから抜ける
@@ -66,8 +72,19 @@ NeoBundle 'Shougo/neosnippet'
 NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'flazz/vim-colorschemes'
-NeoBundle 'Shougo/unite.vim'
+NeoBundle 'ctrlpvim/ctrlp.vim'
 NeoBundle 'terryma/vim-multiple-cursors'
+NeoBundle 'soramugi/auto-ctags.vim'
+NeoBundle 'joonty/vdebug'
+NeoBundle "thinca/vim-quickrun"
+NeoBundle "Shougo/vimproc"
+NeoBundle "osyo-manga/shabadou.vim"
+NeoBundle "osyo-manga/vim-watchdogs"
+NeoBundle 'alpaca-tc/alpaca_powertabline'
+NeoBundle 'Lokaltog/powerline', { 'rtp' : 'powerline/bindings/vim'}
+NeoBundle 'Lokaltog/powerline-fontpatcher'
+" zenburn カラースキーム
+NeoBundle 'vim-scripts/Zenburn'
 
 " You can specify revision/branch/tag.
 NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
