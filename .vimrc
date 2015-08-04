@@ -12,6 +12,21 @@ set title "編集中のファイル名を表示
 set showmatch "括弧入力時の対応する括弧を表示
 syntax on "コードの色分け
 set smartindent "オートインデント
+set list
+set listchars=eol:¬,tab:»\ 
+"全角スペースをハイライト表示
+function! ZenkakuSpace()
+	highlight ZenkakuSpace cterm=reverse ctermfg=DarkMagenta gui=reverse guifg=DarkMagenta
+endfunction
+
+if has('syntax')
+	augroup ZenkakuSpace
+		autocmd!
+		autocmd ColorScheme       * call ZenkakuSpace()
+		autocmd VimEnter,WinEnter * match ZenkakuSpace /　/
+	augroup END
+	call ZenkakuSpace()
+endif
 
 "set expandtab
 set tabstop=4
