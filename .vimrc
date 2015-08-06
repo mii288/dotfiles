@@ -3,8 +3,8 @@ set encoding=utf-8
 set fileencodings=ucs-bom,iso-2022-jp-3,iso-2022-jp,eucjp-ms,euc-jisx0213,euc-jp,sjis,cp932,utf-8
 set fileformats=unix,dos,mac
 " ファイルエンコーディングや文字コードをステータス行に表示する
-set laststatus=2
-set statusline=%<%f\ %m\ %r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=\(%v,%l)/%L%8P\ 
+" set laststatus=2
+" set statusline=%<%f\ %m\ %r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=\(%v,%l)/%L%8P\ 
 
 "#####表示設定#####
 set number "行番号を表示する
@@ -45,12 +45,18 @@ set wrapscan "検索時に最後まで行ったら最初に戻る
 set guioptions+=a
 set clipboard+=unnamed
 
+"####backspace###
+set backspace=indent,eol,start
+
 "####タブ設定####
 nnoremap t; t
 nnoremap t <Nop>
 nnoremap to :<C-u>edit<Space>
 nnoremap tt :<C-u>tabnew<Space>
 nnoremap <silent> td :<C-u>tabclose<CR>
+
+" ctagsをタブで開く
+map <C-]> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 
 "#### keymap ####
 " insertモードから抜ける
@@ -95,9 +101,8 @@ NeoBundle "thinca/vim-quickrun"
 NeoBundle "Shougo/vimproc"
 NeoBundle "osyo-manga/shabadou.vim"
 NeoBundle "osyo-manga/vim-watchdogs"
-NeoBundle 'alpaca-tc/alpaca_powertabline'
-NeoBundle 'Lokaltog/powerline', { 'rtp' : 'powerline/bindings/vim'}
-NeoBundle 'Lokaltog/powerline-fontpatcher'
+NeoBundle 'itchyny/lightline.vim'
+
 " zenburn カラースキーム
 NeoBundle 'vim-scripts/Zenburn'
 
@@ -115,3 +120,43 @@ filetype plugin indent on
 " this will conveniently prompt you to install them.
 NeoBundleCheck
 "End NeoBundle Scripts-------------------------
+" colorscheme
+" syntax on
+colorscheme zenburn
+
+" lightline.vim
+set laststatus=2
+let g:lightline = {
+	\ 'colorscheme': 'wombat',
+	\ 'component': {
+	\   'readonly': '%{&readonly?"⭤":""}',
+	\ },
+	\ 'separator': { 'left': '⮀', 'right': '⮂' },
+	\ 'subseparator': { 'left': '⮁', 'right': '⮃' }
+	\ }
+
+function! LightLineModified()
+	if &filetype == "help"
+		return ""
+	elseif &modified
+		return "+"
+	elseif &modifiable
+		return ""
+	else
+		return ""
+	endif
+endfunction
+
+function! LightLineReadonly()
+	if &filetype == "help"
+		return ""
+	elseif &readonly
+		return "⭤"
+	else
+		return ""
+	endif
+endfunction
+
+function! LightLineFugitive()
+	return exists('*fugitive#head') ? fugitive#head() : ''
+endfunction
