@@ -3,8 +3,7 @@ set encoding=utf-8
 set fileencodings=ucs-bom,iso-2022-jp-3,iso-2022-jp,eucjp-ms,euc-jisx0213,euc-jp,sjis,cp932,utf-8
 set fileformats=unix,dos,mac
 " ファイルエンコーディングや文字コードをステータス行に表示する
-" set laststatus=2
-" set statusline=%<%f\ %m\ %r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=\(%v,%l)/%L%8P\ 
+set statusline=%<%f\ %m\ %r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=\(%v,%l)/%L%8P\ 
 
 "#####表示設定#####
 set number "行番号を表示する
@@ -14,6 +13,7 @@ syntax on "コードの色分け
 set smartindent "オートインデント
 set list
 set listchars=eol:¬,tab:»\ 
+
 "全角スペースをハイライト表示
 function! ZenkakuSpace()
 	highlight ZenkakuSpace cterm=reverse ctermfg=DarkMagenta gui=reverse guifg=DarkMagenta
@@ -127,13 +127,16 @@ colorscheme zenburn
 " lightline.vim
 set laststatus=2
 let g:lightline = {
-	\ 'colorscheme': 'wombat',
-	\ 'component': {
-	\   'readonly': '%{&readonly?"⭤":""}',
-	\ },
-	\ 'separator': { 'left': '⮀', 'right': '⮂' },
-	\ 'subseparator': { 'left': '⮁', 'right': '⮃' }
-	\ }
+      \ 'colorscheme': 'zenburn',
+      \ 'component': {
+      \   'readonly': '%{&readonly?"⭤":""}',
+      \ },
+      \ 'separator': { 'left': '⮀', 'right': '⮂' },
+      \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
+      \ }
+let g:lightline.tabline = {
+      \ 'left': [ [ 'tabs' ] ],
+      \ 'right': [ [ 'close' ] ] }
 
 function! LightLineModified()
 	if &filetype == "help"
