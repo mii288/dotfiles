@@ -2,8 +2,6 @@
 set encoding=utf-8
 set fileencodings=ucs-bom,iso-2022-jp-3,iso-2022-jp,eucjp-ms,euc-jisx0213,euc-jp,sjis,cp932,utf-8
 set fileformats=unix,dos,mac
-" ファイルエンコーディングや文字コードをステータス行に表示する
-set statusline=%<%f\ %m\ %r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=\(%v,%l)/%L%8P\ 
 
 "#####表示設定#####
 set number "行番号を表示する
@@ -43,7 +41,11 @@ set wrapscan "検索時に最後まで行ったら最初に戻る
 
 "#####編集設定####
 set guioptions+=a
-set clipboard+=unnamed
+set clipboard+=unnamed,autoselect
+
+" \cで行の先頭にコメントをつけたり外したりできる
+nmap <C-_> <Plug>(caw:i:toggle)
+vmap <C-_> <Plug>(caw:i:toggle)
 
 "####backspace###
 set backspace=indent,eol,start
@@ -102,6 +104,7 @@ NeoBundle "Shougo/vimproc"
 NeoBundle "osyo-manga/shabadou.vim"
 NeoBundle "osyo-manga/vim-watchdogs"
 NeoBundle 'itchyny/lightline.vim'
+NeoBundle 'tyru/caw.vim.git'
 
 " zenburn カラースキーム
 NeoBundle 'vim-scripts/Zenburn'
@@ -109,6 +112,7 @@ NeoBundle 'vim-scripts/Zenburn'
 " You can specify revision/branch/tag.
 NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
 NeoBundle 'joonty/vim-xdebug'
+NeoBundle 'scrooloose/syntastic'
 
 " Required:
 call neobundle#end()
@@ -126,40 +130,185 @@ colorscheme zenburn
 
 " lightline.vim
 set laststatus=2
+" lightline.vim
 let g:lightline = {
-      \ 'colorscheme': 'zenburn',
-      \ 'component': {
-      \   'readonly': '%{&readonly?"⭤":""}',
-      \ },
-      \ 'separator': { 'left': '⮀', 'right': '⮂' },
-      \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
-      \ }
-let g:lightline.tabline = {
-      \ 'left': [ [ 'tabs' ] ],
-      \ 'right': [ [ 'close' ] ] }
+			\ 'colorscheme': 'wombat',
+			\ 'mode_map': {'c': 'NORMAL'},
+			\ 'active': {
+			\   'left': [
+			\     ['mode', 'paste'],
+			\     ['fugitive', 'gitgutter', 'filename'],
+			\   ],
+			\   'right': [
+			\     ['lineinfo', 'syntastic'],
+			\     ['percent'],
+			\     ['charcode', 'fileformat', 'fileencoding', 'filetype'],
+			\   ]
+			\ },
+			\ 'component_function': {
+			\   'modified': 'MyModified',
+			\   'readonly': 'MyReadonly',
+			\   'fugitive': 'MyFugitive',
+		\   'filename': 'MyFilename',
+		\   'fileformat': 'MyFileformat',
+		\   'filetype': 'MyFiletype',
+		\   'fileencoding': 'MyFileencoding',
+		\   'mode': 'MyMode',
+		\   'syntastic': 'SyntasticStatuslineFlag',
+		\   'charcode': 'MyCharCode',
+		\   'gitgutter': 'MyGitGutter',
+		\ },
+		\ 'separator': {'left': '⮀', 'right': '⮂'},
+		\ 'subseparator': {'left': '⮁', 'right': '⮃'}
+		\ }
 
-function! LightLineModified()
-	if &filetype == "help"
-		return ""
-	elseif &modified
-		return "+"
-	elseif &modifiable
-		return ""
-	else
-		return ""
+function! MyModified()
+	return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+endfunction
+
+function! MyReadonly()
+	return &ft !~? 'help\|vimfiler\|gundo' && &ro ? '⭤' : ''
+endfunction
+
+function! MyFilename()
+	return ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
+				\ (&ft == 'vimfiler' ? vimfiler#get_status_string() :
+				\  &ft == 'unite' ? unite#get_status_string() :
+				\  &ft == 'vimshell' ? substitute(b:vimshell.current_dir,expand('~'),'~','') :
+				\ '' != expand('%:p') ? expand('%:p') : '[No Name]') .
+				\ ('' != MyModified() ? ' ' . MyModified() : '')
+endfunction
+
+function! MyFugitive()
+	try
+		if &ft !~? 'vimfiler\|gundo' && exists('*fugitive#head')
+			let _ = fugitive#head()
+			return strlen(_) ? '⭠ '._ : ''
+		endif
+	catch
+	endtry
+	return ''
+endfunction
+
+function! MyFileformat()
+	return winwidth('.') > 70 ? &fileformat : ''
+endfunction
+
+function! MyFiletype()
+	return winwidth('.') > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
+endfunction
+
+function! MyFileencoding()
+	return winwidth('.') > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
+endfunction
+
+function! MyMode()
+	return winwidth('.') > 60 ? lightline#mode() : ''
+endfunction
+
+function! MyGitGutter()
+	if ! exists('*GitGutterGetHunkSummary')
+				\ || ! get(g:, 'gitgutter_enabled', 0)
+				\ || winwidth('.') <= 90
+		return ''
 	endif
+	let symbols = [
+				\ g:gitgutter_sign_added . ' ',
+				\ g:gitgutter_sign_modified . ' ',
+				\ g:gitgutter_sign_removed . ' '
+				\ ]
+	let hunks = GitGutterGetHunkSummary()
+	let ret = []
+	for i in [0, 1, 2]
+		if hunks[i] > 0
+			call add(ret, symbols[i] . hunks[i])
+		endif
+	endfor
+	return join(ret, ' ')
 endfunction
 
-function! LightLineReadonly()
-	if &filetype == "help"
-		return ""
-	elseif &readonly
-		return "⭤"
-	else
-		return ""
+" https://github.com/Lokaltog/vim-powerline/blob/develop/autoload/Powerline/Functions.vim
+function! MyCharCode()
+	if winwidth('.') <= 70
+		return ''
 	endif
+
+	" Get
+	" the
+	" output
+	" of
+	" :ascii
+	redir => ascii
+	silent! ascii
+	redir END
+
+	if match(ascii, 'NUL') != -1
+		return 'NUL'
+	endif
+
+	" Zero
+	" pad
+	" hex
+	" values
+	let nrformat = '0x%02x'
+
+	let encoding = (&fenc == '' ? &enc : &fenc)
+
+	if encoding == 'utf-8'
+		" Zero
+		" pad
+		" with
+		" 4
+		" zeroes
+		" in
+		" unicode
+		" files
+		let nrformat = '0x%04x'
+	endif
+
+	" Get
+	" the
+	" character
+	" and
+	" the
+	" numeric
+	" value
+	" from
+	" the
+	" return
+	" value
+	" of
+	" :ascii
+	" This
+	" matches
+	" the
+	" two
+	" first
+	" pieces
+	" of
+	" the
+	" return
+	" value,
+	" e.g.
+	" "<F>
+	" 70"
+	" =>
+	" char:
+	" 'F',
+	" nr:
+	" '70'
+	let [str, char, nr; rest] = matchlist(ascii, '\v\<(.{-1,})\>\s*([0-9]+)')
+
+	" Format
+	" the
+	" numeric
+	" value
+	let nr = printf(nrformat, nr)
+
+	return "'". char ."' ". nr
 endfunction
 
-function! LightLineFugitive()
-	return exists('*fugitive#head') ? fugitive#head() : ''
-endfunction
+" jslint
+let g:syntastic_javascript_checker = "jshint" "JavaScriptのSyntaxチェックはjshintで
+let g:syntastic_check_on_open = 0 "ファイルオープン時にはチェックをしない
+let g:syntastic_check_on_save = 1 "ファイル保存時にはチェックを実施
