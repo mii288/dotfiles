@@ -30,6 +30,7 @@ endif
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
+set tabline=2
 
 setlocal formatoptions-=r
 setlocal formatoptions-=o
