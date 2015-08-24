@@ -12,6 +12,7 @@
 !/.git-*
 !/.gitignore
 !/.gitconfig
+!/.ctags
 
 # for CakePHP
 app/tmp/empty
