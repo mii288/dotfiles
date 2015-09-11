@@ -30,7 +30,7 @@ endif
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
-set tabline=2
+" set tabline=2
 
 setlocal formatoptions-=r
 setlocal formatoptions-=o
@@ -113,7 +113,6 @@ NeoBundle 'vim-scripts/Zenburn'
 
 " You can specify revision/branch/tag.
 NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
-NeoBundle 'joonty/vim-xdebug'
 NeoBundle 'scrooloose/syntastic'
 
 " Required:
@@ -144,7 +143,7 @@ let g:lightline = {
 			\   'right': [
 			\     ['lineinfo', 'syntastic'],
 			\     ['percent'],
-			\     ['charcode', 'fileformat', 'fileencoding', 'filetype'],
+			\     ['fileformat', 'fileencoding', 'filetype'],
 			\   ]
 			\ },
 			\ 'component_function': {
@@ -157,7 +156,6 @@ let g:lightline = {
 		\   'fileencoding': 'MyFileencoding',
 		\   'mode': 'MyMode',
 		\   'syntastic': 'SyntasticStatuslineFlag',
-		\   'charcode': 'MyCharCode',
 		\   'gitgutter': 'MyGitGutter',
 		\ },
 		\ 'separator': {'left': '⮀', 'right': '⮂'},
@@ -229,88 +227,16 @@ function! MyGitGutter()
 	return join(ret, ' ')
 endfunction
 
-" https://github.com/Lokaltog/vim-powerline/blob/develop/autoload/Powerline/Functions.vim
-function! MyCharCode()
-	if winwidth('.') <= 70
-		return ''
-	endif
-
-	" Get
-	" the
-	" output
-	" of
-	" :ascii
-	redir => ascii
-	silent! ascii
-	redir END
-
-	if match(ascii, 'NUL') != -1
-		return 'NUL'
-	endif
-
-	" Zero
-	" pad
-	" hex
-	" values
-	let nrformat = '0x%02x'
-
-	let encoding = (&fenc == '' ? &enc : &fenc)
-
-	if encoding == 'utf-8'
-		" Zero
-		" pad
-		" with
-		" 4
-		" zeroes
-		" in
-		" unicode
-		" files
-		let nrformat = '0x%04x'
-	endif
-
-	" Get
-	" the
-	" character
-	" and
-	" the
-	" numeric
-	" value
-	" from
-	" the
-	" return
-	" value
-	" of
-	" :ascii
-	" This
-	" matches
-	" the
-	" two
-	" first
-	" pieces
-	" of
-	" the
-	" return
-	" value,
-	" e.g.
-	" "<F>
-	" 70"
-	" =>
-	" char:
-	" 'F',
-	" nr:
-	" '70'
-	let [str, char, nr; rest] = matchlist(ascii, '\v\<(.{-1,})\>\s*([0-9]+)')
-
-	" Format
-	" the
-	" numeric
-	" value
-	let nr = printf(nrformat, nr)
-
-	return "'". char ."' ". nr
-endfunction
-
 " jslint
 let g:syntastic_javascript_checker = "jshint" "JavaScriptのSyntaxチェックはjshintで
 let g:syntastic_check_on_open = 0 "ファイルオープン時にはチェックをしない
 let g:syntastic_check_on_save = 1 "ファイル保存時にはチェックを実施
+
+"Linuxの場合はviminfoを用いてヤンクデータを共有
+let OSTYPE = system('uname')
+if OSTYPE == "Linux\n"
+    noremap y y:wv<CR>
+    noremap p :rv!<CR>p
+endif
+
+set viminfo='50,\"3000,:0,n~/.viminfo

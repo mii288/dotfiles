@@ -35,3 +35,13 @@ export PS1='\[\033[0;32m\]\u\[\033[00m\]:\[\033[0;34m\]\w\[\033[0;31m\]$(__git_p
 # alias
 alias cdmdkn='cd /var/www/html/mdkn'
 alias cdapi='cd /var/www/html/mdkn_api'
+
+alias ls='ls -h'
+alias ll='ls -l'
+alias la='ls -a'
+alias cp='cp -iv'
+alias rm='rm -iv'
+alias mv='mv -iv'
+alias cl='clear'
+alias vi='vim'
+alias grep='grep --color'
