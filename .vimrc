@@ -107,6 +107,7 @@ NeoBundle "osyo-manga/shabadou.vim"
 NeoBundle "osyo-manga/vim-watchdogs"
 NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'tyru/caw.vim.git'
+NeoBundle 'christoomey/vim-tmux-navigator'
 
 " zenburn カラースキーム
 NeoBundle 'vim-scripts/Zenburn'
@@ -233,10 +234,10 @@ let g:syntastic_check_on_open = 0 "ファイルオープン時にはチェック
 let g:syntastic_check_on_save = 1 "ファイル保存時にはチェックを実施
 
 "Linuxの場合はviminfoを用いてヤンクデータを共有
-let OSTYPE = system('uname')
-if OSTYPE == "Linux\n"
-    noremap y y:wv<CR>
-    noremap p :rv!<CR>p
-endif
+" let OSTYPE = system('uname')
+" if OSTYPE == "Linux\n"
+"     noremap y y:wv<CR>
+"     noremap p :rv!<CR>p
+" endif
 
-set viminfo='50,\"3000,:0,n~/.viminfo
+" set viminfo='50,\"3000,:0,n~/.viminfo

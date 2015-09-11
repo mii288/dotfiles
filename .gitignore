@@ -13,6 +13,7 @@
 !/.gitignore
 !/.gitconfig
 !/.ctags
+!/.tmux.conf
 
 # for CakePHP
 app/tmp/empty
