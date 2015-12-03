@@ -3,21 +3,6 @@
  dotfiles
 
 ###################################################
-
-/*
-/.*
-
-!/.bashrc
-!/.vimrc
-!/.git-*
-!/.gitignore
-!/.gitconfig
-!/.ctags
-!/.tmux.conf
-
-# for CakePHP
-app/tmp/empty
-
 # for vim
 *.swp
 Session.vim
