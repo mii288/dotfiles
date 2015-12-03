@@ -11,6 +11,7 @@ syntax on "コードの色分け
 set smartindent "オートインデント
 set list
 set listchars=eol:¬,tab:»\ 
+set ambiwidth=double
 
 "全角スペースをハイライト表示
 function! ZenkakuSpace()
