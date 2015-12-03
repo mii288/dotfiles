@@ -16,7 +16,6 @@ set listchars=eol:¬,tab:»\
 function! ZenkakuSpace()
 	highlight ZenkakuSpace cterm=reverse ctermfg=DarkMagenta gui=reverse guifg=DarkMagenta
 endfunction
-
 if has('syntax')
 	augroup ZenkakuSpace
 		autocmd!
@@ -26,28 +25,29 @@ if has('syntax')
 	call ZenkakuSpace()
 endif
 
-"set expandtab
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
-" set tabline=2
-
-setlocal formatoptions-=r
-setlocal formatoptions-=o
 
 "#####検索設定#####
 set ignorecase "大文字/小文字の区別なく検索する
 set smartcase "検索文字列に大文字が含まれている場合は区別して検索する
 set wrapscan "検索時に最後まで行ったら最初に戻る
-set isk+=-
+" set isk+=-
 
 "#####編集設定####
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+
+setlocal formatoptions-=ro " 改行時コメントアウトさない
+
 set guioptions+=a
 set clipboard+=unnamed,autoselect
 
 " ^Cで行の先頭にコメントをつけたり外したりできる
 nmap <C-_> <Plug>(caw:i:toggle)
 vmap <C-_> <Plug>(caw:i:toggle)
+
+nmap <Leader>c <Plug>(caw:i:toggle)
+vmap <Leader>c <Plug>(caw:i:toggle)
 
 "####backspace###
 set backspace=indent,eol,start
@@ -82,11 +82,11 @@ if has('vim_starting')
   endif
 
   " Required:
-  set runtimepath+=/root/.vim/bundle/neobundle.vim/
+  set runtimepath+=$HOME/.vim/bundle/neobundle.vim/
 endif
 
 " Required:
-call neobundle#begin(expand('/root/.vim/bundle'))
+call neobundle#begin(expand('$HOME/.vim/bundle'))
 
 " Let NeoBundle manage NeoBundle
 " Required:
@@ -106,8 +106,7 @@ NeoBundle "Shougo/vimproc"
 NeoBundle "osyo-manga/shabadou.vim"
 NeoBundle "osyo-manga/vim-watchdogs"
 NeoBundle 'itchyny/lightline.vim'
-" NeoBundle 'christoomey/vim-tmux-navigator'
-" NeoBundle 'mattn/emmet-vim'
+NeoBundle 'mattn/emmet-vim'
 NeoBundle 'tyru/caw.vim'
 
 " You can specify revision/branch/tag.
@@ -127,7 +126,6 @@ NeoBundleCheck
 
 " lightline.vim
 set laststatus=2
-" lightline.vim
 let g:lightline = {
 			\ 'colorscheme': 'wombat',
 			\ 'mode_map': {'c': 'NORMAL'},
@@ -229,34 +227,34 @@ let g:syntastic_check_on_open = 0 "ファイルオープン時にはチェック
 let g:syntastic_check_on_save = 1 "ファイル保存時にはチェックを実施
 
 " F12で行番号とか消す
-" nnoremap <silent><F12> :<C-u>call <SID>CopipeTerm()<CR>
-" function! s:CopipeTerm()
-"     if !exists('b:copipe_term_save')
-"         " 値が保存されていなければ保存後に各オプションをコピペ用に設定
-"         let b:copipe_term_save = {
-"         \     'number': &l:number,
-"         \     'relativenumber': &relativenumber,
-"         \     'foldcolumn': &foldcolumn,
-"         \     'wrap': &wrap,
-"         \     'list': &list,
-"         \     'showbreak': &showbreak
-"         \ }
-"         setlocal foldcolumn=0     " 折りたたみ情報表示幅
-"         setlocal nonumber         " 行番号
-"         setlocal norelativenumber " 相対行番号
-"         setlocal wrap             " 折り返し
-"         setlocal nolist           " 行末やタブ文字の可視化
-"         set showbreak=            " 折り返し行の先頭に表示されるマーク（こいつだけグローバル設定しかない）
-"     else
-"         " 保存されている場合は復元
-"         let &l:foldcolumn = b:copipe_term_save['foldcolumn']
-"         let &l:number = b:copipe_term_save['number']
-"         let &l:relativenumber = b:copipe_term_save['relativenumber']
-"         let &l:wrap = b:copipe_term_save['wrap']
-"         let &l:list = b:copipe_term_save['list']
-"         let &showbreak = b:copipe_term_save['showbreak']
-"         " 削除
-"         unlet b:copipe_term_save
-"     endif
-" endfunction
-" 
+nnoremap <silent><F12> :<C-u>call <SID>CopipeTerm()<CR>
+function! s:CopipeTerm()
+    if !exists('b:copipe_term_save')
+        " 値が保存されていなければ保存後に各オプションをコピペ用に設定
+        let b:copipe_term_save = {
+        \     'number': &l:number,
+        \     'relativenumber': &relativenumber,
+        \     'foldcolumn': &foldcolumn,
+        \     'wrap': &wrap,
+        \     'list': &list,
+        \     'showbreak': &showbreak
+        \ }
+        setlocal foldcolumn=0     " 折りたたみ情報表示幅
+        setlocal nonumber         " 行番号
+        setlocal norelativenumber " 相対行番号
+        setlocal wrap             " 折り返し
+        setlocal nolist           " 行末やタブ文字の可視化
+        set showbreak=            " 折り返し行の先頭に表示されるマーク（こいつだけグローバル設定しかない）
+    else
+        " 保存されている場合は復元
+        let &l:foldcolumn = b:copipe_term_save['foldcolumn']
+        let &l:number = b:copipe_term_save['number']
+        let &l:relativenumber = b:copipe_term_save['relativenumber']
+        let &l:wrap = b:copipe_term_save['wrap']
+        let &l:list = b:copipe_term_save['list']
+        let &showbreak = b:copipe_term_save['showbreak']
+        " 削除
+        unlet b:copipe_term_save
+    endif
+endfunction
+
