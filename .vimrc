@@ -12,6 +12,9 @@ set smartindent "オートインデント
 set list
 set listchars=eol:¬,tab:»\ 
 
+" 拡張子の設定
+au BufRead,BufNewFile *.md set filetype=markdown
+
 "全角スペースをハイライト表示
 function! ZenkakuSpace()
 	highlight ZenkakuSpace cterm=reverse ctermfg=DarkMagenta gui=reverse guifg=DarkMagenta
@@ -108,10 +111,14 @@ NeoBundle "osyo-manga/vim-watchdogs"
 NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'mattn/emmet-vim'
 NeoBundle 'tyru/caw.vim'
+NeoBundle 'plasticboy/vim-markdown'
+NeoBundle 'kannokanno/previm'
+NeoBundle 'tyru/open-browser.vim'
 
 " You can specify revision/branch/tag.
 NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
 NeoBundle 'scrooloose/syntastic'
+NeoBundle 'violetyk/iikanji-markdown.vim'
 
 " Required:
 call neobundle#end()
