@@ -8,8 +8,9 @@ ln -sf ~/dotfiles/.gitignore           $HOME
 ln -sf ~/dotfiles/.tmux.conf           $HOME
 ln -sf ~/dotfiles/.vimrc               $HOME
 
-ln -si ~/dotfiles/zlogout              $HOME/.zlogout
-ln -si ~/dotfiles/zpreztorc            $HOME/.zpreztorc
-ln -si ~/dotfiles/zprofile             $HOME/.zprofile
-ln -si ~/dotfiles/zshenv               $HOME/.zshenv
-ln -si ~/dotfiles/zshrc                $HOME/.zshrc
+ln -sf ~/dotfiles/prezto               $HOME/.zprezto
+ln -sf ~/dotfiles/zlogout              $HOME/.zlogout
+ln -sf ~/dotfiles/zpreztorc            $HOME/.zpreztorc
+ln -sf ~/dotfiles/zprofile             $HOME/.zprofile
+ln -sf ~/dotfiles/zshenv               $HOME/.zshenv
+ln -sf ~/dotfiles/zshrc                $HOME/.zshrc

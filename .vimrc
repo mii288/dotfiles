@@ -11,6 +11,7 @@ syntax on "コードの色分け
 set smartindent "オートインデント
 set list
 set listchars=eol:¬,tab:»\ 
+set ambiwidth=double
 
 " 拡張子の設定
 au BufRead,BufNewFile *.md set filetype=markdown
