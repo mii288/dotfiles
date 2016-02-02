@@ -99,6 +99,7 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 " Add or remove your Bundles here:
 NeoBundle 'Shougo/neosnippet'
 NeoBundle 'Shougo/neosnippet-snippets'
+NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'flazz/vim-colorschemes'
 NeoBundle 'ctrlpvim/ctrlp.vim'
@@ -115,11 +116,13 @@ NeoBundle 'tyru/caw.vim'
 NeoBundle 'plasticboy/vim-markdown'
 NeoBundle 'kannokanno/previm'
 NeoBundle 'tyru/open-browser.vim'
+NeoBundle 'LeafCage/yankround.vim'
 
 " You can specify revision/branch/tag.
 NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'violetyk/iikanji-markdown.vim'
+NeoBundle 'osyo-manga/vim-over'
 
 " Required:
 call neobundle#end()
@@ -266,3 +269,24 @@ function! s:CopipeTerm()
     endif
 endfunction
 
+"" over.vim {{{
+
+" over.vimの起動
+nnoremap <silent> <Leader>m :OverCommandLine<CR>
+
+" カーソル下の単語をハイライト付きで置換
+nnoremap sub :OverCommandLine<CR>%s/<C-r><C-w>//g<Left><Left>
+
+" コピーした文字列をハイライト付きで置換
+nnoremap subp y:OverCommandLine<CR>%s!<C-r>=substitute(@0, '!', '\\!', 'g')<CR>!!gI<Left><Left><Left>
+
+" }}}
+
+"" yankround.vim
+nmap p <Plug>(yankround-p)
+nmap P <Plug>(yankround-P)
+nmap gp <Plug>(yankround-gp)
+nmap gP <Plug>(yankround-gP)
+nmap <C-p> <Plug>(yankround-prev)
+nnoremap <silent>g<C-p> :<C-u>CtrlPYankRound<CR>
+nmap <C-n> <Plug>(yankround-next)
