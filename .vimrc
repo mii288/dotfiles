@@ -37,9 +37,12 @@ set wrapscan "検索時に最後まで行ったら最初に戻る
 " set isk+=-
 
 "#####編集設定####
+" set tabstop=4
+" set softtabstop=4
+" set shiftwidth=4
 set tabstop=4
-set softtabstop=4
-set shiftwidth=4
+set autoindent
+set expandtab
 
 setlocal formatoptions-=ro " 改行時コメントアウトさない
 
