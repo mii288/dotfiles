@@ -10,7 +10,7 @@ set showmatch "括弧入力時の対応する括弧を表示
 syntax on "コードの色分け
 set smartindent "オートインデント
 set list
-set listchars=eol:¬,tab:»\ 
+set listchars=tab:>.,trail:_,eol:↲,extends:>,precedes:<,nbsp:%
 set ambiwidth=double
 
 " 拡張子の設定
@@ -18,15 +18,15 @@ au BufRead,BufNewFile *.md set filetype=markdown
 
 "全角スペースをハイライト表示
 function! ZenkakuSpace()
-	highlight ZenkakuSpace cterm=reverse ctermfg=DarkMagenta gui=reverse guifg=DarkMagenta
+    highlight ZenkakuSpace cterm=reverse ctermfg=DarkMagenta gui=reverse guifg=DarkMagenta
 endfunction
 if has('syntax')
-	augroup ZenkakuSpace
-		autocmd!
-		autocmd ColorScheme       * call ZenkakuSpace()
-		autocmd VimEnter,WinEnter * match ZenkakuSpace /　/
-	augroup END
-	call ZenkakuSpace()
+    augroup ZenkakuSpace
+        autocmd!
+        autocmd ColorScheme       * call ZenkakuSpace()
+        autocmd VimEnter,WinEnter * match ZenkakuSpace /　/
+    augroup END
+    call ZenkakuSpace()
 endif
 
 
@@ -37,9 +37,12 @@ set wrapscan "検索時に最後まで行ったら最初に戻る
 " set isk+=-
 
 "#####編集設定####
+" インデントをスペース4つに
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
+set autoindent
+set expandtab
 
 setlocal formatoptions-=ro " 改行時コメントアウトさない
 
@@ -123,6 +126,10 @@ NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'violetyk/iikanji-markdown.vim'
 NeoBundle 'osyo-manga/vim-over'
+NeoBundle 'digitaltoad/vim-jade'
+NeoBundle 'nathanaelkane/vim-indent-guides'
+
+NeoBundle 'chriskempson/base16-vim'
 
 " Required:
 call neobundle#end()
@@ -138,98 +145,98 @@ NeoBundleCheck
 " lightline.vim
 set laststatus=2
 let g:lightline = {
-			\ 'colorscheme': 'wombat',
-			\ 'mode_map': {'c': 'NORMAL'},
-			\ 'active': {
-			\   'left': [
-			\     ['mode', 'paste'],
-			\     ['fugitive', 'gitgutter', 'filename'],
-			\   ],
-			\   'right': [
-			\     ['lineinfo', 'syntastic'],
-			\     ['percent'],
-			\     ['fileformat', 'fileencoding', 'filetype'],
-			\   ]
-			\ },
-			\ 'component_function': {
-			\   'modified': 'MyModified',
-			\   'readonly': 'MyReadonly',
-			\   'fugitive': 'MyFugitive',
-		\   'filename': 'MyFilename',
-		\   'fileformat': 'MyFileformat',
-		\   'filetype': 'MyFiletype',
-		\   'fileencoding': 'MyFileencoding',
-		\   'mode': 'MyMode',
-		\   'syntastic': 'SyntasticStatuslineFlag',
-		\   'gitgutter': 'MyGitGutter',
-		\ },
-		\ 'separator': {'left': '⮀', 'right': '⮂'},
-		\ 'subseparator': {'left': '⮁', 'right': '⮃'}
-		\ }
+            \ 'colorscheme': 'wombat',
+            \ 'mode_map': {'c': 'NORMAL'},
+            \ 'active': {
+            \   'left': [
+            \     ['mode', 'paste'],
+            \     ['fugitive', 'gitgutter', 'filename'],
+            \   ],
+            \   'right': [
+            \     ['lineinfo', 'syntastic'],
+            \     ['percent'],
+            \     ['fileformat', 'fileencoding', 'filetype'],
+            \   ]
+            \ },
+            \ 'component_function': {
+            \   'modified': 'MyModified',
+            \   'readonly': 'MyReadonly',
+            \   'fugitive': 'MyFugitive',
+        \   'filename': 'MyFilename',
+        \   'fileformat': 'MyFileformat',
+        \   'filetype': 'MyFiletype',
+        \   'fileencoding': 'MyFileencoding',
+        \   'mode': 'MyMode',
+        \   'syntastic': 'SyntasticStatuslineFlag',
+        \   'gitgutter': 'MyGitGutter',
+        \ },
+        \ 'separator': {'left': '⮀', 'right': '⮂'},
+        \ 'subseparator': {'left': '⮁', 'right': '⮃'}
+        \ }
 
 function! MyModified()
-	return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+    return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
 endfunction
 
 function! MyReadonly()
-	return &ft !~? 'help\|vimfiler\|gundo' && &ro ? '⭤' : ''
+    return &ft !~? 'help\|vimfiler\|gundo' && &ro ? '⭤' : ''
 endfunction
 
 function! MyFilename()
-	return ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
-				\ (&ft == 'vimfiler' ? vimfiler#get_status_string() :
-				\  &ft == 'unite' ? unite#get_status_string() :
-				\  &ft == 'vimshell' ? substitute(b:vimshell.current_dir,expand('~'),'~','') :
-				\ '' != expand('%:p') ? expand('%:p') : '[No Name]') .
-				\ ('' != MyModified() ? ' ' . MyModified() : '')
+    return ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
+                \ (&ft == 'vimfiler' ? vimfiler#get_status_string() :
+                \  &ft == 'unite' ? unite#get_status_string() :
+                \  &ft == 'vimshell' ? substitute(b:vimshell.current_dir,expand('~'),'~','') :
+                \ '' != expand('%:p') ? expand('%:p') : '[No Name]') .
+                \ ('' != MyModified() ? ' ' . MyModified() : '')
 endfunction
 
 function! MyFugitive()
-	try
-		if &ft !~? 'vimfiler\|gundo' && exists('*fugitive#head')
-			let _ = fugitive#head()
-			return strlen(_) ? '⭠ '._ : ''
-		endif
-	catch
-	endtry
-	return ''
+    try
+        if &ft !~? 'vimfiler\|gundo' && exists('*fugitive#head')
+            let _ = fugitive#head()
+            return strlen(_) ? '⭠ '._ : ''
+        endif
+    catch
+    endtry
+    return ''
 endfunction
 
 function! MyFileformat()
-	return winwidth('.') > 70 ? &fileformat : ''
+    return winwidth('.') > 70 ? &fileformat : ''
 endfunction
 
 function! MyFiletype()
-	return winwidth('.') > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
+    return winwidth('.') > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
 endfunction
 
 function! MyFileencoding()
-	return winwidth('.') > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
+    return winwidth('.') > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
 endfunction
 
 function! MyMode()
-	return winwidth('.') > 60 ? lightline#mode() : ''
+    return winwidth('.') > 60 ? lightline#mode() : ''
 endfunction
 
 function! MyGitGutter()
-	if ! exists('*GitGutterGetHunkSummary')
-				\ || ! get(g:, 'gitgutter_enabled', 0)
-				\ || winwidth('.') <= 90
-		return ''
-	endif
-	let symbols = [
-				\ g:gitgutter_sign_added . ' ',
-				\ g:gitgutter_sign_modified . ' ',
-				\ g:gitgutter_sign_removed . ' '
-				\ ]
-	let hunks = GitGutterGetHunkSummary()
-	let ret = []
-	for i in [0, 1, 2]
-		if hunks[i] > 0
-			call add(ret, symbols[i] . hunks[i])
-		endif
-	endfor
-	return join(ret, ' ')
+    if ! exists('*GitGutterGetHunkSummary')
+                \ || ! get(g:, 'gitgutter_enabled', 0)
+                \ || winwidth('.') <= 90
+        return ''
+    endif
+    let symbols = [
+                \ g:gitgutter_sign_added . ' ',
+                \ g:gitgutter_sign_modified . ' ',
+                \ g:gitgutter_sign_removed . ' '
+                \ ]
+    let hunks = GitGutterGetHunkSummary()
+    let ret = []
+    for i in [0, 1, 2]
+        if hunks[i] > 0
+            call add(ret, symbols[i] . hunks[i])
+        endif
+    endfor
+    return join(ret, ' ')
 endfunction
 
 " jslint
@@ -290,3 +297,10 @@ nmap gP <Plug>(yankround-gP)
 nmap <C-p> <Plug>(yankround-prev)
 nnoremap <silent>g<C-p> :<C-u>CtrlPYankRound<CR>
 nmap <C-n> <Plug>(yankround-next)
+
+let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+
+" インデント
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_start_level = 2
+let g:indent_guides_guide_size = 1
