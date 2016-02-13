@@ -41,6 +41,7 @@ set wrapscan "検索時に最後まで行ったら最初に戻る
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
+set tabstop=4
 set autoindent
 set expandtab
 
@@ -286,6 +287,11 @@ nnoremap sub :OverCommandLine<CR>%s/<C-r><C-w>//g<Left><Left>
 
 " コピーした文字列をハイライト付きで置換
 nnoremap subp y:OverCommandLine<CR>%s!<C-r>=substitute(@0, '!', '\\!', 'g')<CR>!!gI<Left><Left><Left>
+
+" ctrlp
+let g:ctrlp_working_path_mode = 'ra'
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/node_modules/*
+let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 
 " }}}
 
