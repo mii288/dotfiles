@@ -1,13 +1,62 @@
+" Note: Skip initialization for vim-tiny or vim-small.
+if 0 | endif
+
+if &compatible
+    set nocompatible               " Be iMproved
+endif
+
+" Required:
+set runtimepath^=$HOME/.vim/bundle/neobundle.vim/
+
+" Required:
+call neobundle#begin(expand('$HOME/.vim/bundle'))
+
+" Let NeoBundle manage NeoBundle
+" Required:
+NeoBundleFetch 'Shougo/neobundle.vim'
+
+" Add or remove your Bundles here:
+" --- Utility
+NeoBundle 'ctrlpvim/ctrlp.vim'           " Open files
+NeoBundle 'LeafCage/yankround.vim'       " Show yank history
+NeoBundle 'osyo-manga/vim-over'          " :substitute preview
+NeoBundle 'scrooloose/syntastic'         " linter
+NeoBundle 'soramugi/auto-ctags.vim'      " Run the ctags command
+NeoBundle 'terryma/vim-multiple-cursors' " True Sublime Text style multiple selections for Vim
+NeoBundle 'tyru/caw.vim'                 " Toggle Comment
+NeoBundle 'tyru/open-browser.vim'        " browser open
+
+" --- Visual
+NeoBundle 'cocopon/iceberg.vim'      " Colorscheme
+NeoBundle 'itchyny/lightline.vim'    " Customize status bar
+NeoBundle 'osyo-manga/vim-brightest' " Highlight words under cursol
+NeoBundle 'Yggdroot/indentLine'      " display indent with mark
+
+" --- For PHP
+NeoBundle 'joonty/vdebug' "Xdebug client
+
+" --- For markdown
+NeoBundle 'kannokanno/previm'             " Preview markdown
+NeoBundle 'plasticboy/vim-markdown'       " hi markdown
+NeoBundle 'violetyk/iikanji-markdown.vim' " util markdown
+
+" --- For HTML/CSS 
+NeoBundle 'digitaltoad/vim-pug' " hi jade
+NeoBundle 'mattn/emmet-vim'     " Emmet
+
+" Required:
+call neobundle#end()
+"End NeoBundle Scripts-------------------------
+
 " 文字コードの設定
 set encoding=utf-8
 set fileencodings=utf-8,ucs-bom,iso-2022-jp-3,iso-2022-jp,eucjp-ms,euc-jisx0213,euc-jp,sjis,cp9328
 set fileformats=unix,dos,mac
 
 "#####表示設定#####
-set number "行番号を表示する
-set title "編集中のファイル名を表示
-set showmatch "括弧入力時の対応する括弧を表示
-syntax on "コードの色分け
+set number      "行番号を表示する
+set title       "編集中のファイル名を表示
+set showmatch   "括弧入力時の対応する括弧を表示
 set smartindent "オートインデント
 set list
 set listchars=tab:>.,trail:_,eol:↲,extends:>,precedes:<,nbsp:%
@@ -15,19 +64,6 @@ set ambiwidth=double
 
 " 拡張子の設定
 au BufRead,BufNewFile *.md set filetype=markdown
-
-"全角スペースをハイライト表示
-function! ZenkakuSpace()
-    highlight ZenkakuSpace cterm=reverse ctermfg=DarkMagenta gui=reverse guifg=DarkMagenta
-endfunction
-if has('syntax')
-    augroup ZenkakuSpace
-        autocmd!
-        autocmd ColorScheme       * call ZenkakuSpace()
-        autocmd VimEnter,WinEnter * match ZenkakuSpace /　/
-    augroup END
-    call ZenkakuSpace()
-endif
 
 
 "#####検索設定#####
@@ -37,6 +73,17 @@ set wrapscan "検索時に最後まで行ったら最初に戻る
 " set isk+=-
 
 "#####編集設定####
+"カーソルを表示行で移動する。物理行移動は<C-n>,<C-p>
+nnoremap j gj
+nnoremap k gk
+nnoremap <Down> gj
+nnoremap <Up>   gk
+" 入力モードで矢印キーでカーソル移動
+inoremap <C-j> <Down>
+inoremap <C-k> <Up>
+inoremap <C-h> <Left>
+inoremap <C-l> <Right>
+
 " インデントをスペース4つに
 set tabstop=4
 set softtabstop=4
@@ -50,14 +97,15 @@ setlocal formatoptions-=ro " 改行時コメントアウトさない
 set guioptions+=a
 set clipboard+=unnamed,autoselect
 
-" ^Cで行の先頭にコメントをつけたり外したりできる
-nmap <C-_> <Plug>(caw:i:toggle)
-vmap <C-_> <Plug>(caw:i:toggle)
-
+" caw
 nmap <Leader>c <Plug>(caw:i:toggle)
 vmap <Leader>c <Plug>(caw:i:toggle)
 
 "####backspace###
+" バックスペースキーで削除できるものを指定
+" indent : 行頭の空白
+" eol    : 改行
+" start  : 挿入モード開始位置より手前の文字
 set backspace=indent,eol,start
 
 "####タブ設定####
@@ -66,9 +114,6 @@ nnoremap t <Nop>
 nnoremap to :<C-u>edit<Space>
 nnoremap tt :<C-u>tabnew<Space>
 nnoremap <silent> td :<C-u>tabclose<CR>
-
-" ctagsをタブで開く
-map <C-]> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 
 "#### keymap ####
 " insertモードから抜ける
@@ -80,89 +125,30 @@ inoremap <silent> <C-k> k
 " 削除キーでyankしない
 nnoremap x "_x
 
-"----------------------------------------------------
-" neobundle.vim
-"----------------------------------------------------
-"NeoBundle Scripts-----------------------------
-if has('vim_starting')
-  if &compatible
-    set nocompatible               " Be iMproved
-  endif
-
-  " Required:
-  set runtimepath+=$HOME/.vim/bundle/neobundle.vim/
-endif
-
-" Required:
-call neobundle#begin(expand('$HOME/.vim/bundle'))
-
-" Let NeoBundle manage NeoBundle
-" Required:
-NeoBundleFetch 'Shougo/neobundle.vim'
-
-" Add or remove your Bundles here:
-NeoBundle 'Shougo/neosnippet'
-NeoBundle 'Shougo/neosnippet-snippets'
-NeoBundle 'Shougo/neocomplcache'
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'flazz/vim-colorschemes'
-NeoBundle 'ctrlpvim/ctrlp.vim'
-NeoBundle 'terryma/vim-multiple-cursors'
-NeoBundle 'soramugi/auto-ctags.vim'
-NeoBundle 'joonty/vdebug'
-NeoBundle "thinca/vim-quickrun"
-NeoBundle "Shougo/vimproc"
-NeoBundle "osyo-manga/shabadou.vim"
-NeoBundle "osyo-manga/vim-watchdogs"
-NeoBundle 'itchyny/lightline.vim'
-NeoBundle 'mattn/emmet-vim'
-NeoBundle 'tyru/caw.vim'
-NeoBundle 'plasticboy/vim-markdown'
-NeoBundle 'kannokanno/previm'
-NeoBundle 'tyru/open-browser.vim'
-NeoBundle 'LeafCage/yankround.vim'
-
-" You can specify revision/branch/tag.
-NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
-NeoBundle 'scrooloose/syntastic'
-NeoBundle 'violetyk/iikanji-markdown.vim'
-NeoBundle 'osyo-manga/vim-over'
-NeoBundle 'digitaltoad/vim-jade'
-NeoBundle 'nathanaelkane/vim-indent-guides'
-
-NeoBundle 'chriskempson/base16-vim'
-
-" Required:
-call neobundle#end()
-
-" Required:
-filetype plugin indent on
-
-" If there are uninstalled bundles found on startup,
-" this will conveniently prompt you to install them.
-NeoBundleCheck
-"End NeoBundle Scripts-------------------------
+" mouse
+set mouse=a
+set ttymouse=xterm2
 
 " lightline.vim
 set laststatus=2
 let g:lightline = {
-            \ 'colorscheme': 'wombat',
-            \ 'mode_map': {'c': 'NORMAL'},
-            \ 'active': {
-            \   'left': [
+    \ 'colorscheme': 'wombat',
+    \ 'mode_map': {'c': 'NORMAL'},
+    \ 'active': {
+        \   'left': [
             \     ['mode', 'paste'],
             \     ['fugitive', 'gitgutter', 'filename'],
             \   ],
             \   'right': [
-            \     ['lineinfo', 'syntastic'],
-            \     ['percent'],
-            \     ['fileformat', 'fileencoding', 'filetype'],
-            \   ]
-            \ },
-            \ 'component_function': {
-            \   'modified': 'MyModified',
-            \   'readonly': 'MyReadonly',
-            \   'fugitive': 'MyFugitive',
+                \     ['lineinfo', 'syntastic'],
+                \     ['percent'],
+                \     ['fileformat', 'fileencoding', 'filetype'],
+                \   ]
+                    \ },
+    \ 'component_function': {
+        \   'modified': 'MyModified',
+        \   'readonly': 'MyReadonly',
+        \   'fugitive': 'MyFugitive',
         \   'filename': 'MyFilename',
         \   'fileformat': 'MyFileformat',
         \   'filetype': 'MyFiletype',
@@ -171,9 +157,9 @@ let g:lightline = {
         \   'syntastic': 'SyntasticStatuslineFlag',
         \   'gitgutter': 'MyGitGutter',
         \ },
-        \ 'separator': {'left': '⮀', 'right': '⮂'},
-        \ 'subseparator': {'left': '⮁', 'right': '⮃'}
-        \ }
+    \ 'separator': {'left': '⮀', 'right': '⮂'},
+    \ 'subseparator': {'left': '⮁', 'right': '⮃'}
+    \ }
 
 function! MyModified()
     return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
@@ -185,11 +171,11 @@ endfunction
 
 function! MyFilename()
     return ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
-                \ (&ft == 'vimfiler' ? vimfiler#get_status_string() :
-                \  &ft == 'unite' ? unite#get_status_string() :
-                \  &ft == 'vimshell' ? substitute(b:vimshell.current_dir,expand('~'),'~','') :
-                \ '' != expand('%:p') ? expand('%:p') : '[No Name]') .
-                \ ('' != MyModified() ? ' ' . MyModified() : '')
+        \ (&ft == 'vimfiler' ? vimfiler#get_status_string() :
+        \  &ft == 'unite' ? unite#get_status_string() :
+        \  &ft == 'vimshell' ? substitute(b:vimshell.current_dir,expand('~'),'~','') :
+        \ '' != expand('%:p') ? expand('%:p') : '[No Name]') .
+        \ ('' != MyModified() ? ' ' . MyModified() : '')
 endfunction
 
 function! MyFugitive()
@@ -221,15 +207,15 @@ endfunction
 
 function! MyGitGutter()
     if ! exists('*GitGutterGetHunkSummary')
-                \ || ! get(g:, 'gitgutter_enabled', 0)
-                \ || winwidth('.') <= 90
+        \ || ! get(g:, 'gitgutter_enabled', 0)
+        \ || winwidth('.') <= 90
         return ''
     endif
     let symbols = [
-                \ g:gitgutter_sign_added . ' ',
-                \ g:gitgutter_sign_modified . ' ',
-                \ g:gitgutter_sign_removed . ' '
-                \ ]
+        \ g:gitgutter_sign_added . ' ',
+        \ g:gitgutter_sign_modified . ' ',
+        \ g:gitgutter_sign_removed . ' '
+        \ ]
     let hunks = GitGutterGetHunkSummary()
     let ret = []
     for i in [0, 1, 2]
@@ -244,6 +230,77 @@ endfunction
 let g:syntastic_javascript_checker = "jshint" "JavaScriptのSyntaxチェックはjshintで
 let g:syntastic_check_on_open = 0 "ファイルオープン時にはチェックをしない
 let g:syntastic_check_on_save = 1 "ファイル保存時にはチェックを実施
+
+
+"" over.vim {{{
+
+" over.vimの起動
+nnoremap <silent> <Leader>m :OverCommandLine<CR>
+" カーソル下の単語をハイライト付きで置換
+nnoremap sub :OverCommandLine<CR>%s/<C-r><C-w>//g<Left><Left>
+" コピーした文字列をハイライト付きで置換
+nnoremap subp y:OverCommandLine<CR>%s!<C-r>=substitute(@0, '!', '\\!', 'g')<CR>!!gI<Left><Left><Left>
+
+" ctrlp
+" 'c' - the directory of the current file.
+" 'r' - the nearest ancestor that contains one of these directories or files: .git .hg .svn .bzr _darcs
+" 'a' - like c, but only if the current working directory outside of CtrlP is not a direct ancestor of the directory of the current file.
+" 0 or '' (empty string) - disable this feature.
+let g:ctrlp_working_path_mode = 'ra'
+" 除外ファイルを設定
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/node_modules/*
+" 検索対象をgit管理ファイルに限定
+let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+
+" ctagsをタブで開く
+map <C-]> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
+
+
+" }}}
+
+"" yankround.vim
+nmap p <Plug>(yankround-p)
+nmap P <Plug>(yankround-P)
+nmap gp <Plug>(yankround-gp)
+nmap gP <Plug>(yankround-gP)
+nmap <C-p> <Plug>(yankround-prev)
+nnoremap <silent>g<C-p> :<C-u>CtrlPYankRound<CR>
+nmap <C-n> <Plug>(yankround-next)
+
+" インデント
+" Vim
+let g:indentLine_color_term = 239
+
+"GVim
+let g:indentLine_color_gui = '#A4E57E'
+
+" none X terminal
+let g:indentLine_color_tty_light = 7 " (default: 4)
+let g:indentLine_color_dark = 1 " (default: 2)
+let g:indentLine_char = '▸'
+
+" ------------------------------------
+" colorscheme
+" ------------------------------------
+syntax on
+colorscheme iceberg
+set t_Co=256
+
+" ------------------------------------
+" Custom Function
+" ------------------------------------
+"全角スペースをハイライト表示
+function! ZenkakuSpace()
+    highlight ZenkakuSpace cterm=reverse ctermfg=DarkMagenta gui=reverse guifg=DarkMagenta
+endfunction
+if has('syntax')
+    augroup ZenkakuSpace
+        autocmd!
+        autocmd ColorScheme       * call ZenkakuSpace()
+        autocmd VimEnter,WinEnter * match ZenkakuSpace /　/
+    augroup END
+    call ZenkakuSpace()
+endif
 
 " F12で行番号とか消す
 nnoremap <silent><F12> :<C-u>call <SID>CopipeTerm()<CR>
@@ -276,37 +333,3 @@ function! s:CopipeTerm()
         unlet b:copipe_term_save
     endif
 endfunction
-
-"" over.vim {{{
-
-" over.vimの起動
-nnoremap <silent> <Leader>m :OverCommandLine<CR>
-
-" カーソル下の単語をハイライト付きで置換
-nnoremap sub :OverCommandLine<CR>%s/<C-r><C-w>//g<Left><Left>
-
-" コピーした文字列をハイライト付きで置換
-nnoremap subp y:OverCommandLine<CR>%s!<C-r>=substitute(@0, '!', '\\!', 'g')<CR>!!gI<Left><Left><Left>
-
-" ctrlp
-let g:ctrlp_working_path_mode = 'ra'
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/node_modules/*
-let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
-
-" }}}
-
-"" yankround.vim
-nmap p <Plug>(yankround-p)
-nmap P <Plug>(yankround-P)
-nmap gp <Plug>(yankround-gp)
-nmap gP <Plug>(yankround-gP)
-nmap <C-p> <Plug>(yankround-prev)
-nnoremap <silent>g<C-p> :<C-u>CtrlPYankRound<CR>
-nmap <C-n> <Plug>(yankround-next)
-
-let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
-
-" インデント
-let g:indent_guides_enable_on_vim_startup = 1
-let g:indent_guides_start_level = 2
-let g:indent_guides_guide_size = 1

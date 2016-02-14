@@ -12,4 +12,6 @@ fi
 
 # Customize to your needs...
 export NVM_DIR=~/.nvm
-  . $(brew --prefix nvm)/nvm.sh
+. $(brew --prefix nvm)/nvm.sh
+
+export PATH=/usr/local/bin:$PATH
