@@ -25,6 +25,7 @@ NeoBundle 'soramugi/auto-ctags.vim'      " Run the ctags command
 NeoBundle 'terryma/vim-multiple-cursors' " True Sublime Text style multiple selections for Vim
 NeoBundle 'tyru/caw.vim'                 " Toggle Comment
 NeoBundle 'tyru/open-browser.vim'        " browser open
+NeoBundle 'tpope/vim-fugitive'           " a Git wrapper so awesome
 
 " --- Visual
 NeoBundle 'cocopon/iceberg.vim'      " Colorscheme
@@ -46,6 +47,7 @@ NeoBundle 'mattn/emmet-vim'     " Emmet
 
 " Required:
 call neobundle#end()
+NeoBundleCheck
 "End NeoBundle Scripts-------------------------
 
 " 文字コードの設定
