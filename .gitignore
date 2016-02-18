@@ -6,6 +6,7 @@
 # for vim
 *.swp
 Session.vim
+.vimrc.local
 
 # ctags
 ctags
