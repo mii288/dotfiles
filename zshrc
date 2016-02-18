@@ -11,7 +11,12 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # Customize to your needs...
-export NVM_DIR=~/.nvm
-. $(brew --prefix nvm)/nvm.sh
+case ${OSTYPE} in
+    darwin*)
+        // For nvm
+        export NVM_DIR=~/.nvm
+        . $(brew --prefix nvm)/nvm.sh
 
-export PATH=/usr/local/bin:$PATH
+        export PATH=/usr/local/bin:$PATH
+        ;;
+esac

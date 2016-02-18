@@ -61,7 +61,7 @@ set title       "編集中のファイル名を表示
 set showmatch   "括弧入力時の対応する括弧を表示
 set smartindent "オートインデント
 set list
-set listchars=tab:>.,trail:_,eol:↲,extends:>,precedes:<,nbsp:%
+set listchars=tab:▸-,trail:.,eol:↲,extends:▸,precedes:<,nbsp:%
 set ambiwidth=double
 
 " 拡張子の設定
@@ -285,8 +285,8 @@ let g:indentLine_char = '▸'
 " colorscheme
 " ------------------------------------
 syntax on
-colorscheme iceberg
 set t_Co=256
+colorscheme iceberg
 
 " ------------------------------------
 " Custom Function
@@ -334,4 +334,17 @@ function! s:CopipeTerm()
         " 削除
         unlet b:copipe_term_save
     endif
+endfunction
+
+" .vim.local
+augroup vimrc-local
+autocmd!
+autocmd BufNewFile,BufReadPost * call s:vimrc_local(expand('<afile>:p:h'))
+augroup END
+
+function! s:vimrc_local(loc)
+    let files = findfile('.vimrc.local', escape(a:loc, ' ') . ';', -1)
+    for i in reverse(filter(files, 'filereadable(v:val)'))
+    source `=i`
+    endfor
 endfunction
