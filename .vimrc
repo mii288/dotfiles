@@ -17,15 +17,18 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 
 " Add or remove your Bundles here:
 " --- Utility
-NeoBundle 'ctrlpvim/ctrlp.vim'           " Open files
-NeoBundle 'LeafCage/yankround.vim'       " Show yank history
-NeoBundle 'osyo-manga/vim-over'          " :substitute preview
-NeoBundle 'scrooloose/syntastic'         " linter
-NeoBundle 'soramugi/auto-ctags.vim'      " Run the ctags command
-NeoBundle 'terryma/vim-multiple-cursors' " True Sublime Text style multiple selections for Vim
-NeoBundle 'tyru/caw.vim'                 " Toggle Comment
-NeoBundle 'tyru/open-browser.vim'        " browser open
-NeoBundle 'tpope/vim-fugitive'           " a Git wrapper so awesome
+NeoBundle 'ctrlpvim/ctrlp.vim'            " Open files
+NeoBundle 'LeafCage/yankround.vim'        " Show yank history
+NeoBundle 'osyo-manga/vim-over'           " :substitute preview
+NeoBundle 'scrooloose/syntastic'          " linter
+NeoBundle 'soramugi/auto-ctags.vim'       " Run the ctags command
+NeoBundle 'terryma/vim-multiple-cursors'  " True Sublime Text style multiple selections for Vim
+NeoBundle 'tyru/caw.vim'                  " Toggle Comment
+NeoBundle 'tyru/open-browser.vim'         " browser open
+NeoBundle 'tpope/vim-fugitive'            " a Git wrapper so awesome
+NeoBundle 'easymotion/vim-easymotion'     " Vim motion on speed!
+NeoBundle 'soramugi/auto-ctags.vim'       " Auto run ctags
+NeoBundle 'christoomey/vim-tmux-navigator' " Seamless navigation between tmux panes and vim splits
 
 " --- Visual
 NeoBundle 'cocopon/iceberg.vim'      " Colorscheme
@@ -128,8 +131,8 @@ inoremap <silent> <C-k> k
 nnoremap x "_x
 
 " mouse
-set mouse=a
-set ttymouse=xterm2
+" set mouse=a
+" set ttymouse=xterm2
 
 " lightline.vim
 set laststatus=2
@@ -235,7 +238,6 @@ let g:syntastic_check_on_save = 1 "ファイル保存時にはチェックを実
 
 
 "" over.vim {{{
-
 " over.vimの起動
 nnoremap <silent> <Leader>m :OverCommandLine<CR>
 " カーソル下の単語をハイライト付きで置換
@@ -260,6 +262,14 @@ map <C-]> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 
 " }}}
 
+"" vim-easymotion.vim
+let g:EasyMotion_do_mapping = 1 " Disable default mappings
+" let g:EasyMotion_use_migemo = 1 " 日本語移動
+let g:EasyMotion_smartcase = 1  " 小文字に限定
+nmap s <Plug>(easymotion-s2)
+xmap s <Plug>(easymotion-s2)
+
+
 "" yankround.vim
 nmap p <Plug>(yankround-p)
 nmap P <Plug>(yankround-P)
@@ -268,6 +278,18 @@ nmap gP <Plug>(yankround-gP)
 nmap <C-p> <Plug>(yankround-prev)
 nnoremap <silent>g<C-p> :<C-u>CtrlPYankRound<CR>
 nmap <C-n> <Plug>(yankround-next)
+
+"" auto-ctags.vim
+let g:auto_ctags = 1
+
+"" vim-tmux-navigator
+let g:tmux_navigator_no_mappings = 1
+
+nnoremap <silent> {Left-mapping} :TmuxNavigateLeft<cr>
+nnoremap <silent> {Down-Mapping} :TmuxNavigateDown<cr>
+nnoremap <silent> {Up-Mapping} :TmuxNavigateUp<cr>
+nnoremap <silent> {Right-Mapping} :TmuxNavigateRight<cr>
+nnoremap <silent> {Previous-Mapping} :TmuxNavigatePrevious<cr>
 
 " インデント
 " Vim
