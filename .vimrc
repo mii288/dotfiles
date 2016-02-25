@@ -27,7 +27,6 @@ NeoBundle 'tyru/caw.vim'                  " Toggle Comment
 NeoBundle 'tyru/open-browser.vim'         " browser open
 NeoBundle 'tpope/vim-fugitive'            " a Git wrapper so awesome
 NeoBundle 'easymotion/vim-easymotion'     " Vim motion on speed!
-NeoBundle 'soramugi/auto-ctags.vim'       " Auto run ctags
 NeoBundle 'christoomey/vim-tmux-navigator' " Seamless navigation between tmux panes and vim splits
 
 " --- Visual
@@ -78,6 +77,8 @@ set wrapscan "検索時に最後まで行ったら最初に戻る
 " set isk+=-
 
 "#####編集設定####
+nnoremap :W :w<CR>
+
 "カーソルを表示行で移動する。物理行移動は<C-n>,<C-p>
 nnoremap j gj
 nnoremap k gk
@@ -101,10 +102,6 @@ setlocal formatoptions-=ro " 改行時コメントアウトさない
 
 set guioptions+=a
 set clipboard+=unnamed,autoselect
-
-" caw
-nmap <Leader>c <Plug>(caw:i:toggle)
-vmap <Leader>c <Plug>(caw:i:toggle)
 
 "####backspace###
 " バックスペースキーで削除できるものを指定
@@ -236,6 +233,9 @@ let g:syntastic_javascript_checker = "jshint" "JavaScriptのSyntaxチェック�
 let g:syntastic_check_on_open = 0 "ファイルオープン時にはチェックをしない
 let g:syntastic_check_on_save = 1 "ファイル保存時にはチェックを実施
 
+" caw
+nmap <Leader>c <Plug>(caw:i:toggle)
+vmap <Leader>c <Plug>(caw:i:toggle)
 
 "" over.vim {{{
 " over.vimの起動
@@ -264,7 +264,7 @@ map <C-]> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 
 "" vim-easymotion.vim
 let g:EasyMotion_do_mapping = 1 " Disable default mappings
-" let g:EasyMotion_use_migemo = 1 " 日本語移動
+let g:EasyMotion_use_migemo = 1 " 日本語移動
 let g:EasyMotion_smartcase = 1  " 小文字に限定
 nmap s <Plug>(easymotion-s2)
 xmap s <Plug>(easymotion-s2)
