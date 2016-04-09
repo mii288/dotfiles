@@ -13,3 +13,5 @@ ctags
 tags
 tags.lock
 
+# OSX
+.DS_Store
