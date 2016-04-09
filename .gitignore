@@ -10,3 +10,6 @@ Session.vim
 
 # ctags
 ctags
+tags
+tags.lock
+
