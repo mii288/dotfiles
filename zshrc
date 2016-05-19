@@ -36,4 +36,10 @@ case ${OSTYPE} in
 
         # export PATH=/usr/local/bin:$PATH
         ;;
+
+    *)
+    if [ -s /root/nvm/nvm.sh ];
+    then
+        source /root/nvm/nvm.sh ;
+    fi
 esac

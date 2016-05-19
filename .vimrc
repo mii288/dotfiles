@@ -17,17 +17,18 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 
 " Add or remove your Bundles here:
 " --- Utility
-NeoBundle 'ctrlpvim/ctrlp.vim'            " Open files
-NeoBundle 'LeafCage/yankround.vim'        " Show yank history
-NeoBundle 'osyo-manga/vim-over'           " :substitute preview
-NeoBundle 'scrooloose/syntastic'          " linter
-NeoBundle 'soramugi/auto-ctags.vim'       " Run the ctags command
-NeoBundle 'terryma/vim-multiple-cursors'  " True Sublime Text style multiple selections for Vim
-NeoBundle 'tyru/caw.vim'                  " Toggle Comment
-NeoBundle 'tyru/open-browser.vim'         " browser open
-NeoBundle 'tpope/vim-fugitive'            " a Git wrapper so awesome
-NeoBundle 'easymotion/vim-easymotion'     " Vim motion on speed!
+NeoBundle 'ctrlpvim/ctrlp.vim'             " Open files
+NeoBundle 'LeafCage/yankround.vim'         " Show yank history
+NeoBundle 'osyo-manga/vim-over'            " :substitute preview
+NeoBundle 'scrooloose/syntastic'           " linter
+NeoBundle 'soramugi/auto-ctags.vim'        " Run the ctags command
+NeoBundle 'terryma/vim-multiple-cursors'   " True Sublime Text style multiple selections for Vim
+NeoBundle 'tyru/caw.vim'                   " Toggle Comment
+NeoBundle 'tyru/open-browser.vim'          " browser open
+NeoBundle 'tpope/vim-fugitive'             " a Git wrapper so awesome
+NeoBundle 'easymotion/vim-easymotion'      " Vim motion on speed!
 NeoBundle 'christoomey/vim-tmux-navigator' " Seamless navigation between tmux panes and vim splits
+NeoBundle 'malithsen/trello-vim'           " A barebone vim plugin to fetch user assigned cards from Trello
 
 " --- Visual
 NeoBundle 'cocopon/iceberg.vim'      " Colorscheme
@@ -57,6 +58,10 @@ set encoding=utf-8
 set fileencodings=utf-8,ucs-bom,iso-2022-jp-3,iso-2022-jp,eucjp-ms,euc-jisx0213,euc-jp,sjis,cp9328
 set fileformats=unix,dos,mac
 
+" markdown
+au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn}.{des3,des,bf,bfa,aes,idea,cast,rc2,rc4,rc5,desx,tmp,old} set filetype=markdown
+
+
 "#####表示設定#####
 set number      "行番号を表示する
 set title       "編集中のファイル名を表示
@@ -65,10 +70,6 @@ set smartindent "オートインデント
 set list
 set listchars=tab:▸-,trail:.,eol:↲,extends:▸,precedes:<,nbsp:%
 set ambiwidth=double
-
-" 拡張子の設定
-au BufRead,BufNewFile *.md set filetype=markdown
-
 
 "#####検索設定#####
 set ignorecase "大文字/小文字の区別なく検索する
@@ -263,12 +264,8 @@ map <C-]> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 " }}}
 
 "" vim-easymotion.vim
-let g:EasyMotion_do_mapping = 1 " Disable default mappings
-let g:EasyMotion_use_migemo = 1 " 日本語移動
-let g:EasyMotion_smartcase = 1  " 小文字に限定
+let g:EasyMotion_do_mapping = 0 " Disable default mappings
 nmap s <Plug>(easymotion-s2)
-xmap s <Plug>(easymotion-s2)
-
 
 "" yankround.vim
 nmap p <Plug>(yankround-p)
@@ -370,3 +367,19 @@ function! s:vimrc_local(loc)
     source `=i`
     endfor
 endfunction
+
+" todoリストのon/offを切り替える
+nnoremap <buffer> <Leader><Leader> :call ToggleCheckbox()<CR>
+vnoremap <buffer> <Leader><Leader> :call ToggleCheckbox()<CR>
+
+" 選択行のチェックボックスを切り替える
+function! ToggleCheckbox()
+    let l:line = getline('.')
+    if l:line =~ '\-\s\[\s\]'
+    let l:result = substitute(l:line, '-\s\[\s\]', '- [x]', '')
+    call setline('.', l:result)
+    elseif l:line =~ '\-\s\[x\]'
+    let l:result = substitute(l:line, '-\s\[x\]', '- [ ]', '')
+    call setline('.', l:result)
+    end
+    endfunction
