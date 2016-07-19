@@ -43,3 +43,13 @@ case ${OSTYPE} in
         source /root/nvm/nvm.sh ;
     fi
 esac
+
+# Attache tmux
+if [ -z $TMUX ]; then
+  if $(tmux has-session); then
+    tmux attach
+  else
+    tmux
+  fi
+fi
+

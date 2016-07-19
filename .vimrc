@@ -18,7 +18,11 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 " Add or remove your Bundles here:
 " --- Utility
 NeoBundle 'ctrlpvim/ctrlp.vim'             " Open files
+NeoBundle 'christoomey/vim-tmux-navigator' " Seamless navigation between tmux panes and vim splits
+NeoBundle 'easymotion/vim-easymotion'      " Vim motion on speed!
 NeoBundle 'LeafCage/yankround.vim'         " Show yank history
+NeoBundle 'koron/codic-vim'                " Codic
+NeoBundle 'malithsen/trello-vim'           " A barebone vim plugin to fetch user assigned cards from Trello
 NeoBundle 'osyo-manga/vim-over'            " :substitute preview
 NeoBundle 'scrooloose/syntastic'           " linter
 NeoBundle 'soramugi/auto-ctags.vim'        " Run the ctags command
@@ -26,14 +30,11 @@ NeoBundle 'terryma/vim-multiple-cursors'   " True Sublime Text style multiple se
 NeoBundle 'tyru/caw.vim'                   " Toggle Comment
 NeoBundle 'tyru/open-browser.vim'          " browser open
 NeoBundle 'tpope/vim-fugitive'             " a Git wrapper so awesome
-NeoBundle 'easymotion/vim-easymotion'      " Vim motion on speed!
-NeoBundle 'christoomey/vim-tmux-navigator' " Seamless navigation between tmux panes and vim splits
-NeoBundle 'malithsen/trello-vim'           " A barebone vim plugin to fetch user assigned cards from Trello
 
 " --- Visual
 NeoBundle 'cocopon/iceberg.vim'      " Colorscheme
 NeoBundle 'itchyny/lightline.vim'    " Customize status bar
-NeoBundle 'osyo-manga/vim-brightest' " Highlight words under cursol
+" NeoBundle 'osyo-manga/vim-brightest' " Highlight words under cursol
 NeoBundle 'Yggdroot/indentLine'      " display indent with mark
 
 " --- For PHP
@@ -235,16 +236,17 @@ let g:syntastic_check_on_open = 0 "ファイルオープン時にはチェック
 let g:syntastic_check_on_save = 1 "ファイル保存時にはチェックを実施
 
 " caw
-nmap <Leader>c <Plug>(caw:i:toggle)
-vmap <Leader>c <Plug>(caw:i:toggle)
+nmap <Leader>c <Plug>(caw:hatpos:toggle)
+vmap <Leader>c <Plug>(caw:hatpos:toggle)
+
 
 "" over.vim {{{
 " over.vimの起動
-nnoremap <silent> <Leader>m :OverCommandLine<CR>
-" カーソル下の単語をハイライト付きで置換
-nnoremap sub :OverCommandLine<CR>%s/<C-r><C-w>//g<Left><Left>
-" コピーした文字列をハイライト付きで置換
-nnoremap subp y:OverCommandLine<CR>%s!<C-r>=substitute(@0, '!', '\\!', 'g')<CR>!!gI<Left><Left><Left>
+"nnoremap <silent> <Leader>m :OverCommandLine<CR>
+"" カーソル下の単語をハイライト付きで置換
+"nnoremap sub :OverCommandLine<CR>%s/<C-r><C-w>//g<Left><Left>
+"" コピーした文字列をハイライト付きで置換
+"nnoremap subp y:OverCommandLine<CR>%s!<C-r>=substitute(@0, '!', '\\!', 'g')<CR>!!gI<Left><Left><Left>
 
 " ctrlp
 " 'c' - the directory of the current file.
@@ -277,7 +279,7 @@ nnoremap <silent>g<C-p> :<C-u>CtrlPYankRound<CR>
 nmap <C-n> <Plug>(yankround-next)
 
 "" auto-ctags.vim
-let g:auto_ctags = 1
+" let g:auto_ctags = 1
 
 "" vim-tmux-navigator
 let g:tmux_navigator_no_mappings = 1
