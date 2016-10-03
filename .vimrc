@@ -24,6 +24,7 @@ NeoBundle 'LeafCage/yankround.vim'         " Show yank history
 NeoBundle 'koron/codic-vim'                " Codic
 NeoBundle 'malithsen/trello-vim'           " A barebone vim plugin to fetch user assigned cards from Trello
 NeoBundle 'osyo-manga/vim-over'            " :substitute preview
+NeoBundle 'rking/ag.vim'                   " agを使えるようにする
 NeoBundle 'scrooloose/syntastic'           " linter
 NeoBundle 'soramugi/auto-ctags.vim'        " Run the ctags command
 NeoBundle 'terryma/vim-multiple-cursors'   " True Sublime Text style multiple selections for Vim
@@ -76,6 +77,9 @@ set ambiwidth=double
 set ignorecase "大文字/小文字の区別なく検索する
 set smartcase "検索文字列に大文字が含まれている場合は区別して検索する
 set wrapscan "検索時に最後まで行ったら最初に戻る
+" vimgrep時デフォルトでquickfix-windowを使用する
+autocmd QuickFixCmdPost *grep* cwindow
+nnoremap ff :<C-u>vim<Space>
 " set isk+=-
 
 "#####編集設定####
@@ -257,12 +261,27 @@ let g:ctrlp_working_path_mode = 'ra'
 " 除外ファイルを設定
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/node_modules/*
 " 検索対象をgit管理ファイルに限定
-let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+" let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+let g:ctrlp_custom_ignore = {
+    \ 'dir':  '\v[\/](doc|tmp|node_modules)',
+    \ 'file': '\v\.(exe|so|dll)$',
+    \ }
 
 " ctagsをタブで開く
 map <C-]> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 
+" agを使用する
+if executable('ag')
+    set grepprg=ag\ --nogroup\ --nocolor
 
+    " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+    " キャッシュを使用
+    let g:ctrlp_use_caching=0
+
+    nnoremap ff :<C-u>Ag<Space>
+endif
 " }}}
 
 "" vim-easymotion.vim
