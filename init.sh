@@ -5,3 +5,7 @@ git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$H
 sh ./install.sh
 sh ./reflesh.sh
 chsh -s /usr/local/bin/zsh
+
+# PHP_CodeSniffer
+pear install PHP_CodeSniffer
+sudo phpcs --config-set installed_paths vendor/cakephp/cakephp-codesniffer/

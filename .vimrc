@@ -39,7 +39,8 @@ NeoBundle 'itchyny/lightline.vim'    " Customize status bar
 NeoBundle 'Yggdroot/indentLine'      " display indent with mark
 
 " --- For PHP
-NeoBundle 'joonty/vdebug' "Xdebug client
+NeoBundle 'joonty/vdebug'      "Xdebug client
+NeoBundle 'bpearson/vim-phpcs' "run PHP_CodeSniffer on the current file, and run the results in a vim window.
 
 " --- For markdown
 NeoBundle 'kannokanno/previm'             " Preview markdown
@@ -72,6 +73,9 @@ set smartindent "オートインデント
 set list
 set listchars=tab:▸-,trail:.,eol:↲,extends:▸,precedes:<,nbsp:%
 set ambiwidth=double
+" カーソルの速度
+set lazyredraw
+set ttyfast
 
 "#####検索設定#####
 set ignorecase "大文字/小文字の区別なく検索する
@@ -327,6 +331,18 @@ let g:indentLine_char = '▸'
 syntax on
 set t_Co=256
 colorscheme iceberg
+
+" ------------------------------------
+" PHP
+" ------------------------------------
+let g:syntastic_mode_map ={
+    \ 'mode': 'active',
+    \ 'active_filetypes': ['php']
+    \}
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_php_checkers=['php', 'phpcs']
+" let g:syntastic_php_phpcs_args='--standard=CakePHP'
+let g:syntastic_php_phpcs_args='--standard=/var/www/sagooo/ruleset.xml'
 
 " ------------------------------------
 " Custom Function
