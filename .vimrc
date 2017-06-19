@@ -22,7 +22,6 @@ NeoBundle 'christoomey/vim-tmux-navigator' " Seamless navigation between tmux pa
 NeoBundle 'easymotion/vim-easymotion'      " Vim motion on speed!
 NeoBundle 'LeafCage/yankround.vim'         " Show yank history
 NeoBundle 'koron/codic-vim'                " Codic
-NeoBundle 'malithsen/trello-vim'           " A barebone vim plugin to fetch user assigned cards from Trello
 NeoBundle 'osyo-manga/vim-over'            " :substitute preview
 NeoBundle 'rking/ag.vim'                   " agを使えるようにする
 NeoBundle 'scrooloose/syntastic'           " linter
