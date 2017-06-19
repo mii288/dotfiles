@@ -19,6 +19,7 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 " --- Utility
 NeoBundle 'ctrlpvim/ctrlp.vim'             " Open files
 NeoBundle 'christoomey/vim-tmux-navigator' " Seamless navigation between tmux panes and vim splits
+NeoBundle 'cohama/lexima'                  " Auto close parentheses and repeat by dot dot dot...
 NeoBundle 'easymotion/vim-easymotion'      " Vim motion on speed!
 NeoBundle 'LeafCage/yankround.vim'         " Show yank history
 NeoBundle 'koron/codic-vim'                " Codic
@@ -440,8 +441,3 @@ augroup MyXML
     autocmd Filetype xml inoremap <buffer> </ </<C-x><C-o>
     autocmd Filetype html inoremap <buffer> </ </<C-x><C-o>
 augroup END
-
-" カッコの補完
-inoremap {<Enter> {}<Left><CR><ESC><S-o>
-inoremap [<Enter> []<Left><CR><ESC><S-o>
-inoremap (<Enter> ()<Left><CR><ESC><S-o>
