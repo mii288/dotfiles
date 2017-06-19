@@ -79,6 +79,10 @@ set ambiwidth=double
 set lazyredraw
 set ttyfast
 
+" vimからファイルを開くときにリストを表示する
+set wildmenu
+set wildmode=list:full
+
 "#####検索設定#####
 set ignorecase "大文字/小文字の区別なく検索する
 set smartcase "検索文字列に大文字が含まれている場合は区別して検索する
@@ -137,7 +141,8 @@ inoremap <silent> kk <ESC>
 inoremap <silent> <C-k> k
 
 " 削除キーでyankしない
-nnoremap x "_x
+noremap PP "0p
+noremap x "_x
 
 " mouse
 " set mouse=a
@@ -335,6 +340,12 @@ set t_Co=256
 colorscheme iceberg
 
 " ------------------------------------
+" HTML
+" ------------------------------------
+" 実行時のキーバインド変更する場合（ここではYからEに変更）
+let g:user_emmet_leader_key = '<C-E>'
+
+" ------------------------------------
 " PHP
 " ------------------------------------
 let g:syntastic_mode_map ={
@@ -343,8 +354,8 @@ let g:syntastic_mode_map ={
     \}
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_php_checkers=['php', 'phpcs']
-" let g:syntastic_php_phpcs_args='--standard=CakePHP'
-let g:syntastic_php_phpcs_args='--standard=/var/www/sagooo/ruleset.xml'
+let g:syntastic_php_phpcs_args='--standard=psr2'
+" let g:syntastic_php_phpcs_args='--standard=/var/www/sagooo/ruleset.xml'
 
 " ------------------------------------
 " Custom Function
@@ -422,3 +433,15 @@ function! ToggleCheckbox()
     call setline('.', l:result)
     end
     endfunction
+
+" HTML閉じタグ補完
+augroup MyXML
+    autocmd!
+    autocmd Filetype xml inoremap <buffer> </ </<C-x><C-o>
+    autocmd Filetype html inoremap <buffer> </ </<C-x><C-o>
+augroup END
+
+" カッコの補完
+inoremap {<Enter> {}<Left><CR><ESC><S-o>
+inoremap [<Enter> []<Left><CR><ESC><S-o>
+inoremap (<Enter> ()<Left><CR><ESC><S-o>
