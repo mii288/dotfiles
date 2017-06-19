@@ -34,7 +34,7 @@ NeoBundle 'tpope/vim-fugitive'             " a Git wrapper so awesome
 " --- Visual
 NeoBundle 'cocopon/iceberg.vim'      " Colorscheme
 NeoBundle 'itchyny/lightline.vim'    " Customize status bar
-" NeoBundle 'osyo-manga/vim-brightest' " Highlight words under cursol
+NeoBundle 'osyo-manga/vim-brightest' " Highlight words under cursol
 NeoBundle 'Yggdroot/indentLine'      " display indent with mark
 
 " --- For PHP
@@ -47,6 +47,7 @@ NeoBundle 'plasticboy/vim-markdown'       " hi markdown
 NeoBundle 'violetyk/iikanji-markdown.vim' " util markdown
 
 " --- For HTML/CSS 
+NeoBundle 'cakebaker/scss-syntax.vim'
 NeoBundle 'digitaltoad/vim-pug' " hi jade
 NeoBundle 'mattn/emmet-vim'     " Emmet
 
@@ -60,9 +61,11 @@ set encoding=utf-8
 set fileencodings=utf-8,ucs-bom,iso-2022-jp-3,iso-2022-jp,eucjp-ms,euc-jisx0213,euc-jp,sjis,cp9328
 set fileformats=unix,dos,mac
 
+"####Filetype####
 " markdown
 au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn}.{des3,des,bf,bfa,aes,idea,cast,rc2,rc4,rc5,desx,tmp,old} set filetype=markdown
-
+" css
+au BufRead,BufNewFile *.scss set filetype=scss.css
 
 "#####表示設定#####
 set number      "行番号を表示する
