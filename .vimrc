@@ -50,6 +50,7 @@ NeoBundle 'violetyk/iikanji-markdown.vim' " util markdown
 NeoBundle 'cakebaker/scss-syntax.vim'
 NeoBundle 'digitaltoad/vim-pug' " hi jade
 NeoBundle 'mattn/emmet-vim'     " Emmet
+NeoBundle 'posva/vim-vue'       " Vim syntax highlighting for Vue components.
 
 " Required:
 call neobundle#end()
