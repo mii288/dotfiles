@@ -19,10 +19,10 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 " --- Utility
 NeoBundle 'ctrlpvim/ctrlp.vim'             " Open files
 NeoBundle 'christoomey/vim-tmux-navigator' " Seamless navigation between tmux panes and vim splits
+NeoBundle 'cohama/lexima.vim'              " Auto close parentheses and repeat by dot dot dot...
 NeoBundle 'easymotion/vim-easymotion'      " Vim motion on speed!
 NeoBundle 'LeafCage/yankround.vim'         " Show yank history
 NeoBundle 'koron/codic-vim'                " Codic
-NeoBundle 'malithsen/trello-vim'           " A barebone vim plugin to fetch user assigned cards from Trello
 NeoBundle 'osyo-manga/vim-over'            " :substitute preview
 NeoBundle 'rking/ag.vim'                   " agを使えるようにする
 NeoBundle 'scrooloose/syntastic'           " linter
@@ -35,7 +35,7 @@ NeoBundle 'tpope/vim-fugitive'             " a Git wrapper so awesome
 " --- Visual
 NeoBundle 'cocopon/iceberg.vim'      " Colorscheme
 NeoBundle 'itchyny/lightline.vim'    " Customize status bar
-" NeoBundle 'osyo-manga/vim-brightest' " Highlight words under cursol
+NeoBundle 'osyo-manga/vim-brightest' " Highlight words under cursol
 NeoBundle 'Yggdroot/indentLine'      " display indent with mark
 
 " --- For PHP
@@ -43,11 +43,11 @@ NeoBundle 'joonty/vdebug'      "Xdebug client
 NeoBundle 'bpearson/vim-phpcs' "run PHP_CodeSniffer on the current file, and run the results in a vim window.
 
 " --- For markdown
-NeoBundle 'kannokanno/previm'             " Preview markdown
 NeoBundle 'plasticboy/vim-markdown'       " hi markdown
 NeoBundle 'violetyk/iikanji-markdown.vim' " util markdown
 
 " --- For HTML/CSS 
+NeoBundle 'cakebaker/scss-syntax.vim'
 NeoBundle 'digitaltoad/vim-pug' " hi jade
 NeoBundle 'mattn/emmet-vim'     " Emmet
 
@@ -62,22 +62,28 @@ set fileencodings=utf-8,ucs-bom,iso-2022-jp-3,iso-2022-jp,eucjp-ms,euc-jisx0213,
 set fileformats=unix,dos,mac
 set ambiwidth=double " □や○文字が崩れる問題を解決
 
+"####Filetype####
 " markdown
 au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn}.{des3,des,bf,bfa,aes,idea,cast,rc2,rc4,rc5,desx,tmp,old} set filetype=markdown
-
+" css
+au BufRead,BufNewFile *.scss set filetype=scss.css
 
 "#####表示設定#####
 set number      "行番号を表示する
 set title       "編集中のファイル名を表示
-set showmatch " 括弧の対応関係を一瞬表示する
+set showmatch   " 括弧の対応関係を一瞬表示する
+set cindent     "オートインデント
 source $VIMRUNTIME/macros/matchit.vim " Vimの「%」を拡張する
-set smartindent "オートインデント
 set list
 set listchars=tab:▸-,trail:.,eol:↲,extends:▸,precedes:<,nbsp:%
 set ambiwidth=double
 " カーソルの速度
 set lazyredraw
 set ttyfast
+
+" vimからファイルを開くときにリストを表示する
+set wildmenu
+set wildmode=list:full
 
 "#####検索設定#####
 set wrapscan "検索時に最後まで行ったら最初に戻る
@@ -143,7 +149,8 @@ inoremap <silent> kk <ESC>
 inoremap <silent> <C-k> k
 
 " 削除キーでyankしない
-nnoremap x "_x
+noremap PP "0p
+noremap x "_x
 
 "#### コマンドモード #####
 set wildmenu " コマンドモードの補完
@@ -344,6 +351,12 @@ set t_Co=256
 colorscheme iceberg
 
 " ------------------------------------
+" HTML
+" ------------------------------------
+" 実行時のキーバインド変更する場合（ここではYからEに変更）
+let g:user_emmet_leader_key = '<C-E>'
+
+" ------------------------------------
 " PHP
 " ------------------------------------
 let g:syntastic_mode_map ={
@@ -352,8 +365,8 @@ let g:syntastic_mode_map ={
     \}
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_php_checkers=['php', 'phpcs']
-" let g:syntastic_php_phpcs_args='--standard=CakePHP'
-let g:syntastic_php_phpcs_args='--standard=/var/www/sagooo/ruleset.xml'
+let g:syntastic_php_phpcs_args='--standard=psr2'
+" let g:syntastic_php_phpcs_args='--standard=/var/www/sagooo/ruleset.xml'
 
 " ------------------------------------
 " Custom Function
