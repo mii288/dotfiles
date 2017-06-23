@@ -19,7 +19,7 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 " --- Utility
 NeoBundle 'ctrlpvim/ctrlp.vim'             " Open files
 NeoBundle 'christoomey/vim-tmux-navigator' " Seamless navigation between tmux panes and vim splits
-NeoBundle 'cohama/lexima'                  " Auto close parentheses and repeat by dot dot dot...
+NeoBundle 'cohama/lexima.vim'              " Auto close parentheses and repeat by dot dot dot...
 NeoBundle 'easymotion/vim-easymotion'      " Vim motion on speed!
 NeoBundle 'LeafCage/yankround.vim'         " Show yank history
 NeoBundle 'koron/codic-vim'                " Codic
@@ -43,7 +43,6 @@ NeoBundle 'joonty/vdebug'      "Xdebug client
 NeoBundle 'bpearson/vim-phpcs' "run PHP_CodeSniffer on the current file, and run the results in a vim window.
 
 " --- For markdown
-NeoBundle 'kannokanno/previm'             " Preview markdown
 NeoBundle 'plasticboy/vim-markdown'       " hi markdown
 NeoBundle 'violetyk/iikanji-markdown.vim' " util markdown
 
