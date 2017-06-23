@@ -60,6 +60,7 @@ NeoBundleCheck
 set encoding=utf-8
 set fileencodings=utf-8,ucs-bom,iso-2022-jp-3,iso-2022-jp,eucjp-ms,euc-jisx0213,euc-jp,sjis,cp9328
 set fileformats=unix,dos,mac
+set ambiwidth=double " □や○文字が崩れる問題を解決
 
 " markdown
 au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn}.{des3,des,bf,bfa,aes,idea,cast,rc2,rc4,rc5,desx,tmp,old} set filetype=markdown
@@ -68,7 +69,8 @@ au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn}.{des3,des,bf,bfa,aes,i
 "#####表示設定#####
 set number      "行番号を表示する
 set title       "編集中のファイル名を表示
-set showmatch   "括弧入力時の対応する括弧を表示
+set showmatch " 括弧の対応関係を一瞬表示する
+source $VIMRUNTIME/macros/matchit.vim " Vimの「%」を拡張する
 set smartindent "オートインデント
 set list
 set listchars=tab:▸-,trail:.,eol:↲,extends:▸,precedes:<,nbsp:%
@@ -78,9 +80,15 @@ set lazyredraw
 set ttyfast
 
 "#####検索設定#####
-set ignorecase "大文字/小文字の区別なく検索する
-set smartcase "検索文字列に大文字が含まれている場合は区別して検索する
 set wrapscan "検索時に最後まで行ったら最初に戻る
+set incsearch " インクリメンタルサーチ. １文字入力毎に検索を行う
+set ignorecase " 検索パターンに大文字小文字を区別しない
+set smartcase " 検索パターンに大文字を含んでいたら大文字小文字を区別する
+set hlsearch " 検索結果をハイライト
+
+" ESCキー2度押しでハイライトの切り替え
+nnoremap <silent><Esc><Esc> :<C-u>set nohlsearch!<CR>
+
 " vimgrep時デフォルトでquickfix-windowを使用する
 autocmd QuickFixCmdPost *grep* cwindow
 nnoremap ff :<C-u>vim<Space>
@@ -136,6 +144,9 @@ inoremap <silent> <C-k> k
 
 " 削除キーでyankしない
 nnoremap x "_x
+
+"#### コマンドモード #####
+set wildmenu " コマンドモードの補完
 
 " mouse
 " set mouse=a
@@ -420,3 +431,17 @@ function! ToggleCheckbox()
     call setline('.', l:result)
     end
     endfunction
+
+" クリップボードからペーストする時だけインデントしない
+if &term =~ "xterm"
+    let &t_SI .= "\e[?2004h"
+    let &t_EI .= "\e[?2004l"
+    let &pastetoggle = "\e[201~"
+
+    function XTermPasteBegin(ret)
+        set paste
+        return a:ret
+    endfunction
+
+    inoremap <special> <expr> <Esc>[200~ XTermPasteBegin("")
+endif
