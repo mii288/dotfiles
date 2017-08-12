@@ -17,25 +17,23 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 
 " Add or remove your Bundles here:
 " --- Utility
-NeoBundle 'ctrlpvim/ctrlp.vim'             " Open files
-NeoBundle 'christoomey/vim-tmux-navigator' " Seamless navigation between tmux panes and vim splits
-NeoBundle 'cohama/lexima.vim'              " Auto close parentheses and repeat by dot dot dot...
+NeoBundle 'kien/ctrlp.vim'                 " Open files
 NeoBundle 'easymotion/vim-easymotion'      " Vim motion on speed!
 NeoBundle 'LeafCage/yankround.vim'         " Show yank history
-NeoBundle 'koron/codic-vim'                " Codic
-NeoBundle 'osyo-manga/vim-over'            " :substitute preview
 NeoBundle 'rking/ag.vim'                   " agを使えるようにする
-NeoBundle 'scrooloose/syntastic'           " linter
+NeoBundle 'w0rp/ale'                       " linter
 NeoBundle 'soramugi/auto-ctags.vim'        " Run the ctags command
 NeoBundle 'terryma/vim-multiple-cursors'   " True Sublime Text style multiple selections for Vim
 NeoBundle 'tyru/caw.vim'                   " Toggle Comment
-NeoBundle 'tyru/open-browser.vim'          " browser open
 NeoBundle 'tpope/vim-fugitive'             " a Git wrapper so awesome
+NeoBundle 'Shougo/unite.vim'               " Unite and create user interfaces
+NeoBundle 'tpope/vim-abolish'
+NeoBundle 'junegunn/vim-easy-align'
 
 " --- Visual
 NeoBundle 'cocopon/iceberg.vim'      " Colorscheme
 NeoBundle 'itchyny/lightline.vim'    " Customize status bar
-NeoBundle 'osyo-manga/vim-brightest' " Highlight words under cursol
+" NeoBundle 'osyo-manga/vim-brightest' " Highlight words under cursor
 NeoBundle 'Yggdroot/indentLine'      " display indent with mark
 
 " --- For PHP
@@ -50,6 +48,8 @@ NeoBundle 'violetyk/iikanji-markdown.vim' " util markdown
 NeoBundle 'cakebaker/scss-syntax.vim'
 NeoBundle 'digitaltoad/vim-pug' " hi jade
 NeoBundle 'mattn/emmet-vim'     " Emmet
+
+" --- For JavaScript
 NeoBundle 'posva/vim-vue'       " Vim syntax highlighting for Vue components.
 
 " Required:
@@ -61,13 +61,17 @@ NeoBundleCheck
 set encoding=utf-8
 set fileencodings=utf-8,ucs-bom,iso-2022-jp-3,iso-2022-jp,eucjp-ms,euc-jisx0213,euc-jp,sjis,cp9328
 set fileformats=unix,dos,mac
-set ambiwidth=double " □や○文字が崩れる問題を解決
+" □や○文字が崩れる問題を解決
+set ambiwidth=double
 
 "####Filetype####
 " markdown
 au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn}.{des3,des,bf,bfa,aes,idea,cast,rc2,rc4,rc5,desx,tmp,old} set filetype=markdown
 " css
 au BufRead,BufNewFile *.scss set filetype=scss.css
+
+"#####全般#####
+set synmaxcol=200
 
 "#####表示設定#####
 set number      "行番号を表示する
@@ -77,7 +81,7 @@ set cindent     "オートインデント
 source $VIMRUNTIME/macros/matchit.vim " Vimの「%」を拡張する
 set list
 set listchars=tab:▸-,trail:.,eol:↲,extends:▸,precedes:<,nbsp:%
-set ambiwidth=double
+
 " カーソルの速度
 set lazyredraw
 set ttyfast
@@ -87,19 +91,14 @@ set wildmenu
 set wildmode=list:full
 
 "#####検索設定#####
-set wrapscan "検索時に最後まで行ったら最初に戻る
-set incsearch " インクリメンタルサーチ. １文字入力毎に検索を行う
+set wrapscan   "検索時に最後まで行ったら最初に戻る
+set incsearch  " インクリメンタルサーチ. １文字入力毎に検索を行う
 set ignorecase " 検索パターンに大文字小文字を区別しない
-set smartcase " 検索パターンに大文字を含んでいたら大文字小文字を区別する
-set hlsearch " 検索結果をハイライト
+set smartcase  " 検索パターンに大文字を含んでいたら大文字小文字を区別する
+set hlsearch   " 検索結果をハイライト
 
 " ESCキー2度押しでハイライトの切り替え
 nnoremap <silent><Esc><Esc> :<C-u>set nohlsearch!<CR>
-
-" vimgrep時デフォルトでquickfix-windowを使用する
-autocmd QuickFixCmdPost *grep* cwindow
-nnoremap ff :<C-u>vim<Space>
-" set isk+=-
 
 "#####編集設定####
 nnoremap :W :w<CR>
@@ -109,6 +108,7 @@ nnoremap j gj
 nnoremap k gk
 nnoremap <Down> gj
 nnoremap <Up>   gk
+
 " 入力モードで矢印キーでカーソル移動
 inoremap <C-j> <Down>
 inoremap <C-k> <Up>
@@ -149,6 +149,9 @@ inoremap <silent> <C-j> j
 inoremap <silent> kk <ESC>
 inoremap <silent> <C-k> k
 
+" ctrl + , で.vimrcを開く
+nmap <C-,> :tabnew $MYVIMRC<CR>
+
 " 削除キーでyankしない
 noremap PP "0p
 noremap x "_x
@@ -156,38 +159,34 @@ noremap x "_x
 "#### コマンドモード #####
 set wildmenu " コマンドモードの補完
 
-" mouse
-" set mouse=a
-" set ttymouse=xterm2
-
 " lightline.vim
 set laststatus=2
 let g:lightline = {
     \ 'colorscheme': 'wombat',
     \ 'mode_map': {'c': 'NORMAL'},
     \ 'active': {
-        \   'left': [
-            \     ['mode', 'paste'],
-            \     ['fugitive', 'gitgutter', 'filename'],
-            \   ],
-            \   'right': [
-                \     ['lineinfo', 'syntastic'],
-                \     ['percent'],
-                \     ['fileformat', 'fileencoding', 'filetype'],
-                \   ]
-                    \ },
+    \   'left': [
+    \     ['mode', 'paste'],
+    \     ['fugitive', 'gitgutter', 'filename'],
+    \   ],
+    \   'right': [
+    \     ['lineinfo', 'ale'],
+    \     ['percent'],
+    \     ['fileformat', 'fileencoding', 'filetype'],
+    \   ]
+    \ },
     \ 'component_function': {
-        \   'modified': 'MyModified',
-        \   'readonly': 'MyReadonly',
-        \   'fugitive': 'MyFugitive',
-        \   'filename': 'MyFilename',
-        \   'fileformat': 'MyFileformat',
-        \   'filetype': 'MyFiletype',
-        \   'fileencoding': 'MyFileencoding',
-        \   'mode': 'MyMode',
-        \   'syntastic': 'SyntasticStatuslineFlag',
-        \   'gitgutter': 'MyGitGutter',
-        \ },
+    \   'modified': 'MyModified',
+    \   'readonly': 'MyReadonly',
+    \   'fugitive': 'MyFugitive',
+    \   'filename': 'MyFilename',
+    \   'fileformat': 'MyFileformat',
+    \   'filetype': 'MyFiletype',
+    \   'fileencoding': 'MyFileencoding',
+    \   'mode': 'MyMode',
+    \   'gitgutter': 'MyGitGutter',
+    \   'ale': 'ALEGetStatusLine',
+    \ },
     \ 'separator': {'left': '⮀', 'right': '⮂'},
     \ 'subseparator': {'left': '⮁', 'right': '⮃'}
     \ }
@@ -257,23 +256,10 @@ function! MyGitGutter()
     return join(ret, ' ')
 endfunction
 
-" jslint
-let g:syntastic_javascript_checkers = ['jshint'] "JavaScriptのSyntaxチェックはjshintで
-let g:syntastic_check_on_open = 0 "ファイルオープン時にはチェックをしない
-let g:syntastic_check_on_save = 1 "ファイル保存時にはチェックを実施
-
 " caw
 nmap <Leader>c <Plug>(caw:hatpos:toggle)
 vmap <Leader>c <Plug>(caw:hatpos:toggle)
 
-
-"" over.vim {{{
-" over.vimの起動
-"nnoremap <silent> <Leader>m :OverCommandLine<CR>
-"" カーソル下の単語をハイライト付きで置換
-"nnoremap sub :OverCommandLine<CR>%s/<C-r><C-w>//g<Left><Left>
-"" コピーした文字列をハイライト付きで置換
-"nnoremap subp y:OverCommandLine<CR>%s!<C-r>=substitute(@0, '!', '\\!', 'g')<CR>!!gI<Left><Left><Left>
 
 " ctrlp
 " 'c' - the directory of the current file.
@@ -281,8 +267,10 @@ vmap <Leader>c <Plug>(caw:hatpos:toggle)
 " 'a' - like c, but only if the current working directory outside of CtrlP is not a direct ancestor of the directory of the current file.
 " 0 or '' (empty string) - disable this feature.
 let g:ctrlp_working_path_mode = 'ra'
+
 " 除外ファイルを設定
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/node_modules/*
+
 " 検索対象をgit管理ファイルに限定
 " let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 let g:ctrlp_custom_ignore = {
@@ -308,8 +296,8 @@ endif
 " }}}
 
 "" vim-easymotion.vim
-let g:EasyMotion_do_mapping = 0 " Disable default mappings
-nmap s <Plug>(easymotion-s2)
+" let g:EasyMotion_do_mapping = 0 " Disable default mappings
+" nmap s <Plug>(easymotion-s2)
 
 "" yankround.vim
 nmap p <Plug>(yankround-p)
@@ -319,18 +307,6 @@ nmap gP <Plug>(yankround-gP)
 nmap <C-p> <Plug>(yankround-prev)
 nnoremap <silent>g<C-p> :<C-u>CtrlPYankRound<CR>
 nmap <C-n> <Plug>(yankround-next)
-
-"" auto-ctags.vim
-" let g:auto_ctags = 1
-
-"" vim-tmux-navigator
-let g:tmux_navigator_no_mappings = 1
-
-nnoremap <silent> {Left-mapping} :TmuxNavigateLeft<cr>
-nnoremap <silent> {Down-Mapping} :TmuxNavigateDown<cr>
-nnoremap <silent> {Up-Mapping} :TmuxNavigateUp<cr>
-nnoremap <silent> {Right-Mapping} :TmuxNavigateRight<cr>
-nnoremap <silent> {Previous-Mapping} :TmuxNavigatePrevious<cr>
 
 " インデント
 " Vim
@@ -344,11 +320,18 @@ let g:indentLine_color_tty_light = 7 " (default: 4)
 let g:indentLine_color_dark = 1 " (default: 2)
 let g:indentLine_char = '▸'
 
+" multiple cursor
+" <ESC>を押したときに、カーソル位置が復元されるようにする
+let g:multi_cursor_exit_from_insert_mode = 0
+
 " ------------------------------------
 " colorscheme
 " ------------------------------------
 syntax on
 set t_Co=256
+autocmd ColorScheme * highlight Normal ctermbg=none
+autocmd ColorScheme * highlight NonText ctermbg=none
+autocmd ColorScheme * highlight EndOfBuffer ctermbg=none
 colorscheme iceberg
 
 " ------------------------------------
@@ -360,14 +343,41 @@ let g:user_emmet_leader_key = '<C-E>'
 " ------------------------------------
 " PHP
 " ------------------------------------
-let g:syntastic_mode_map ={
-    \ 'mode': 'active',
-    \ 'active_filetypes': ['php']
-    \}
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_php_checkers=['php', 'phpcs']
-let g:syntastic_php_phpcs_args='--standard=psr2'
-" let g:syntastic_php_phpcs_args='--standard=/var/www/sagooo/ruleset.xml'
+
+" ------------------------------------
+" JavaScript
+" ------------------------------------
+let g:ale_linters = {
+\ 'php': ['phpcs'],
+\ 'javascript': ['eslint'],
+\ 'vue': ['eslint']
+\ }
+
+let g:ale_fixers = {
+\ 'javascript': ['eslint'],
+\ 'vue': ['eslint']
+\ }
+
+let g:ale_sign_column_always = 1
+let g:ale_sign_error = '✖'
+let g:ale_sign_warning = '⚠'
+let g:ale_statusline_format = ['✖ %d', '⚠ %d', '🙆']
+
+let g:ale_echo_msg_error_str = '✖'
+let g:ale_echo_msg_warning_str = '⚠ '
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+
+let g:ale_lint_on_save = 1
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_insert_leave = 0
+
+" ファイルオープン時にチェックしたくない場合
+let g:ale_lint_on_enter = 0
+
+let g:ale_lint_delay = 1000
+
+" F8で修正
+nmap <F8> <Plug>(ale_fix)
 
 " ------------------------------------
 " Custom Function
@@ -459,3 +469,4 @@ if &term =~ "xterm"
 
     inoremap <special> <expr> <Esc>[200~ XTermPasteBegin("")
 endif
+
