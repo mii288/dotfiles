@@ -29,6 +29,7 @@ NeoBundle 'tpope/vim-fugitive'             " a Git wrapper so awesome
 NeoBundle 'Shougo/unite.vim'               " Unite and create user interfaces
 NeoBundle 'tpope/vim-abolish'
 NeoBundle 'junegunn/vim-easy-align'
+NeoBundle 'Townk/vim-autoclose'
 
 " --- Visual
 NeoBundle 'cocopon/iceberg.vim'      " Colorscheme
@@ -38,7 +39,6 @@ NeoBundle 'Yggdroot/indentLine'      " display indent with mark
 
 " --- For PHP
 NeoBundle 'joonty/vdebug'      "Xdebug client
-NeoBundle 'bpearson/vim-phpcs' "run PHP_CodeSniffer on the current file, and run the results in a vim window.
 
 " --- For markdown
 NeoBundle 'plasticboy/vim-markdown'       " hi markdown
@@ -50,6 +50,7 @@ NeoBundle 'digitaltoad/vim-pug' " hi jade
 NeoBundle 'mattn/emmet-vim'     " Emmet
 
 " --- For JavaScript
+NeoBundle 'pangloss/vim-javascript'
 NeoBundle 'posva/vim-vue'       " Vim syntax highlighting for Vue components.
 
 " Required:
@@ -67,6 +68,7 @@ set ambiwidth=double
 "####Filetype####
 " markdown
 au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn}.{des3,des,bf,bfa,aes,idea,cast,rc2,rc4,rc5,desx,tmp,old} set filetype=markdown
+
 " css
 au BufRead,BufNewFile *.scss set filetype=scss.css
 
@@ -123,7 +125,8 @@ set tabstop=4
 set autoindent
 set expandtab
 
-setlocal formatoptions-=ro " 改行時コメントアウトさない
+" 改行時コメントアウトさない
+setlocal formatoptions-=ro
 
 set guioptions+=a
 set clipboard+=unnamed,autoselect
@@ -329,9 +332,6 @@ let g:multi_cursor_exit_from_insert_mode = 0
 " ------------------------------------
 syntax on
 set t_Co=256
-autocmd ColorScheme * highlight Normal ctermbg=none
-autocmd ColorScheme * highlight NonText ctermbg=none
-autocmd ColorScheme * highlight EndOfBuffer ctermbg=none
 colorscheme iceberg
 
 " ------------------------------------
@@ -347,12 +347,6 @@ let g:user_emmet_leader_key = '<C-E>'
 " ------------------------------------
 " JavaScript
 " ------------------------------------
-let g:ale_linters = {
-\ 'php': ['phpcs'],
-\ 'javascript': ['eslint'],
-\ 'vue': ['eslint']
-\ }
-
 let g:ale_fixers = {
 \ 'javascript': ['eslint'],
 \ 'vue': ['eslint']
@@ -368,16 +362,17 @@ let g:ale_echo_msg_warning_str = '⚠ '
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 
 let g:ale_lint_on_save = 1
-let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_insert_leave = 0
-
-" ファイルオープン時にチェックしたくない場合
-let g:ale_lint_on_enter = 0
 
 let g:ale_lint_delay = 1000
 
 " F8で修正
 nmap <F8> <Plug>(ale_fix)
+
+" vue
+autocmd FileType vue syntax sync fromstart
+autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
+let g:vue_disable_pre_processors=1
 
 " ------------------------------------
 " Custom Function
