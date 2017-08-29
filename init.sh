@@ -15,11 +15,12 @@ if [ -e /etc/centos-release ]; then
     chsh -s /usr/bin/zsh
 
     alert "tmuxインストール"
-    sudo yum -y install gcc libevent-devel ncurses-devel
+    sudo yum -y install libevent-devel ncurses-devel automake gcc
     git clone https://github.com/tmux/tmux.git
     cd tmux
     sh autogen.sh
     ./configure && make
+    sudo make install
     cd ../
     rm -Rf ./tmux
 fi
