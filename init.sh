@@ -26,7 +26,8 @@ fi
 if [ -x "`which zsh`" ]; then
     alert "zsh初期設定"
     git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
-    chsh -s /usr/local/bin/zsh
+    sudo sh -c "echo '/usr/bin/zsh' >> /etc/shells"
+    chsh -s /usr/bin/zsh
 fi
 
 # Vim
@@ -43,4 +44,4 @@ sh ./reflesh.sh
 # 再起動
 exec $SHELL -l
 
-alert 'dotfilesの初期設定が完了しました！'
+alert "dotfilesの初期設定が完了しました！"
