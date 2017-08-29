@@ -11,6 +11,8 @@ if [ -e /etc/centos-release ]; then
 
     alert "zshインストール"
     sudo yum -y install zsh
+    sudo sh -c "echo '/usr/bin/zsh' >> /etc/shells"
+    chsh -s /usr/bin/zsh
 
     alert "tmuxインストール"
     sudo yum -y install gcc libevent-devel ncurses-devel
@@ -26,8 +28,6 @@ fi
 if [ -x "`which zsh`" ]; then
     alert "zsh初期設定"
     git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
-    sudo sh -c "echo '/usr/bin/zsh' >> /etc/shells"
-    chsh -s /usr/bin/zsh
 fi
 
 # Vim
@@ -37,6 +37,11 @@ if [ -x "`which vim`" ]; then
     sh ./installer.sh ~/.vim/bundles
     rm -Rf ./installer.sh
 fi
+
+# Git
+alert "Git初期設定"
+curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash > .git-completion.bash
+curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.bash > .git-prompt.bash
 
 # シンボリックリンクの作成
 sh ./reflesh.sh
