@@ -1,62 +1,71 @@
-" Note: Skip initialization for vim-tiny or vim-small.
-if 0 | endif
-
+"dein Scripts-----------------------------
 if &compatible
-    set nocompatible               " Be iMproved
+  set nocompatible               " Be iMproved
 endif
 
 " Required:
-set runtimepath^=$HOME/.vim/bundle/neobundle.vim/
+set runtimepath+=/home/developer/.vim/bundles/repos/github.com/Shougo/dein.vim
 
 " Required:
-call neobundle#begin(expand('$HOME/.vim/bundle'))
+if dein#load_state('/home/developer/.vim/bundles')
+  call dein#begin('/home/developer/.vim/bundles')
 
-" Let NeoBundle manage NeoBundle
+  " Let dein manage dein
+  " Required:
+  call dein#add('/home/developer/.vim/bundles/repos/github.com/Shougo/dein.vim')
+
+  " Add or remove your plugins here:
+  " --- Utility
+  call dein#add('kien/ctrlp.vim')                 " Open files
+  call dein#add('easymotion/vim-easymotion')      " Vim motion on speed!
+  call dein#add('LeafCage/yankround.vim')         " Show yank history
+  call dein#add('rking/ag.vim')                    " agを使えるようにする
+  call dein#add('w0rp/ale')                        " linter
+  call dein#add('soramugi/auto-ctags.vim')         " Run the ctags command
+  call dein#add('terryma/vim-multiple-cursors')    " True Sublime Text style multiple selections for Vim
+  call dein#add('tyru/caw.vim')                    " Toggle Comment
+  call dein#add('tpope/vim-fugitive')              " a Git wrapper so awesome
+  call dein#add('Shougo/unite.vim')                " Unite and create user interfaces
+  call dein#add('tpope/vim-abolish')
+  call dein#add('junegunn/vim-easy-align')
+  call dein#add('Townk/vim-autoclose')
+
+  " --- Visual
+  call dein#add('cocopon/iceberg.vim')       " Colorscheme
+  call dein#add('itchyny/lightline.vim')     " Customize status bar
+  " dein#add('osyo-manga/vim-brightest')  " Highlight words under cursor
+  call dein#add('Yggdroot/indentLine')       " display indent with mark
+
+  " --- For PHP
+  call dein#add('joonty/vdebug')       "Xdebug client
+
+  " --- For markdown
+  call dein#add('plasticboy/vim-markdown')        " hi markdown
+
+  " --- For HTML/CSS 
+  call dein#add('cakebaker/scss-syntax.vim')
+  call dein#add('digitaltoad/vim-pug')  " hi jade
+  call dein#add('mattn/emmet-vim')      " Emmet
+
+  " --- For JavaScript
+  call dein#add('pangloss/vim-javascript')
+  call dein#add('posva/vim-vue')        " Vim syntax highlighting for Vue components.
+
+  " Required:
+  call dein#end()
+  call dein#save_state()
+endif
+
 " Required:
-NeoBundleFetch 'Shougo/neobundle.vim'
+filetype plugin indent on
+syntax enable
 
-" Add or remove your Bundles here:
-" --- Utility
-NeoBundle 'kien/ctrlp.vim'                 " Open files
-NeoBundle 'easymotion/vim-easymotion'      " Vim motion on speed!
-NeoBundle 'LeafCage/yankround.vim'         " Show yank history
-NeoBundle 'rking/ag.vim'                   " agを使えるようにする
-NeoBundle 'w0rp/ale'                       " linter
-NeoBundle 'soramugi/auto-ctags.vim'        " Run the ctags command
-NeoBundle 'terryma/vim-multiple-cursors'   " True Sublime Text style multiple selections for Vim
-NeoBundle 'tyru/caw.vim'                   " Toggle Comment
-NeoBundle 'tpope/vim-fugitive'             " a Git wrapper so awesome
-NeoBundle 'Shougo/unite.vim'               " Unite and create user interfaces
-NeoBundle 'tpope/vim-abolish'
-NeoBundle 'junegunn/vim-easy-align'
-NeoBundle 'Townk/vim-autoclose'
+" If you want to install not installed plugins on startup.
+if dein#check_install()
+  call dein#install()
+endif
 
-" --- Visual
-NeoBundle 'cocopon/iceberg.vim'      " Colorscheme
-NeoBundle 'itchyny/lightline.vim'    " Customize status bar
-" NeoBundle 'osyo-manga/vim-brightest' " Highlight words under cursor
-NeoBundle 'Yggdroot/indentLine'      " display indent with mark
-
-" --- For PHP
-NeoBundle 'joonty/vdebug'      "Xdebug client
-
-" --- For markdown
-NeoBundle 'plasticboy/vim-markdown'       " hi markdown
-NeoBundle 'violetyk/iikanji-markdown.vim' " util markdown
-
-" --- For HTML/CSS 
-NeoBundle 'cakebaker/scss-syntax.vim'
-NeoBundle 'digitaltoad/vim-pug' " hi jade
-NeoBundle 'mattn/emmet-vim'     " Emmet
-
-" --- For JavaScript
-NeoBundle 'pangloss/vim-javascript'
-NeoBundle 'posva/vim-vue'       " Vim syntax highlighting for Vue components.
-
-" Required:
-call neobundle#end()
-NeoBundleCheck
-"End NeoBundle Scripts-------------------------
+"End dein Scripts-------------------------
 
 " 文字コードの設定
 set encoding=utf-8
