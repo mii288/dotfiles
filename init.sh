@@ -1,11 +1,46 @@
 #!/bin/sh
-zsh
-curl https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh > install.sh
-git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
-sh ./install.sh
-sh ./reflesh.sh
-chsh -s /usr/local/bin/zsh
 
-# PHP_CodeSniffer
-pear install PHP_CodeSniffer
-sudo phpcs --config-set installed_paths vendor/cakephp/cakephp-codesniffer/
+# ログ出力
+alert() {
+    echo -e "\e[33m>> ${1}\e[m"
+}
+
+if [ -e /etc/centos-release ]; then
+    # CentOS
+    sudo yum -y update
+
+    alert "zshインストール"
+    sudo yum -y install zsh
+
+    alert "tmuxインストール"
+    sudo yum -y install gcc libevent-devel ncurses-devel
+    git clone https://github.com/tmux/tmux.git
+    cd tmux
+    sh autogen.sh
+    ./configure && make
+    cd ../
+    rm -Rf ./tmux
+fi
+
+# Zsh
+if [ -x "`which zsh`" ]; then
+    alert "zsh初期設定"
+    git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
+    chsh -s /usr/local/bin/zsh
+fi
+
+# Vim
+if [ -x "`which vim`" ]; then
+    alert "vim初期設定"
+    curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
+    sh ./installer.sh ~/.vim/bundles
+    rm -Rf ./installer.sh
+fi
+
+# シンボリックリンクの作成
+sh ./reflesh.sh
+
+# 再起動
+exec $SHELL -l
+
+alert 'dotfilesの初期設定が完了しました！'
