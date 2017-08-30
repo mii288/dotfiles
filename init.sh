@@ -23,6 +23,9 @@ if [ -e /etc/centos-release ]; then
     sudo make install
     cd ../
     rm -Rf ./tmux
+
+    alert "agインストール"
+    sudo yum install -y the_silver_searcher
 fi
 
 # Zsh
