@@ -39,9 +39,6 @@ if dein#load_state('/home/developer/.vim/bundles')
   " --- For PHP
   call dein#add('joonty/vdebug')       "Xdebug client
 
-  " --- For markdown
-  call dein#add('plasticboy/vim-markdown')        " hi markdown
-
   " --- For HTML/CSS 
   call dein#add('cakebaker/scss-syntax.vim')
   call dein#add('digitaltoad/vim-pug')  " hi jade
@@ -75,8 +72,6 @@ set fileformats=unix,dos,mac
 set ambiwidth=double
 
 "####Filetype####
-" markdown
-au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn}.{des3,des,bf,bfa,aes,idea,cast,rc2,rc4,rc5,desx,tmp,old} set filetype=markdown
 
 " css
 au BufRead,BufNewFile *.scss set filetype=scss.css
