@@ -16,3 +16,6 @@ tags.lock
 # OSX
 .DS_Store
 *.map
+
+.git-completion.bash
+.git-prompt.bash
