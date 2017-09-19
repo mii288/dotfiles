@@ -13,6 +13,9 @@ fi
 # Customize to your needs...
 case ${OSTYPE} in
     darwin*)
+        # Ruby
+        eval "$(rbenv init -)"
+
         # For nvm
         PATH=${NVM_DIR:-$HOME/.nvm}/default/bin:$PATH
         MANPATH=${NVM_DIR:-$HOME/.nvm}/default/share/man:$MANPATH

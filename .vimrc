@@ -4,15 +4,15 @@ if &compatible
 endif
 
 " Required:
-set runtimepath+=/home/developer/.vim/bundles/repos/github.com/Shougo/dein.vim
+set runtimepath+=~/.vim/bundles/repos/github.com/Shougo/dein.vim
 
 " Required:
-if dein#load_state('/home/developer/.vim/bundles')
-  call dein#begin('/home/developer/.vim/bundles')
+if dein#load_state('~/.vim/bundles')
+  call dein#begin('~/.vim/bundles')
 
   " Let dein manage dein
   " Required:
-  call dein#add('/home/developer/.vim/bundles/repos/github.com/Shougo/dein.vim')
+  call dein#add('~/.vim/bundles/repos/github.com/Shougo/dein.vim')
 
   " Add or remove your plugins here:
   " --- Utility
