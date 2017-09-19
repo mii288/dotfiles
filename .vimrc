@@ -16,16 +16,16 @@ if dein#load_state('/home/developer/.vim/bundles')
 
   " Add or remove your plugins here:
   " --- Utility
-  call dein#add('kien/ctrlp.vim')                 " Open files
-  call dein#add('easymotion/vim-easymotion')      " Vim motion on speed!
-  call dein#add('LeafCage/yankround.vim')         " Show yank history
-  call dein#add('rking/ag.vim')                    " agを使えるようにする
-  call dein#add('w0rp/ale')                        " linter
-  call dein#add('soramugi/auto-ctags.vim')         " Run the ctags command
-  call dein#add('terryma/vim-multiple-cursors')    " True Sublime Text style multiple selections for Vim
-  call dein#add('tyru/caw.vim')                    " Toggle Comment
-  call dein#add('tpope/vim-fugitive')              " a Git wrapper so awesome
-  call dein#add('Shougo/unite.vim')                " Unite and create user interfaces
+  call dein#add('kien/ctrlp.vim')               " Open files
+  call dein#add('easymotion/vim-easymotion')    " Vim motion on speed!
+  call dein#add('LeafCage/yankround.vim')       " Show yank history
+  call dein#add('rking/ag.vim')                 " agを使えるようにする
+  call dein#add('w0rp/ale')                     " linter
+  call dein#add('soramugi/auto-ctags.vim')      " Run the ctags command
+  call dein#add('terryma/vim-multiple-cursors') " True Sublime Text style multiple selections for Vim
+  call dein#add('tyru/caw.vim')                 " Toggle Comment
+  call dein#add('tpope/vim-fugitive')           " a Git wrapper so awesome
+  call dein#add('Shougo/unite.vim')             " Unite and create user interfaces
   call dein#add('tpope/vim-abolish')
   call dein#add('junegunn/vim-easy-align')
   call dein#add('Townk/vim-autoclose')
@@ -33,7 +33,7 @@ if dein#load_state('/home/developer/.vim/bundles')
   " --- Visual
   call dein#add('cocopon/iceberg.vim')       " Colorscheme
   call dein#add('itchyny/lightline.vim')     " Customize status bar
-  " dein#add('osyo-manga/vim-brightest')  " Highlight words under cursor
+  " call dein#add('osyo-manga/vim-brightest')  " Highlight words under cursor
   call dein#add('Yggdroot/indentLine')       " display indent with mark
 
   " --- For PHP
@@ -41,12 +41,12 @@ if dein#load_state('/home/developer/.vim/bundles')
 
   " --- For HTML/CSS 
   call dein#add('cakebaker/scss-syntax.vim')
-  call dein#add('digitaltoad/vim-pug')  " hi jade
-  call dein#add('mattn/emmet-vim')      " Emmet
+  call dein#add('digitaltoad/vim-pug')        " hi jade
+  call dein#add('mattn/emmet-vim')            " Emmet
 
   " --- For JavaScript
   call dein#add('pangloss/vim-javascript')
-  call dein#add('posva/vim-vue')        " Vim syntax highlighting for Vue components.
+  call dein#add('posva/vim-vue')           " Vim syntax highlighting for Vue components.
 
   " Required:
   call dein#end()
@@ -347,13 +347,17 @@ let g:user_emmet_leader_key = '<C-E>'
 " ------------------------------------
 " PHP
 " ------------------------------------
+let g:php_phpcs_use_global = 1
+let g:ale_php_phpcs_standard = 'PSR2'
+
 
 " ------------------------------------
 " JavaScript
 " ------------------------------------
 let g:ale_fixers = {
 \ 'javascript': ['eslint'],
-\ 'vue': ['eslint']
+\ 'vue': ['eslint'],
+\ 'php': ['phpcbf'],
 \ }
 
 let g:ale_sign_column_always = 1
