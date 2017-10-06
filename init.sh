@@ -9,33 +9,39 @@ if [ -e /etc/centos-release ]; then
     # CentOS
     sudo yum -y update
 
-    alert "zshインストール"
-    sudo yum -y install zsh
-    sudo sh -c "echo '/usr/bin/zsh' >> /etc/shells"
-    chsh -s /usr/bin/zsh
+    if ! type "zsh" > /dev/null 2>&1; then
+        alert "zshインストール"
+        sudo yum -y install zsh
+        sudo sh -c "echo '/usr/bin/zsh' >> /etc/shells"
+        chsh -s /usr/bin/zsh
+    fi
 
-    alert "tmuxインストール"
-    sudo yum -y install libevent-devel ncurses-devel automake gcc
-    git clone https://github.com/tmux/tmux.git
-    cd tmux
-    sh autogen.sh
-    ./configure && make
-    sudo make install
-    cd ../
-    rm -Rf ./tmux
+    if ! type "tmux" > /dev/null 2>&1; then
+        alert "tmuxインストール"
+        sudo yum -y install libevent-devel ncurses-devel automake gcc
+        git clone https://github.com/tmux/tmux.git
+        cd tmux
+        sh autogen.sh
+        ./configure && make
+        sudo make install
+        cd ../
+        rm -Rf ./tmux
+    fi
 
-    alert "agインストール"
-    sudo yum install -y the_silver_searcher
+    if ! type "ag" > /dev/null 2>&1; then
+        alert "agインストール"
+        sudo yum install -y the_silver_searcher
+    fi
 fi
 
 # Zsh
-if [ -x "`which zsh`" ]; then
+if type "zsh" > /dev/null 2>&1; then
     alert "zsh初期設定"
     git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
 fi
 
 # Vim
-if [ -x "`which vim`" ]; then
+if type "vim" > /dev/null 2>&1; then
     alert "vim初期設定"
     curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
     sh ./installer.sh ~/.vim/bundles
