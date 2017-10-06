@@ -12,8 +12,6 @@ if [ -e /etc/centos-release ]; then
     if ! type "zsh" > /dev/null 2>&1; then
         alert "zshインストール"
         sudo yum -y install zsh
-        sudo sh -c "echo '/usr/bin/zsh' >> /etc/shells"
-        chsh -s /usr/bin/zsh
     fi
 
     if ! type "tmux" > /dev/null 2>&1; then
