@@ -13,9 +13,6 @@ fi
 # Customize to your needs...
 case ${OSTYPE} in
     darwin*)
-        # Ruby
-        eval "$(rbenv init -)"
-
         # For nvm
         # PATH=${NVM_DIR:-$HOME/.nvm}/default/bin:$PATH
         # MANPATH=${NVM_DIR:-$HOME/.nvm}/default/share/man:$MANPATH
@@ -27,8 +24,8 @@ case ${OSTYPE} in
         # (Hint: .nvm/default は .nvm/vX.Y.Z へのシンボリックリンク)
         # NODE_PATH=${NODE_PATH:A}
 
-        export NVM_DIR=~/.nvm
-            . $(brew --prefix nvm)/nvm.sh
+        # export NVM_DIR=~/.nvm
+        #     . $(brew --prefix nvm)/nvm.sh
         ;;
 
     linux*)
@@ -43,5 +40,3 @@ if [ -x "`which tmux`" ]; then
         tmux attach
     fi
 fi
-
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
