@@ -24,6 +24,9 @@ if [ -e /etc/centos-release ]; then
         sudo make install
         cd ../
         rm -Rf ./tmux
+
+        # Tmux Plugin Managerのインストール
+        git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
     fi
 
     if ! type "ag" > /dev/null 2>&1; then
