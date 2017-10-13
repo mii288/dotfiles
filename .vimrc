@@ -25,7 +25,6 @@ if dein#load_state('~/.vim/bundles')
   call dein#add('terryma/vim-multiple-cursors')    " True Sublime Text style multiple selections for Vim
   call dein#add('tyru/caw.vim')                    " Toggle Comment
   call dein#add('tpope/vim-fugitive')              " a Git wrapper so awesome
-  call dein#add('Shougo/unite.vim')                " Unite and create user interfaces
   call dein#add('tpope/vim-abolish')
   call dein#add('junegunn/vim-easy-align')
   call dein#add('Townk/vim-autoclose')
@@ -279,7 +278,7 @@ let g:ctrlp_working_path_mode = 'ra'
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/node_modules/*
 
 " 検索対象をgit管理ファイルに限定
-" let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 let g:ctrlp_custom_ignore = {
     \ 'dir':  '\v[\/](doc|tmp|node_modules)',
     \ 'file': '\v\.(exe|so|dll)$',
@@ -290,14 +289,10 @@ map <C-]> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 
 " agを使用する
 if executable('ag')
-    set grepprg=ag\ --nogroup\ --nocolor
-
-    " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-
-    " キャッシュを使用
+    " キャッシュの利用
     let g:ctrlp_use_caching=0
 
+    " ffで検索できるようにする
     nnoremap ff :<C-u>Ag<Space>
 endif
 " }}}
