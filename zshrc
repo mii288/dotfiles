@@ -40,3 +40,8 @@ if [ -x "`which tmux`" ]; then
         tmux attach
     fi
 fi
+
+# For neovim
+export XDG_CONFIG_HOME=~/.config
+
+alias cd=cd

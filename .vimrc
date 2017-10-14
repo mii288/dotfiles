@@ -4,15 +4,26 @@ if &compatible
 endif
 
 " Required:
-set runtimepath+=~/.vim/bundles/repos/github.com/Shougo/dein.vim
+" プラグインがインストールされるディレクトリ
+let s:dein_dir = expand('~/.vim/bundles')
+" dein.vim 本体
+let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
+
+" dein.vim がなければ github から落としてくる
+if &runtimepath !~# '/dein.vim'
+  if !isdirectory(s:dein_repo_dir)
+    execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_dir
+  endif
+  execute 'set runtimepath^=' . fnamemodify(s:dein_repo_dir, ':p')
+endif
 
 " Required:
-if dein#load_state('~/.vim/bundles')
-  call dein#begin('~/.vim/bundles')
+if dein#load_state(s:dein_dir)
+  call dein#begin(s:dein_dir)
 
   " Let dein manage dein
   " Required:
-  call dein#add('~/.vim/bundles/repos/github.com/Shougo/dein.vim')
+  call dein#add(s:dein_dir . '/repos/github.com/Shougo/dein.vim')
 
   " Add or remove your plugins here:
   " --- Utility
@@ -30,7 +41,7 @@ if dein#load_state('~/.vim/bundles')
   call dein#add('Townk/vim-autoclose')
 
   " --- Visual
-  call dein#add('cocopon/iceberg.vim')       " Colorscheme
+  call dein#add('jacoborus/tender.vim')       " Colorscheme
   call dein#add('itchyny/lightline.vim')     " Customize status bar
   " dein#add('osyo-manga/vim-brightest')  " Highlight words under cursor
   call dein#add('Yggdroot/indentLine')       " display indent with mark
@@ -132,7 +143,7 @@ set expandtab
 setlocal formatoptions-=ro
 
 set guioptions+=a
-set clipboard+=unnamed,autoselect
+set clipboard+=unnamedplus
 
 "####backspace###
 " バックスペースキーで削除できるものを指定
@@ -168,7 +179,7 @@ set wildmenu " コマンドモードの補完
 " lightline.vim
 set laststatus=2
 let g:lightline = {
-    \ 'colorscheme': 'wombat',
+    \ 'colorscheme': 'tender',
     \ 'mode_map': {'c': 'NORMAL'},
     \ 'active': {
     \   'left': [
@@ -329,9 +340,19 @@ let g:multi_cursor_exit_from_insert_mode = 0
 " ------------------------------------
 " colorscheme
 " ------------------------------------
-syntax on
+" 256色
 set t_Co=256
-colorscheme iceberg
+" If you have vim >=8.0 or Neovim >= 0.1.5
+if (has("termguicolors"))
+ set termguicolors
+endif
+
+" For Neovim 0.1.3 and 0.1.4
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+
+" Theme
+syntax enable
+colorscheme tender
 
 " ------------------------------------
 " HTML
