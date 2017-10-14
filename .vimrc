@@ -34,6 +34,7 @@ if dein#load_state(s:dein_dir)
   call dein#add('w0rp/ale')                        " linter
   call dein#add('soramugi/auto-ctags.vim')         " Run the ctags command
   call dein#add('terryma/vim-multiple-cursors')    " True Sublime Text style multiple selections for Vim
+
   call dein#add('tyru/caw.vim')                    " Toggle Comment
   call dein#add('tpope/vim-fugitive')              " a Git wrapper so awesome
   call dein#add('tpope/vim-abolish')
