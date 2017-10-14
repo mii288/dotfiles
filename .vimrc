@@ -47,7 +47,7 @@ if dein#load_state(s:dein_dir)
   call dein#add('itchyny/lightline.vim')      " Customize status bar
   " dein#add('osyo-manga/vim-brightest')      " Highlight words under cursor
   call dein#add('Yggdroot/indentLine')        " display indent with mark
-  call dein#add('vim-scripts/vim-webdevicons')     " Adds gile glyphs/icons
+  call dein#add('ryanoasis/vim-webdevicons')     " Adds gile glyphs/icons
 
   " --- For PHP
   call dein#add('joonty/vdebug')       "Xdebug client
