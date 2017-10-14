@@ -120,8 +120,6 @@ set hlsearch   " 検索結果をハイライト
 nnoremap <silent><Esc><Esc> :<C-u>set nohlsearch!<CR>
 
 "#####編集設定####
-nnoremap :W :w<CR>
-
 "カーソルを表示行で移動する。物理行移動は<C-n>,<C-p>
 nnoremap j gj
 nnoremap k gk
@@ -169,9 +167,6 @@ inoremap <silent> jj <ESC>
 inoremap <silent> <C-j> j
 inoremap <silent> kk <ESC>
 inoremap <silent> <C-k> k
-
-" ctrl + , で.vimrcを開く
-nmap <C-,> :tabnew $MYVIMRC<CR>
 
 " 削除キーでyankしない
 noremap PP "0p
