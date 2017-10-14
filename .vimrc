@@ -27,7 +27,7 @@ if dein#load_state(s:dein_dir)
 
   " Add or remove your plugins here:
   " --- Utility
-  call dein#add('kien/ctrlp.vim')                 " Open files
+  call dein#add('ctrlpvim/ctrlp.vim')                 " Open files
   call dein#add('easymotion/vim-easymotion')      " Vim motion on speed!
   call dein#add('LeafCage/yankround.vim')         " Show yank history
   call dein#add('rking/ag.vim')                    " agを使えるようにする
@@ -43,9 +43,11 @@ if dein#load_state(s:dein_dir)
 
   " --- Visual
   call dein#add('jacoborus/tender.vim')       " Colorscheme
-  call dein#add('itchyny/lightline.vim')     " Customize status bar
-  " dein#add('osyo-manga/vim-brightest')  " Highlight words under cursor
-  call dein#add('Yggdroot/indentLine')       " display indent with mark
+  call dein#add('mhartington/oceanic-next')   " Colorscheme
+  call dein#add('itchyny/lightline.vim')      " Customize status bar
+  " dein#add('osyo-manga/vim-brightest')      " Highlight words under cursor
+  call dein#add('Yggdroot/indentLine')        " display indent with mark
+  call dein#add('vim-scripts/vim-webdevicons')     " Adds gile glyphs/icons
 
   " --- For PHP
   call dein#add('joonty/vdebug')       "Xdebug client
@@ -181,7 +183,7 @@ set wildmenu " コマンドモードの補完
 " lightline.vim
 set laststatus=2
 let g:lightline = {
-    \ 'colorscheme': 'tender',
+    \ 'colorscheme': 'oceanicnext',
     \ 'mode_map': {'c': 'NORMAL'},
     \ 'active': {
     \   'left': [
@@ -286,6 +288,7 @@ vmap <Leader>c <Plug>(caw:hatpos:toggle)
 " 'a' - like c, but only if the current working directory outside of CtrlP is not a direct ancestor of the directory of the current file.
 " 0 or '' (empty string) - disable this feature.
 let g:ctrlp_working_path_mode = 'ra'
+let g:webdevicons_enable_ctrlp = 1
 
 " 除外ファイルを設定
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/node_modules/*
@@ -347,6 +350,8 @@ set t_Co=256
 " If you have vim >=8.0 or Neovim >= 0.1.5
 if (has("termguicolors"))
  set termguicolors
+ let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+ let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 endif
 
 " For Neovim 0.1.3 and 0.1.4
@@ -354,7 +359,7 @@ let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 " Theme
 syntax enable
-colorscheme tender
+colorscheme OceanicNext
 
 " ------------------------------------
 " HTML
