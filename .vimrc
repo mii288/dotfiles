@@ -21,47 +21,8 @@ endif
 if dein#load_state(s:dein_dir)
   call dein#begin(s:dein_dir)
 
-  " Let dein manage dein
-  " Required:
-  call dein#add(s:dein_dir . '/repos/github.com/Shougo/dein.vim')
-
-  " Add or remove your plugins here:
-  " --- Utility
-  call dein#add('ctrlpvim/ctrlp.vim')                 " Open files
-  call dein#add('easymotion/vim-easymotion')      " Vim motion on speed!
-  call dein#add('LeafCage/yankround.vim')         " Show yank history
-  call dein#add('rking/ag.vim')                    " agを使えるようにする
-  call dein#add('w0rp/ale')                        " linter
-  call dein#add('soramugi/auto-ctags.vim')         " Run the ctags command
-  call dein#add('terryma/vim-multiple-cursors')    " True Sublime Text style multiple selections for Vim
-  call dein#add('deton/jasegment.vim')             " plugin to change WORD motion(E,W,B) for Japanese text using TinySegmenter
-
-  call dein#add('tyru/caw.vim')                    " Toggle Comment
-  call dein#add('tpope/vim-fugitive')              " a Git wrapper so awesome
-  call dein#add('tpope/vim-abolish')
-  call dein#add('junegunn/vim-easy-align')
-  call dein#add('Townk/vim-autoclose')
-
-  " --- Visual
-  call dein#add('jacoborus/tender.vim')       " Colorscheme
-  call dein#add('mhartington/oceanic-next')   " Colorscheme
-  call dein#add('itchyny/lightline.vim')      " Customize status bar
-  " dein#add('osyo-manga/vim-brightest')      " Highlight words under cursor
-  call dein#add('Yggdroot/indentLine')        " display indent with mark
-  call dein#add('ryanoasis/vim-webdevicons')     " Adds gile glyphs/icons
-
-  " --- For PHP
-  call dein#add('joonty/vdebug')       "Xdebug client
-
-  " --- For HTML/CSS 
-  call dein#add('cakebaker/scss-syntax.vim')
-  call dein#add('digitaltoad/vim-pug')          " hi jade
-  call dein#add('mattn/emmet-vim')              " Emmet
-  call dein#add('hail2u/vim-css3-syntax')       " css3
-
-  " --- For JavaScript
-  call dein#add('pangloss/vim-javascript')
-  call dein#add('posva/vim-vue')        " Vim syntax highlighting for Vue components.
+  call dein#load_toml('~/dotfiles/dein.toml', {'lazy': 0})
+  call dein#load_toml('~/dotfiles/dein_lazy.toml', {'lazy': 1})
 
   " Required:
   call dein#end()
@@ -150,7 +111,7 @@ setlocal formatoptions-=r
 setlocal formatoptions-=o
 
 set guioptions+=a
-set clipboard+=unnamed,autoselect
+set clipboard=unnamed
 
 "####backspace###
 " バックスペースキーで削除できるものを指定
@@ -314,8 +275,8 @@ endif
 " }}}
 
 "" vim-easymotion.vim
-" let g:EasyMotion_do_mapping = 0 " Disable default mappings
-" nmap s <Plug>(easymotion-s2)
+let g:EasyMotion_do_mapping = 0 " Disable default mappings
+nmap s <Plug>(easymotion-s2)
 
 "" yankround.vim
 nmap p <Plug>(yankround-p)
