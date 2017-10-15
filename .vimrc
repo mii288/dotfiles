@@ -34,6 +34,7 @@ if dein#load_state(s:dein_dir)
   call dein#add('w0rp/ale')                        " linter
   call dein#add('soramugi/auto-ctags.vim')         " Run the ctags command
   call dein#add('terryma/vim-multiple-cursors')    " True Sublime Text style multiple selections for Vim
+  call dein#add('deton/jasegment.vim')             " plugin to change WORD motion(E,W,B) for Japanese text using TinySegmenter
 
   call dein#add('tyru/caw.vim')                    " Toggle Comment
   call dein#add('tpope/vim-fugitive')              " a Git wrapper so awesome
@@ -54,8 +55,9 @@ if dein#load_state(s:dein_dir)
 
   " --- For HTML/CSS 
   call dein#add('cakebaker/scss-syntax.vim')
-  call dein#add('digitaltoad/vim-pug')  " hi jade
-  call dein#add('mattn/emmet-vim')      " Emmet
+  call dein#add('digitaltoad/vim-pug')          " hi jade
+  call dein#add('mattn/emmet-vim')              " Emmet
+  call dein#add('hail2u/vim-css3-syntax')       " css3
 
   " --- For JavaScript
   call dein#add('pangloss/vim-javascript')
@@ -131,6 +133,9 @@ inoremap <C-j> <Down>
 inoremap <C-k> <Up>
 inoremap <C-h> <Left>
 inoremap <C-l> <Right>
+
+" _を単語に含めない
+set iskeyword-=_
 
 " インデントをスペース4つに
 set tabstop=4
@@ -378,7 +383,7 @@ let g:ale_fixers = {
 let g:ale_sign_column_always = 1
 let g:ale_sign_error = '✖'
 let g:ale_sign_warning = '⚠'
-let g:ale_statusline_format = ['✖ %d', '⚠ %d', '☀']
+let g:ale_statusline_format = ['✖ %d', '⚠ %d', '✨']
 
 let g:ale_echo_msg_error_str = '✖'
 let g:ale_echo_msg_warning_str = '⚠ '
