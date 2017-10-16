@@ -18,7 +18,4 @@
     today = !git log --reverse --no-merges --branches --date=iso --pretty=\"format:%C(yellow)%h %C(green)%cd %C(red)%d %C(reset)%s\" --since=midnight --author=\"`git config --get user.name`\"
 
 [push]
-	default = current
-[user]
-	name = inaoki_misato
-	email = inaoki.misato@willgate.co.jp
+    default = current

@@ -4,9 +4,10 @@ ln -sf ~/dotfiles/.ctags               $HOME
 ln -sf ~/dotfiles/.git-completion.bash $HOME
 ln -sf ~/dotfiles/.git-prompt.sh       $HOME
 ln -sf ~/dotfiles/.gitconfig           $HOME
-ln -sf ~/dotfiles/.gitignore           $HOME
+ln -sf ~/dotfiles/gitignore            $HOME/.gitignore
 ln -sf ~/dotfiles/.tmux.conf           $HOME
 ln -sf ~/dotfiles/.vimrc               $HOME
+ln -sf ~/dotfiles/.vimrc               $HOME/.nvimrc
 
 ln -sf ~/dotfiles/zlogout              $HOME/.zlogout
 ln -sf ~/dotfiles/zpreztorc            $HOME/.zpreztorc

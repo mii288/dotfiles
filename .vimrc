@@ -4,49 +4,25 @@ if &compatible
 endif
 
 " Required:
-set runtimepath+=~/.vim/bundles/repos/github.com/Shougo/dein.vim
+" プラグインがインストールされるディレクトリ
+let s:dein_dir = expand('~/.vim/bundles')
+" dein.vim 本体
+let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
+
+" dein.vim がなければ github から落としてくる
+if &runtimepath !~# '/dein.vim'
+  if !isdirectory(s:dein_repo_dir)
+    execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_dir
+  endif
+  execute 'set runtimepath^=' . fnamemodify(s:dein_repo_dir, ':p')
+endif
 
 " Required:
-if dein#load_state('~/.vim/bundles')
-  call dein#begin('~/.vim/bundles')
+if dein#load_state(s:dein_dir)
+  call dein#begin(s:dein_dir)
 
-  " Let dein manage dein
-  " Required:
-  call dein#add('~/.vim/bundles/repos/github.com/Shougo/dein.vim')
-
-  " Add or remove your plugins here:
-  " --- Utility
-  call dein#add('kien/ctrlp.vim')               " Open files
-  call dein#add('easymotion/vim-easymotion')    " Vim motion on speed!
-  call dein#add('LeafCage/yankround.vim')       " Show yank history
-  call dein#add('rking/ag.vim')                 " agを使えるようにする
-  call dein#add('w0rp/ale')                     " linter
-  call dein#add('soramugi/auto-ctags.vim')      " Run the ctags command
-  call dein#add('terryma/vim-multiple-cursors') " True Sublime Text style multiple selections for Vim
-  call dein#add('tyru/caw.vim')                 " Toggle Comment
-  call dein#add('tpope/vim-fugitive')           " a Git wrapper so awesome
-  call dein#add('Shougo/unite.vim')             " Unite and create user interfaces
-  call dein#add('tpope/vim-abolish')
-  call dein#add('junegunn/vim-easy-align')
-  call dein#add('Townk/vim-autoclose')
-
-  " --- Visual
-  call dein#add('cocopon/iceberg.vim')       " Colorscheme
-  call dein#add('itchyny/lightline.vim')     " Customize status bar
-  " call dein#add('osyo-manga/vim-brightest')  " Highlight words under cursor
-  call dein#add('Yggdroot/indentLine')       " display indent with mark
-
-  " --- For PHP
-  call dein#add('joonty/vdebug')       "Xdebug client
-
-  " --- For HTML/CSS 
-  call dein#add('cakebaker/scss-syntax.vim')
-  call dein#add('digitaltoad/vim-pug')        " hi jade
-  call dein#add('mattn/emmet-vim')            " Emmet
-
-  " --- For JavaScript
-  call dein#add('pangloss/vim-javascript')
-  call dein#add('posva/vim-vue')           " Vim syntax highlighting for Vue components.
+  call dein#load_toml('~/dotfiles/dein.toml', {'lazy': 0})
+  call dein#load_toml('~/dotfiles/dein_lazy.toml', {'lazy': 1})
 
   " Required:
   call dein#end()
@@ -107,8 +83,6 @@ set hlsearch   " 検索結果をハイライト
 nnoremap <silent><Esc><Esc> :<C-u>set nohlsearch!<CR>
 
 "#####編集設定####
-nnoremap :W :w<CR>
-
 "カーソルを表示行で移動する。物理行移動は<C-n>,<C-p>
 nnoremap j gj
 nnoremap k gk
@@ -121,6 +95,9 @@ inoremap <C-k> <Up>
 inoremap <C-h> <Left>
 inoremap <C-l> <Right>
 
+" _を単語に含めない
+set iskeyword-=_
+
 " インデントをスペース4つに
 set tabstop=4
 set softtabstop=4
@@ -130,10 +107,11 @@ set autoindent
 set expandtab
 
 " 改行時コメントアウトさない
-setlocal formatoptions-=ro
+setlocal formatoptions-=r
+setlocal formatoptions-=o
 
 set guioptions+=a
-set clipboard+=unnamed,autoselect
+set clipboard=unnamed
 
 "####backspace###
 " バックスペースキーで削除できるものを指定
@@ -156,9 +134,6 @@ inoremap <silent> <C-j> j
 inoremap <silent> kk <ESC>
 inoremap <silent> <C-k> k
 
-" ctrl + , で.vimrcを開く
-nmap <C-,> :tabnew $MYVIMRC<CR>
-
 " 削除キーでyankしない
 noremap PP "0p
 noremap x "_x
@@ -169,7 +144,7 @@ set wildmenu " コマンドモードの補完
 " lightline.vim
 set laststatus=2
 let g:lightline = {
-    \ 'colorscheme': 'wombat',
+    \ 'colorscheme': 'oceanicnext',
     \ 'mode_map': {'c': 'NORMAL'},
     \ 'active': {
     \   'left': [
@@ -227,11 +202,11 @@ function! MyFugitive()
 endfunction
 
 function! MyFileformat()
-    return winwidth('.') > 70 ? &fileformat : ''
+    return winwidth(0) > 120 ? &fileformat . (exists('*WebDevIconsGetFileFormatSymbol') ? ' ' . WebDevIconsGetFileFormatSymbol() : '') : ''
 endfunction
 
 function! MyFiletype()
-    return winwidth('.') > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
+    return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . (exists('*WebDevIconsGetFileTypeSymbol') ? ' ' . WebDevIconsGetFileTypeSymbol() : ''): 'no ft') : ''
 endfunction
 
 function! MyFileencoding()
@@ -274,12 +249,13 @@ vmap <Leader>c <Plug>(caw:hatpos:toggle)
 " 'a' - like c, but only if the current working directory outside of CtrlP is not a direct ancestor of the directory of the current file.
 " 0 or '' (empty string) - disable this feature.
 let g:ctrlp_working_path_mode = 'ra'
+let g:webdevicons_enable_ctrlp = 1
 
 " 除外ファイルを設定
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/node_modules/*
 
 " 検索対象をgit管理ファイルに限定
-" let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 let g:ctrlp_custom_ignore = {
     \ 'dir':  '\v[\/](doc|tmp|node_modules)',
     \ 'file': '\v\.(exe|so|dll)$',
@@ -290,21 +266,17 @@ map <C-]> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 
 " agを使用する
 if executable('ag')
-    set grepprg=ag\ --nogroup\ --nocolor
-
-    " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-
-    " キャッシュを使用
+    " キャッシュの利用
     let g:ctrlp_use_caching=0
 
+    " ffで検索できるようにする
     nnoremap ff :<C-u>Ag<Space>
 endif
 " }}}
 
 "" vim-easymotion.vim
-" let g:EasyMotion_do_mapping = 0 " Disable default mappings
-" nmap s <Plug>(easymotion-s2)
+let g:EasyMotion_do_mapping = 0 " Disable default mappings
+nmap s <Plug>(easymotion-s2)
 
 "" yankround.vim
 nmap p <Plug>(yankround-p)
@@ -334,9 +306,21 @@ let g:multi_cursor_exit_from_insert_mode = 0
 " ------------------------------------
 " colorscheme
 " ------------------------------------
-syntax on
+" 256色
 set t_Co=256
-colorscheme iceberg
+" If you have vim >=8.0 or Neovim >= 0.1.5
+if (has("termguicolors"))
+ set termguicolors
+ let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+ let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+endif
+
+" For Neovim 0.1.3 and 0.1.4
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+
+" Theme
+syntax enable
+colorscheme OceanicNext
 
 " ------------------------------------
 " HTML
@@ -360,10 +344,11 @@ let g:ale_fixers = {
 \ 'php': ['phpcbf'],
 \ }
 
+" @see http://graphemica.com/characters/tags/emoji
 let g:ale_sign_column_always = 1
 let g:ale_sign_error = '✖'
 let g:ale_sign_warning = '⚠'
-let g:ale_statusline_format = ['✖ %d', '⚠ %d', '🙆']
+let g:ale_statusline_format = ['✖ %d', '⚠ %d', '✨']
 
 let g:ale_echo_msg_error_str = '✖'
 let g:ale_echo_msg_warning_str = '⚠ '
