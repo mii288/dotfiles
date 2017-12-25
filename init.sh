@@ -33,20 +33,20 @@ if [ -e /etc/centos-release ]; then
         alert "agインストール"
         sudo yum install -y the_silver_searcher
     fi
+
+    # Vim
+    if type "vim" > /dev/null 2>&1; then
+        alert "vim初期設定"
+        curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
+        sh ./installer.sh ~/.vim/bundles
+        rm -Rf ./installer.sh
+    fi
 fi
 
 # Zsh
 if type "zsh" > /dev/null 2>&1; then
     alert "zsh初期設定"
     git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
-fi
-
-# Vim
-if type "vim" > /dev/null 2>&1; then
-    alert "vim初期設定"
-    curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
-    sh ./installer.sh ~/.vim/bundles
-    rm -Rf ./installer.sh
 fi
 
 # Git
