@@ -2,12 +2,12 @@
 # Open files
 [[plugins]]
 repo = 'ctrlpvim/ctrlp.vim'
-# Vim motion on speed!
 
+# Vim motion on speed!
 [[plugins]]
 repo = 'easymotion/vim-easymotion'
-# Show yank history
 
+# Show yank history
 [[plugins]]
 repo = 'LeafCage/yankround.vim'
 
