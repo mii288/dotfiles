@@ -11,6 +11,9 @@ repo = 'easymotion/vim-easymotion'
 [[plugins]]
 repo = 'LeafCage/yankround.vim'
 
+[[plugins]]
+repo = 'irrationalistic/vim-tasks'
+
 # agを使えるようにする
 [[plugins]]
 repo = 'rking/ag.vim'
@@ -38,6 +41,10 @@ repo = 'tyru/caw.vim'
 # a Git wrapper so awesome
 [[plugins]]
 repo = 'tpope/vim-fugitive'
+
+# a Git wrapper so awesome
+[[plugins]]
+repo = 'lambdalisue/gina.vim'
 
 [[plugins]]
 repo = 'tpope/vim-abolish'

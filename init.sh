@@ -33,6 +33,11 @@ if [ -e /etc/centos-release ]; then
         alert "agインストール"
         sudo yum install -y the_silver_searcher
     fi
+
+    if ! type "ctags" > /dev/null 2>&1; then
+        alert "ctagsインストール"
+        sudo yum install -y ctags
+    fi
 fi
 
 # Zsh

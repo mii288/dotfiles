@@ -43,3 +43,4 @@ fi
 
 # For neovim
 export XDG_CONFIG_HOME=~/.config
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

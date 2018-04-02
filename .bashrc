@@ -19,6 +19,4 @@ alias cl='clear'
 alias vi='vim'
 alias grep='grep --color'
 
-if type "zsh" > /dev/null 2>&1; then
-    exec zsh
-fi
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

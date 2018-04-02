@@ -338,7 +338,7 @@ let g:user_emmet_leader_key = '<C-E>'
 " PHP
 " ------------------------------------
 let g:php_phpcs_use_global = 1
-let g:ale_php_phpcs_standard = 'PSR2'
+let g:ale_php_phpcs_standard = 'phpcs.xml'
 
 
 " ------------------------------------
