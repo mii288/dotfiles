@@ -9,21 +9,21 @@ if [ -e /etc/centos-release ]; then
     # CentOS
     sudo yum -y update
 
+    if ! type "brew" > /dev/null 2>&1; then
+        sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
+        test -d ~/.linuxbrew && PATH="$HOME/.linuxbrew/bin:$HOME/.linuxbrew/sbin:$PATH"
+        test -d /home/linuxbrew/.linuxbrew && PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:$PATH"
+        test -r ~/.bash_profile && echo "export PATH='$(brew --prefix)/bin:$(brew --prefix)/sbin'":'"$PATH"' >>~/.bash_profile
+        echo "export PATH='$(brew --prefix)/bin:$(brew --prefix)/sbin'":'"$PATH"' >>~/.profile
+    fi
+
     if ! type "zsh" > /dev/null 2>&1; then
         alert "zshインストール"
         sudo yum -y install zsh
     fi
 
     if ! type "tmux" > /dev/null 2>&1; then
-        alert "tmuxインストール"
-        sudo yum -y install libevent-devel ncurses-devel automake gcc
-        git clone https://github.com/tmux/tmux.git
-        cd tmux
-        sh autogen.sh
-        ./configure && make
-        sudo make install
-        cd ../
-        rm -Rf ./tmux
+        brew install tmux
 
         # Tmux Plugin Managerのインストール
         git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
@@ -41,17 +41,22 @@ if [ -e /etc/centos-release ]; then
 fi
 
 # Zsh
-if type "zsh" > /dev/null 2>&1; then
-    alert "zsh初期設定"
-    git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
+if type "fish" > /dev/null 2>&1; then
+    alert "fish初期設定"
+    brew tap fisherman/tap
+    brew install fish fisherman
+
+    if test -r ~/.config/fish/config.fish > /dev/null 2>&1; then
+        "export PATH='$(brew --prefix)/bin:$(brew --prefix)/sbin'":'"$PATH"' >>~/.config/fish/config.fish
+    else
+        "export PATH='$(brew --prefix)/bin:$(brew --prefix)/sbin'":'"$PATH"' >~/.config/fish/config.fish
+    fi
 fi
 
 # Vim
 if type "vim" > /dev/null 2>&1; then
     alert "vim初期設定"
-    curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
-    sh ./installer.sh ~/.vim/bundles
-    rm -Rf ./installer.sh
+    brew install vim
 fi
 
 # Git

@@ -16,7 +16,4 @@ alias cp='cp -iv'
 alias rm='rm -iv'
 alias mv='mv -iv'
 alias cl='clear'
-alias vi='vim'
 alias grep='grep --color'
-
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash

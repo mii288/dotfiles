@@ -69,6 +69,7 @@ set cindent     "オートインデント
 source $VIMRUNTIME/macros/matchit.vim " Vimの「%」を拡張する
 set list
 set listchars=tab:▸-,trail:.,eol:↲,extends:▸,precedes:<,nbsp:%
+let g:netrw_liststyle=3 " ディレクトリの場合はディレクトリツリーを表示
 
 " カーソルの速度
 set lazyredraw
@@ -337,7 +338,7 @@ let g:user_emmet_leader_key = '<C-E>'
 " ------------------------------------
 " PHP
 " ------------------------------------
-let g:php_phpcs_use_global = 1
+" let g:php_phpcs_use_global = 1
 let g:ale_php_phpcs_standard = 'phpcs.xml'
 
 
@@ -463,4 +464,3 @@ if &term =~ "xterm"
 
     inoremap <special> <expr> <Esc>[200~ XTermPasteBegin("")
 endif
-
