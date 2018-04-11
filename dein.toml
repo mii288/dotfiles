@@ -55,6 +55,9 @@ repo = 'junegunn/vim-easy-align'
 [[plugins]]
 repo = 'Townk/vim-autoclose'
 
+[[plugins]]
+repo = 'christoomey/vim-tmux-navigator'
+
 # --- Visual
 # Colorscheme
 [[plugins]]

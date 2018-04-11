@@ -151,6 +151,18 @@ noremap x "_x
 "#### コマンドモード #####
 set wildmenu " コマンドモードの補完
 
+" vdebug.vim
+let g:vdebug_options = {
+\   'path_maps': {
+\     '/var/www/milly_web': '/var/www/milly_web'
+\   },
+\   'break_on_open': 1,
+\   'ide_key' : 'WILLGATE',
+\   'watch_window_style': 'compact',
+\   'server' : '',
+\   'port': 9000
+\ }
+
 " lightline.vim
 set laststatus=2
 let g:lightline = {
@@ -467,3 +479,11 @@ if &term =~ "xterm"
 
     inoremap <special> <expr> <Esc>[200~ XTermPasteBegin("")
 endif
+
+let g:tmux_navigator_no_mappings = 1
+
+nnoremap <silent> {Left-Mapping} :TmuxNavigateLeft<cr>
+nnoremap <silent> {Down-Mapping} :TmuxNavigateDown<cr>
+nnoremap <silent> {Up-Mapping} :TmuxNavigateUp<cr>
+nnoremap <silent> {Right-Mapping} :TmuxNavigateRight<cr>
+nnoremap <silent> {Previous-Mapping} :TmuxNavigatePrevious<cr>
