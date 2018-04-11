@@ -8,9 +8,3 @@ ln -sf ~/dotfiles/gitignore            $HOME/.gitignore
 ln -sf ~/dotfiles/.tmux.conf           $HOME
 ln -sf ~/dotfiles/.vimrc               $HOME
 ln -sf ~/dotfiles/.vimrc               $HOME/.nvimrc
-
-ln -sf ~/dotfiles/zlogout              $HOME/.zlogout
-ln -sf ~/dotfiles/zpreztorc            $HOME/.zpreztorc
-ln -sf ~/dotfiles/zprofile             $HOME/.zprofile
-ln -sf ~/dotfiles/zshenv               $HOME/.zshenv
-ln -sf ~/dotfiles/zshrc                $HOME/.zshrc

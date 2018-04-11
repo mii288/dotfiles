@@ -2,14 +2,17 @@
 # Open files
 [[plugins]]
 repo = 'ctrlpvim/ctrlp.vim'
-# Vim motion on speed!
 
+# Vim motion on speed!
 [[plugins]]
 repo = 'easymotion/vim-easymotion'
-# Show yank history
 
+# Show yank history
 [[plugins]]
 repo = 'LeafCage/yankround.vim'
+
+[[plugins]]
+repo = 'irrationalistic/vim-tasks'
 
 # agを使えるようにする
 [[plugins]]
@@ -39,6 +42,10 @@ repo = 'tyru/caw.vim'
 [[plugins]]
 repo = 'tpope/vim-fugitive'
 
+# a Git wrapper so awesome
+[[plugins]]
+repo = 'lambdalisue/gina.vim'
+
 [[plugins]]
 repo = 'tpope/vim-abolish'
 
@@ -47,6 +54,9 @@ repo = 'junegunn/vim-easy-align'
 
 [[plugins]]
 repo = 'Townk/vim-autoclose'
+
+[[plugins]]
+repo = 'christoomey/vim-tmux-navigator'
 
 # --- Visual
 # Colorscheme

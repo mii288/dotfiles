@@ -24,6 +24,14 @@ if dein#load_state(s:dein_dir)
   call dein#load_toml('~/dotfiles/dein.toml', {'lazy': 0})
   call dein#load_toml('~/dotfiles/dein_lazy.toml', {'lazy': 1})
 
+  call dein#add('Shougo/deoplete.nvim', {
+  \ 'hook_add': 'let g:deoplete#enable_at_startup = 1'
+  \ })
+  if !has('nvim')
+    call dein#add('roxma/nvim-yarp')
+    call dein#add('roxma/vim-hug-neovim-rpc')
+  endif
+
   " Required:
   call dein#end()
   call dein#save_state()
@@ -54,6 +62,7 @@ au BufRead,BufNewFile *.scss set filetype=scss.css
 
 "#####全般#####
 set synmaxcol=200
+set timeoutlen=1000 ttimeoutlen=0
 
 "#####表示設定#####
 set number      "行番号を表示する
@@ -63,6 +72,7 @@ set cindent     "オートインデント
 source $VIMRUNTIME/macros/matchit.vim " Vimの「%」を拡張する
 set list
 set listchars=tab:▸-,trail:.,eol:↲,extends:▸,precedes:<,nbsp:%
+let g:netrw_liststyle=3 " ディレクトリの場合はディレクトリツリーを表示
 
 " カーソルの速度
 set lazyredraw
@@ -140,6 +150,18 @@ noremap x "_x
 
 "#### コマンドモード #####
 set wildmenu " コマンドモードの補完
+
+" vdebug.vim
+let g:vdebug_options = {
+\   'path_maps': {
+\     '/var/www/milly_web': '/var/www/milly_web'
+\   },
+\   'break_on_open': 1,
+\   'ide_key' : 'WILLGATE',
+\   'watch_window_style': 'compact',
+\   'server' : '',
+\   'port': 9000
+\ }
 
 " lightline.vim
 set laststatus=2
@@ -331,8 +353,8 @@ let g:user_emmet_leader_key = '<C-E>'
 " ------------------------------------
 " PHP
 " ------------------------------------
-let g:php_phpcs_use_global = 1
-let g:ale_php_phpcs_standard = 'PSR2'
+" let g:php_phpcs_use_global = 1
+let g:ale_php_phpcs_standard = 'phpcs.xml'
 
 
 " ------------------------------------
@@ -458,3 +480,10 @@ if &term =~ "xterm"
     inoremap <special> <expr> <Esc>[200~ XTermPasteBegin("")
 endif
 
+let g:tmux_navigator_no_mappings = 1
+
+nnoremap <silent> {Left-Mapping} :TmuxNavigateLeft<cr>
+nnoremap <silent> {Down-Mapping} :TmuxNavigateDown<cr>
+nnoremap <silent> {Up-Mapping} :TmuxNavigateUp<cr>
+nnoremap <silent> {Right-Mapping} :TmuxNavigateRight<cr>
+nnoremap <silent> {Previous-Mapping} :TmuxNavigatePrevious<cr>
