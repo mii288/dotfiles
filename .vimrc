@@ -24,7 +24,9 @@ if dein#load_state(s:dein_dir)
   call dein#load_toml('~/dotfiles/dein.toml', {'lazy': 0})
   call dein#load_toml('~/dotfiles/dein_lazy.toml', {'lazy': 1})
 
-  call dein#add('Shougo/deoplete.nvim')
+  call dein#add('Shougo/deoplete.nvim', {
+  \ 'hook_add': 'let g:deoplete#enable_at_startup = 1'
+  \ })
   if !has('nvim')
     call dein#add('roxma/nvim-yarp')
     call dein#add('roxma/vim-hug-neovim-rpc')
@@ -60,6 +62,7 @@ au BufRead,BufNewFile *.scss set filetype=scss.css
 
 "#####全般#####
 set synmaxcol=200
+set timeoutlen=1000 ttimeoutlen=0
 
 "#####表示設定#####
 set number      "行番号を表示する
