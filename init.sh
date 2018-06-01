@@ -17,9 +17,9 @@ if [ -e /etc/centos-release ]; then
         echo "export PATH='$(brew --prefix)/bin:$(brew --prefix)/sbin'":'"$PATH"' >>~/.profile
     fi
 
-    if ! type "zsh" > /dev/null 2>&1; then
-        alert "zshインストール"
-        sudo yum -y install zsh
+    if ! type "fish" > /dev/null 2>&1; then
+        alert "fishインストール"
+        sudo yum -y install fish
     fi
 
     if ! type "tmux" > /dev/null 2>&1; then

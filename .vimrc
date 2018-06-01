@@ -345,27 +345,8 @@ syntax enable
 colorscheme OceanicNext
 
 " ------------------------------------
-" HTML
+" ALE
 " ------------------------------------
-" 実行時のキーバインド変更する場合（ここではYからEに変更）
-let g:user_emmet_leader_key = '<C-E>'
-
-" ------------------------------------
-" PHP
-" ------------------------------------
-" let g:php_phpcs_use_global = 1
-let g:ale_php_phpcs_standard = 'phpcs.xml'
-
-
-" ------------------------------------
-" JavaScript
-" ------------------------------------
-let g:ale_fixers = {
-\ 'javascript': ['eslint'],
-\ 'vue': ['eslint'],
-\ 'php': ['phpcbf'],
-\ }
-
 " @see http://graphemica.com/characters/tags/emoji
 let g:ale_sign_column_always = 1
 let g:ale_sign_error = '✖'
@@ -381,9 +362,19 @@ let g:ale_lint_on_insert_leave = 0
 
 let g:ale_lint_delay = 1000
 
+let g:ale_fixers = {
+\ 'javascript': ['eslint'],
+\ 'vue': ['eslint'],
+\ 'php': ['phpcbf'],
+\ }
+
 " F8で修正
 nmap <F8> <Plug>(ale_fix)
 
+" PHP
+let g:ale_php_phpcs_standard = 'phpcs.xml'
+
+" JavaScript
 " vue
 autocmd FileType vue syntax sync fromstart
 autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
