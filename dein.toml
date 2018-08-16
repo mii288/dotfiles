@@ -92,7 +92,15 @@ repo = 'hail2u/vim-css3-syntax'
 on_ft = 'css'
 
 # --- For JavaScript
-#
 [[plugins]]
 repo = 'pangloss/vim-javascript'
 on_ft = 'js'
+
+# --- For TypeScript
+[[plugins]]
+repo = 'peitalin/vim-jsx-typescript'
+on_ft = ['typescript']
+
+[[plugins]]
+repo = 'leafgarland/typescript-vim'
+on_ft = ['typescript']

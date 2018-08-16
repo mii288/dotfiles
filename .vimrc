@@ -18,18 +18,32 @@ if &runtimepath !~# '/dein.vim'
 endif
 
 " Required:
-if dein#load_state(s:dein_dir)
-  call dein#begin(s:dein_dir)
-
-  call dein#load_toml('~/dotfiles/dein.toml', {'lazy': 0})
-  call dein#load_toml('~/dotfiles/dein_lazy.toml', {'lazy': 1})
-
-  " Required:
-  call dein#end()
-  call dein#save_state()
+if &compatible
+ set nocompatible
 endif
 
-" Required:
+" Add the dein installation directory into runtimepath
+" set runtimepath+=s:dein_repo_dir
+
+if dein#load_state(s:dein_dir)
+ call dein#begin(s:dein_dir)
+
+ call dein#add(s:dein_dir)
+
+ call dein#add('mhartington/nvim-typescript', {'build': './install.sh'})
+ call dein#add('Shougo/deoplete.nvim')
+ if !has('nvim')
+   call dein#add('roxma/nvim-yarp')
+   call dein#add('roxma/vim-hug-neovim-rpc')
+ endif
+
+ call dein#load_toml('~/dotfiles/dein.toml', {'lazy': 0})
+ call dein#load_toml('~/dotfiles/dein_lazy.toml', {'lazy': 1})
+
+ call dein#end()
+ call dein#save_state()
+endif
+
 filetype plugin indent on
 syntax enable
 
@@ -340,6 +354,7 @@ let g:ale_php_phpcs_standard = 'PSR2'
 " ------------------------------------
 let g:ale_fixers = {
 \ 'javascript': ['eslint'],
+\ 'typescript': ['tslint'],
 \ 'vue': ['eslint'],
 \ 'php': ['phpcbf'],
 \ }
@@ -366,6 +381,11 @@ nmap <F8> <Plug>(ale_fix)
 autocmd FileType vue syntax sync fromstart
 autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
 let g:vue_disable_pre_processors=1
+
+" ------------------------------------
+" TypeScript
+" ------------------------------------
+autocmd BufNewFile,BufRead *.ts,*.tsx setlocal filetype=typescript
 
 " ------------------------------------
 " Custom Function
@@ -458,3 +478,7 @@ if &term =~ "xterm"
     inoremap <special> <expr> <Esc>[200~ XTermPasteBegin("")
 endif
 
+set timeoutlen=1000 ttimeoutlen=0
+
+" deoplete.vim
+let g:deoplete#enable_at_startup = 1
