@@ -17,7 +17,7 @@ on_ft = 'jade'
 # Emmet
 [[plugins]]
 repo = 'mattn/emmet-vim'
-on_ft = ['html', 'css', 'tsx']
+on_ft = ['html', 'css', 'php', 'ctp', 'tsx']
 
 # css3
 [[plugins]]

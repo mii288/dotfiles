@@ -7,7 +7,6 @@ ln -sf ~/dotfiles/.gitconfig           $HOME
 ln -sf ~/dotfiles/gitignore            $HOME/.gitignore
 ln -sf ~/dotfiles/.tmux.conf           $HOME
 ln -sf ~/dotfiles/.vimrc               $HOME
-ln -sf ~/dotfiles/.vimrc               $HOME/.nvimrc
 ln -sf ~/dotfiles/.vim                 $HOME/.config/nvim/
 ln -sf ~/dotfiles/.vimrc               $HOME/.config/nvim/init.vim
 
