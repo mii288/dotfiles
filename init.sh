@@ -62,11 +62,6 @@ if type "vim" > /dev/null 2>&1; then
     rm -Rf ./installer.sh
 fi
 
-# Git
-alert "Git初期設定"
-curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash > .git-completion.bash
-curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.bash > .git-prompt.bash
-
 # シンボリックリンクの作成
 sh ./reflesh.sh
 
