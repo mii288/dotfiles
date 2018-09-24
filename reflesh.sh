@@ -9,9 +9,3 @@ ln -sf ~/dotfiles/.tmux.conf           $HOME
 ln -sf ~/dotfiles/.vimrc               $HOME
 ln -sf ~/dotfiles/.vim                 $HOME/.config/nvim/
 ln -sf ~/dotfiles/.vimrc               $HOME/.config/nvim/init.vim
-
-ln -sf ~/dotfiles/zlogout              $HOME/.zlogout
-ln -sf ~/dotfiles/zpreztorc            $HOME/.zpreztorc
-ln -sf ~/dotfiles/zprofile             $HOME/.zprofile
-ln -sf ~/dotfiles/zshenv               $HOME/.zshenv
-ln -sf ~/dotfiles/zshrc                $HOME/.zshrc
