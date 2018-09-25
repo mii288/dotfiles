@@ -1,7 +1,6 @@
 [core]
     editor = vim
     autocrlf = false
-    excludesfile = ~/dotfiles/git/.gitignore_global
 
 [color]
     ui = true
@@ -19,6 +18,3 @@
 
 [push]
     default = current
-[user]
-    email = inaoki.misato@willgate.co.jp
-    name = Misato Inaoki
