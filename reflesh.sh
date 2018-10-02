@@ -1,5 +1,4 @@
 #!/bin/sh
-ln -sf ~/dotfiles/.bashrc              $HOME
 ln -sf ~/dotfiles/.ctags               $HOME
 ln -sf ~/dotfiles/git/.gitconfig       $HOME
 ln -sf ~/dotfiles/.tmux.conf           $HOME
