@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<folders>
+	<folder>
+		<title>Git emoji</title>
+		<snippets>
+			<snippet>
+				<title>🔧 Linter, CI, npm scriptsの変更</title>
+				<content>:wrench: </content>
+			</snippet>
+			<snippet>
+				<title>🎨 コードの構造の変更</title>
+				<content>:art: </content>
+			</snippet>
+			<snippet>
+				<title>♻️ リファクタリングコード</title>
+				<content>:recycle: </content>
+			</snippet>
+			<snippet>
+				<title>🔥 コードやファイルの削除</title>
+				<content>:fire: </content>
+			</snippet>
+			<snippet>
+				<title>🐛 バグ修正</title>
+				<content>:bug: </content>
+			</snippet>
+			<snippet>
+				<title>✨ 新機能の導入</title>
+				<content>:sparkles: </content>
+			</snippet>
+			<snippet>
+				<title>📝 ドキュメントの執筆</title>
+				<content>:memo: </content>
+			</snippet>
+			<snippet>
+				<title>✏️ タイポの修正</title>
+				<content>:pencil2: </content>
+			</snippet>
+			<snippet>
+				<title>🚚 ファイルの移動やリネーム</title>
+				<content>:track: </content>
+			</snippet>
+			<snippet>
+				<title>💬 文言修正</title>
+				<content>:speech_balloon:</content>
+			</snippet>
+			<snippet>
+				<title>💄 UIやCSSの変更</title>
+				<content>:lipstick: </content>
+			</snippet>
+			<snippet>
+				<title>✅ テストの追加</title>
+				<content>:white_check_mark: </content>
+			</snippet>
+			<snippet>
+				<title>🚧 Work in progress</title>
+				<content>:construction: </content>
+			</snippet>
+			<snippet>
+				<title>👷 CIビルドシステムの追加</title>
+				<content>:construction_worker: </content>
+			</snippet>
+			<snippet>
+				<title>🐳 Docker</title>
+				<content>:whale: </content>
+			</snippet>
+			<snippet>
+				<title>🙈 .gitignoreの追加や修正</title>
+				<content>:see_no_evil: </content>
+			</snippet>
+		</snippets>
+	</folder>
+</folders>
