@@ -46,9 +46,9 @@ set guioptions+=a
 set clipboard=unnamed
 
 " バックスペースキーで削除できるものを指定
-" indent : 行頭の空白
-" eol    : 改行
-" start  : 挿入モード開始位置より手前の文字
+" * indent - 行頭の空白
+" * eol    - 改行
+" * start  - 挿入モード開始位置より手前の文字
 set backspace=indent,eol,start
 
 " コマンドモードの補完
