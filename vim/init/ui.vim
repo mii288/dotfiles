@@ -10,9 +10,6 @@ set title
 " 括弧の対応関係を表示する
 set showmatch
 
-"オートインデント
-set cindent
-
 " Vimの「%」を拡張する
 source $VIMRUNTIME/macros/matchit.vim
 

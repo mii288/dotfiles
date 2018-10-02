@@ -31,6 +31,13 @@ set shiftwidth=2
 set tabstop=2
 set expandtab
 
+" インデント
+" * autoindent  - 一つ前の行に基づくインデント
+" * smartindent - `autoindent`と同様だが幾つかのC構文を認識し、適切な箇所のインデントを増減させる。
+" * cindent     - 他の2つの方法よりも賢く動作し、設定することで異なるインデントスタイルにも対応できる。
+" * indentexpr  - この中で一番融通が利く: ある行のインデントを計算するのにVimスクリプトを実行する。
+set cindent
+
 " 改行時コメントアウトさない
 setlocal formatoptions-=r
 setlocal formatoptions-=o
