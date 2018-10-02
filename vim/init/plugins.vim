@@ -30,8 +30,8 @@ if dein#load_state(s:dein_dir)
   call dein#add(s:dein_dir)
 
   call dein#add('Shougo/deoplete.nvim', {
-    'hook_add': 'let g:deoplete#enable_at_startup = 1'
-  })
+  \   'hook_add': 'let g:deoplete#enable_at_startup = 1'
+  \ })
 
   if !has('nvim')
     call dein#add('roxma/nvim-yarp')
