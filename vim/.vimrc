@@ -37,8 +37,8 @@ if dein#load_state(s:dein_dir)
    call dein#add('roxma/vim-hug-neovim-rpc')
  endif
 
- call dein#load_toml('~/dotfiles/dein.toml', {'lazy': 0})
- call dein#load_toml('~/dotfiles/dein_lazy.toml', {'lazy': 1})
+ call dein#load_toml('~/dotfiles/vim/dein.toml', {'lazy': 0})
+ call dein#load_toml('~/dotfiles/vim/dein_lazy.toml', {'lazy': 1})
 
   call dein#add('Shougo/deoplete.nvim', {
   \ 'hook_add': 'let g:deoplete#enable_at_startup = 1'
