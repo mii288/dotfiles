@@ -36,8 +36,6 @@ if dein#load_state(s:dein_dir)
   if !has('nvim')
     call dein#add('roxma/nvim-yarp')
     call dein#add('roxma/vim-hug-neovim-rpc')
-  else
-    call dein#add('mhartington/nvim-typescript', {'build': './install.sh'})
   endif
 
   call dein#load_toml('~/dotfiles/vim/plugins/install/dein.toml', {'lazy': 0})

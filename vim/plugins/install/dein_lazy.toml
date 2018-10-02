@@ -28,3 +28,8 @@ on_ft = 'css'
 [[plugins]]
 repo = 'pangloss/vim-javascript'
 on_ft = 'js'
+
+[[plugins]]
+repo = 'mhartington/nvim-typescript'
+on_ft = 'ts'
+build= './install.sh'
