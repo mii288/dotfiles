@@ -6,13 +6,19 @@
     ui = true
 
 [alias]
+    a = add
     ap = add -p
     br = branch
     cancel = reset --soft HEAD^
     cm = commit -m
+    ca = commit --amend
     co = checkout
     codev = checkout develop
     coma = checkout master
+    cp = cherry-pick
+    st = status
+    mg = merge
+    pma = pull master
 
 [push]
     default = current
