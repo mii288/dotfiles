@@ -7,12 +7,12 @@
 
 [alias]
     br = branch
-    co = checkout
     cancel = reset --soft HEAD^
     cm = commit -m
-    cma = checkout master
-    cdev = checkout develop
     ap = add -p
+    co = checkout
+    codev = checkout develop
+    coma = checkout master
 
 [push]
     default = current
