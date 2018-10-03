@@ -6,10 +6,10 @@
     ui = true
 
 [alias]
+    ap = add -p
     br = branch
     cancel = reset --soft HEAD^
     cm = commit -m
-    ap = add -p
     co = checkout
     codev = checkout develop
     coma = checkout master
