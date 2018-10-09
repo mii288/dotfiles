@@ -19,7 +19,7 @@
     cp = cherry-pick
     st = status
     mg = merge
-    pma = pull master
+    pma = pull origin master
 
 [push]
     default = current
