@@ -14,8 +14,8 @@
     ca = commit --amend
     co = checkout
     cob = checkout -b
-    codev = checkout develop
-    coma = checkout master
+    cdev = checkout develop
+    cma = checkout master
     cp = cherry-pick
     st = status
     mg = merge
