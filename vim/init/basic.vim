@@ -43,7 +43,10 @@ setlocal formatoptions-=r
 setlocal formatoptions-=o
 
 set guioptions+=a
-set clipboard=unnamed
+
+if has('clipboard')
+  set clipboard=unnamed
+endif
 
 " バックスペースキーで削除できるものを指定
 " * indent - 行頭の空白
