@@ -1,56 +1,71 @@
-if &compatible
-  set nocompatible               " Be iMproved
+" https://github.com/junegunn/vim-plug
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-" Required:
-" プラグインがインストールされるディレクトリ
-let s:dein_dir = expand('~/.vim/bundles')
-" dein.vim 本体
-let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
+" Specify a directory for plugins
+" - For Neovim: stdpath('data') . '/plugged'
+" - Avoid using standard Vim directory names like 'plugin'
+call plug#begin('~/.vim/plugged')
 
-" dein.vim がなければ github から落としてくる
-if &runtimepath !~# '/dein.vim'
-  if !isdirectory(s:dein_repo_dir)
-    execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_dir
-  endif
-  execute 'set runtimepath^=' . fnamemodify(s:dein_repo_dir, ':p')
-endif
+" --- Utility
+" Open files
+Plug 'ctrlpvim/ctrlp.vim'
+" Vim motion on speed!
+Plug 'easymotion/vim-easymotion'
+" Show yank history
+Plug 'LeafCage/yankround.vim'
+Plug 'irrationalistic/vim-tasks'
+Plug 'rking/ag.vim'
+" linter
+Plug 'w0rp/ale'
+" Run the ctags command
+Plug 'soramugi/auto-ctags.vim'
+" True Sublime Text style multiple selections for Vim
+Plug 'terryma/vim-multiple-cursors'
+" plugin to change WORD motion(E,W,B) for Japanese text using TinySegmenter
+Plug 'deton/jasegment.vim'
+" Toggle Comment
+Plug 'tyru/caw.vim'
+" a Git wrapper so awesome
+Plug 'tpope/vim-fugitive'
+" a Git wrapper so awesome
+Plug 'lambdalisue/gina.vim'
+Plug 'tpope/vim-abolish'
+Plug 'junegunn/vim-easy-align'
+Plug 'Townk/vim-autoclose'
+Plug 'christoomey/vim-tmux-navigator'
 
-" Required:
-if &compatible
- set nocompatible
-endif
+" --- UI
+" Colorscheme
+Plug 'jacoborus/tender.vim'
+" Colorscheme
+Plug 'mhartington/oceanic-next'
+" Customize status bar
+Plug 'itchyny/lightline.vim'
+" Highlight words under cursor
+" Plug 'osyo-manga/vim-brightest'
+" display indent with mark
+Plug 'Yggdroot/indentLine'
+" Adds gile glyphs/icons
+Plug 'ryanoasis/vim-webdevicons'
 
-" Add the dein installation directory into runtimepath
-" set runtimepath+=s:dein_repo_dir
+" --- For HTML/CSS 
+Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'php', 'ctp', 'tsx'] }
+Plug 'cakebaker/scss-syntax.vim', { 'for': 'scss' }
+Plug 'hail2u/vim-css3-syntax', { 'for': 'css' }
 
-if dein#load_state(s:dein_dir)
-  call dein#begin(s:dein_dir)
+" --- For JavaScript
+Plug 'pangloss/vim-javascript', { 'for': 'js' }
 
-  call dein#add(s:dein_dir)
+" --- For TypeScript
+Plug 'peitalin/vim-jsx-typescript', { 'for': ['typescript'] }
+Plug 'leafgarland/typescript-vim', { 'for': ['typescript'] }
 
-  call dein#add('Shougo/deoplete.nvim', {
-  \   'hook_add': 'let g:deoplete#enable_at_startup = 1'
-  \ })
+" --- For PHP
+" Xdebug client
+Plug 'joonty/vdebug', { 'for': 'php' }
 
-  if !has('nvim')
-    call dein#add('roxma/nvim-yarp')
-    call dein#add('roxma/vim-hug-neovim-rpc')
-  endif
-
-  call dein#load_toml('~/dotfiles/vim/plugins/install/dein.toml', {'lazy': 0})
-  call dein#load_toml('~/dotfiles/vim/plugins/install/dein_lazy.toml', {'lazy': 1})
-
-  " Required:
-  call dein#end()
-  call dein#save_state()
-endif
-
-filetype plugin indent on
-syntax enable
-
-" If you want to install not installed plugins on startup.
-if dein#check_install()
-  call dein#install()
-endif
-
+call plug#end()

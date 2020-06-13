@@ -55,11 +55,8 @@ fi
 
 # Vim
 if type "vim" > /dev/null 2>&1; then
-    alert "vim初期設定"
+    alert "vimインストール"
     brew install vim
-    curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
-    sh ./installer.sh ~/.vim/bundles
-    rm -Rf ./installer.sh
 fi
 
 # シンボリックリンクの作成
