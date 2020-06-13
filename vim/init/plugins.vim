@@ -40,9 +40,7 @@ Plug 'christoomey/vim-tmux-navigator'
 
 " --- UI
 " Colorscheme
-Plug 'jacoborus/tender.vim'
-" Colorscheme
-Plug 'mhartington/oceanic-next'
+Plug 'arcticicestudio/nord-vim'
 " Customize status bar
 Plug 'itchyny/lightline.vim'
 " Highlight words under cursor
