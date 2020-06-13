@@ -1,32 +1,30 @@
 set laststatus=2
 let g:lightline = {
-    \ 'colorscheme': 'oceanicnext',
-    \ 'mode_map': {'c': 'NORMAL'},
-    \ 'active': {
-    \   'left': [
-    \     ['mode', 'paste'],
-    \     ['fugitive', 'gitgutter', 'filename'],
-    \   ],
-    \   'right': [
-    \     ['lineinfo', 'ale'],
-    \     ['percent'],
-    \     ['fileformat', 'fileencoding', 'filetype'],
-    \   ]
-    \ },
-    \ 'component_function': {
-    \   'modified': 'MyModified',
-    \   'readonly': 'MyReadonly',
-    \   'fugitive': 'MyFugitive',
-    \   'filename': 'MyFilename',
-    \   'fileformat': 'MyFileformat',
-    \   'filetype': 'MyFiletype',
-    \   'fileencoding': 'MyFileencoding',
-    \   'mode': 'MyMode',
-    \   'gitgutter': 'MyGitGutter',
-    \   'ale': 'ALEGetStatusLine',
-    \ },
-    \ 'separator': {'left': '⮀', 'right': '⮂'},
-    \ 'subseparator': {'left': '⮁', 'right': '⮃'}
+    \   'colorscheme': 'oceanicnext',
+    \   'mode_map': {'c': 'NORMAL'},
+    \   'active': {
+    \     'left': [
+    \       ['mode', 'paste'],
+    \       ['fugitive', 'gitgutter', 'filename'],
+    \     ],
+    \     'right': [
+    \       ['lineinfo', 'ale'],
+    \       ['percent'],
+    \       ['fileformat', 'fileencoding', 'filetype'],
+    \     ]
+    \   },
+    \   'component_function': {
+    \     'modified': 'MyModified',
+    \     'readonly': 'MyReadonly',
+    \     'fugitive': 'MyFugitive',
+    \     'filename': 'MyFilename',
+    \     'fileformat': 'MyFileformat',
+    \     'filetype': 'MyFiletype',
+    \     'fileencoding': 'MyFileencoding',
+    \     'mode': 'MyMode',
+    \     'gitgutter': 'MyGitGutter',
+    \     'ale': 'ALEGetStatusLine',
+    \   }
     \ }
 
 function! MyModified()
