@@ -24,9 +24,6 @@ if [ -e /etc/centos-release ]; then
 
     if ! type "tmux" > /dev/null 2>&1; then
         brew install tmux
-
-        # Tmux Plugin Managerのインストール
-        git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
     fi
 
     if ! type "ag" > /dev/null 2>&1; then
