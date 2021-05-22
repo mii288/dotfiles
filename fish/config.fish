@@ -12,3 +12,9 @@ bind -k up history-prefix-search-backward
 bind \e\[A history-prefix-search-backward
 ## CTRL - p
 bind \cp history-prefix-search-backward
+
+# anyenv
+status --is-interactive; and source (nodenv init -|psub)
+status --is-interactive; and source (rbenv init -|psub)
+status --is-interactive; and source (pyenv init -|psub)
+status --is-interactive; and source (pyenv virtualenv-init -|psub)
