@@ -1,6 +1,3 @@
 # fish-shell
 fish/fishd.*
 vim/yankround
-git
-!git/config
-!git/ignore
