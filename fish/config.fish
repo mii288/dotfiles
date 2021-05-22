@@ -1,1 +1,1 @@
-alias ghqcd="cd (ghq list -p | peco)"
+alias repo="peco_ghq_project"
