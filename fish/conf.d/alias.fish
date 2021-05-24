@@ -1,1 +1,4 @@
 alias repo="peco_ghq_project"
+alias cat="bat"
+alias ls="exa --icons"
+
