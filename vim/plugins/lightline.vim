@@ -1,6 +1,6 @@
 set laststatus=2
 let g:lightline = {
-    \   'colorscheme': 'nord',
+    \   'colorscheme': 'tokyonight',
     \   'mode_map': {'c': 'NORMAL'},
     \   'active': {
     \     'left': [

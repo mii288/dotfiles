@@ -25,6 +25,10 @@ set wildmode=list:full
 
 " colorscheme
 set t_Co=256
+set termguicolors
+let g:tokyonight_style = 'night' " available: night, storm
+let g:tokyonight_enable_italic = 1
+colorscheme tokyonight
 
 " If you have vim >=8.0 or Neovim >= 0.1.5
 if (has("termguicolors"))
