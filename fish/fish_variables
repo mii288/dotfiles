@@ -33,4 +33,5 @@ SETUVAR fish_pager_color_description:444B6A\x1e\x2d\x2ditalics
 SETUVAR fish_pager_color_prefix:F7768E\x1e\x2d\x2dbold
 SETUVAR fish_pager_color_progress:7AA2F7\x1e\x2d\x2dbold
 SETUVAR fish_user_paths:/Users/JP25375/\x2egem/ruby/2\x2e6\x2e0/bin
-SETUVAR fisher_dependency_count:peco\x1evimcolor
+SETUVAR fisher_active_prompt:technopagan
+SETUVAR fisher_dependency_count:peco\x1evimcolor\x1etechnopagan\x1eemoji\x2dclock
