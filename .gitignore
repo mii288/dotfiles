@@ -1,3 +1,6 @@
 # fish-shell
 fish/fishd.*
+fish/functions
+fish/completions
+
 vim/yankround

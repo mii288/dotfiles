@@ -3,6 +3,11 @@
 SETUVAR --export GEM_HOME:/Users/JP25375/\x2egem
 SETUVAR __fish_init_2_3_0:\x1d
 SETUVAR __fish_initialized:3100
+SETUVAR _fisher_jorgebucaran_2F_fisher_files:/Users/JP25375/\x2econfig/fish/functions/fisher\x2efish\x1e/Users/JP25375/\x2econfig/fish/completions/fisher\x2efish
+SETUVAR _fisher_oh_2D_my_2D_fish_2F_plugin_2D_emoji_2D_clock_files:/Users/JP25375/\x2econfig/fish/functions/emoji\x2dclock\x2efish
+SETUVAR _fisher_oh_2D_my_2D_fish_2F_theme_2D_technopagan_files:/Users/JP25375/\x2econfig/fish/functions/fish_prompt\x2efish
+SETUVAR _fisher_plugins:jorgebucaran/fisher\x1eoh\x2dmy\x2dfish/plugin\x2demoji\x2dclock\x1eryotako/fish\x2dvimcolor\x1eoh\x2dmy\x2dfish/theme\x2dtechnopagan
+SETUVAR _fisher_ryotako_2F_fish_2D_vimcolor_files:/Users/JP25375/\x2econfig/fish/functions/vimcolor\x2efish\x1e/Users/JP25375/\x2econfig/fish/completions/vimcolor\x2efish
 SETUVAR fish_color_autosuggestion:444B6A\x1e\x2d\x2ditalics
 SETUVAR fish_color_cancel:\x2dr
 SETUVAR fish_color_command:F7768E
@@ -33,5 +38,3 @@ SETUVAR fish_pager_color_description:444B6A\x1e\x2d\x2ditalics
 SETUVAR fish_pager_color_prefix:F7768E\x1e\x2d\x2dbold
 SETUVAR fish_pager_color_progress:7AA2F7\x1e\x2d\x2dbold
 SETUVAR fish_user_paths:/Users/JP25375/\x2egem/ruby/2\x2e6\x2e0/bin
-SETUVAR fisher_active_prompt:technopagan
-SETUVAR fisher_dependency_count:peco\x1evimcolor\x1etechnopagan\x1eemoji\x2dclock
