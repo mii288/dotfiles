@@ -2,5 +2,6 @@
 fish/fishd.*
 fish/functions
 fish/completions
+fish/fish_variables
 
 vim/yankround
