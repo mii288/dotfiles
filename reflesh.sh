@@ -1,8 +1,10 @@
-#!/bin/sh
-mkdir $HOME/.config
-ln -sf $(pwd)/.ctags $HOME
-ln -sf $(pwd)/tmux/.tmux.conf $HOME
-ln -sf $(pwd)/vim/vimrc $HOME/.vim
-ln -sf $(pwd)/vim $HOME/.config/vim 
-ln -sf $(pwd)/git $HOME/.config/git 
-ln -sf $(pwd)/fish $HOME/.config/fish
+#!/bin/h
+mkdir -p $HOME/.config/nvim
+
+ln -sfn $(pwd)/.ctags $HOME
+ln -sfn $(pwd)/tmux/.tmux.conf $HOME
+ln -sfn $(pwd)/vim/vimrc $HOME/.config/nvim/init.vim
+ln -sfn $(pwd)/vim/vimrc $HOME/.vim
+ln -sfn $(pwd)/vim $HOME/.config/vim
+ln -sfn $(pwd)/git $HOME/.config/git
+ln -sfn $(pwd)/fish $HOME/.config/fish
