@@ -22,4 +22,6 @@
     pma = pull origin master
 
 [push]
-    default = current
+	default = current
+[pull]
+	rebase = false
