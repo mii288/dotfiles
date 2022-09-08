@@ -5,7 +5,9 @@ tap "nodenv/nodenv"
 tap "rcmdnk/file"
 brew "bat"
 brew "blueutil"
+brew "direnv"
 brew "exa"
+brew "ffmpeg"
 brew "fish"
 brew "gh"
 brew "ghq"
@@ -18,8 +20,9 @@ brew "node-build"
 brew "nodenv"
 brew "nvm"
 brew "peco"
-brew "tmux"
 brew "the_silver_searcher"
+brew "tmux"
+brew "tree"
 brew "vim"
 brew "nodenv/nodenv/nodenv-nvmrc"
 cask "android-studio"
@@ -34,9 +37,3 @@ cask "krisp"
 cask "moom"
 cask "visual-studio-code"
 cask "zeplin"
-mas "1Password 7", id: 1333542190
-mas "DevCleaner", id: 1388020431
-mas "Keynote", id: 409183694
-mas "Slack", id: 803453959
-mas "TickTick", id: 966085870
-mas "Xcode", id: 497799835
