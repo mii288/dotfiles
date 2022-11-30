@@ -13,3 +13,5 @@ bind \e\[A history-prefix-search-backward
 bind \cp history-prefix-search-backward
 
 source ~/ghq/github.com/mii288/utils/fish/config.fish
+
+set -Ux EDITOR vim
