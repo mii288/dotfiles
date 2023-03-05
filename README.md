@@ -9,6 +9,6 @@ git clone https://github.com/mii288/dotfiles.git && sh ./init.sh
 Setup for fish
 
 ```sh
-sudo (which fish) >> /etc/shell
-chsh -s (which fish)
+sudo cat $(which fish) >> /etc/shells
+chsh -s $(which fish)
 ```
