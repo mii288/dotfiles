@@ -1,11 +1,11 @@
 fish_add_path /usr/local/sbin
 fish_add_path /usr/local/bin
 
-if test -d "/opt/homebrew/bin/brew"
+if test -e "/opt/homebrew/bin/brew"
   eval (/opt/homebrew/bin/brew shellenv)
 end
 
-if test -d "/home/linuxbrew/.linuxbrew/bin/brew" 
+if test -e "/home/linuxbrew/.linuxbrew/bin/brew" 
   eval (/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 end
 

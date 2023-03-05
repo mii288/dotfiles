@@ -12,8 +12,8 @@ bind \e\[A history-prefix-search-backward
 ## CTRL - p
 bind \cp history-prefix-search-backward
 
-if test -d "~/ghq/github.com/mii288/utils/fish/config.fish"
-  source ~/ghq/github.com/mii288/utils/fish/config.fish
+if test -e ~/ghq/github.com/mii288/utils/fish/config.fish
+    source ~/ghq/github.com/mii288/utils/fish/config.fish
 end
 
 set -Ux EDITOR vim
