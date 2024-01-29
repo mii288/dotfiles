@@ -17,3 +17,4 @@ if test -e ~/ghq/github.com/mii288/utils/fish/config.fish
 end
 
 set -Ux EDITOR vim
+set -Ux PYTHON /opt/homebrew/bin/python3.10
