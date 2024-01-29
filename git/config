@@ -11,9 +11,11 @@
     br = branch
     cancel = reset --soft HEAD^
     cm = commit -m
-    ca = commit --amend
+    edit = commit --amend
     co = checkout
     cob = checkout -b
+    cbeta = checkout beta
+    crc = checkout rc
     cdev = checkout develop
     cma = checkout master
     cp = cherry-pick
@@ -21,6 +23,7 @@
     mg = merge
     pma = pull origin master
     current-branch = rev-parse --abbrev-ref HEAD
+    brclean = !git branch --merged | grep -v \\* | xargs -I % git branch -d %
 
 [push]
 	default = current
@@ -33,3 +36,4 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+
