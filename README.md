@@ -1,12 +1,15 @@
 # mii288's dotfiles
 
-Run init.sh
+1. Install [Homebrew](https://brew.sh/)
+
+2. Run
 
 ```sh
-git clone https://github.com/mii288/dotfiles.git && sh ./init.sh
+brew install ghq
+ghq get -p mii288/dotfiles && sh ./init.sh
 ```
 
-Setup for fish
+3. Setup fish
 
 ```sh
 sudo cat $(which fish) >> /etc/shells
