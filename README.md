@@ -15,3 +15,7 @@ ghq get -p mii288/dotfiles && sh ./init.sh
 sudo cat $(which fish) >> /etc/shells
 chsh -s $(which fish)
 ```
+
+Links:
+
+- Fonts: [yuru7/Firge](https://github.com/yuru7/Firge)
