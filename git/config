@@ -6,6 +6,7 @@
     ui = true
 
 [alias]
+    # FYI: https://github.com/GitAlias/gitalias
     a = add
     ap = add -p
     br = branch
@@ -16,6 +17,12 @@
                 | peco \
                 | cut -d " " -f 1 \
                 | xargs -I @ git commit --fixup "@"; \
+            }; f"
+    rbi = "!f() { \
+            git log --oneline \
+                | peco \
+                | cut -d " " -f 1 \
+                | xargs -I @ git rebase -i --autosquash "@"; \
             }; f"
     edit = commit --amend
     co = checkout
