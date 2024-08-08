@@ -11,6 +11,12 @@
     br = branch
     cancel = reset --soft HEAD^
     cm = commit -m
+    cmf = "!f() { \
+            git log --oneline \
+                | peco \
+                | cut -d " " -f 1 \
+                | xargs -I @ git commit --fixup "@"; \
+            }; f"
     edit = commit --amend
     co = checkout
     cob = checkout -b
