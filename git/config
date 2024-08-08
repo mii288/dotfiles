@@ -7,36 +7,46 @@
 
 [alias]
     # FYI: https://github.com/GitAlias/gitalias
-    a = add
-    ap = add -p
-    br = branch
-    cancel = reset --soft HEAD^
-    cm = commit -m
-    cmf = "!f() { \
+    ## git add:
+    ap = add --patch
+
+    ## git branch:
+    b = branch
+
+    ## git commit:
+    ca = commit --amend
+    cm = commit --message
+    cf = "!f() { \
             git log --oneline \
                 | peco \
-                | cut -d " " -f 1 \
-                | xargs -I @ git commit --fixup "@"; \
+                | cut -d \" \" -f 1 \
+                | xargs -I @ git commit --fixup \"@\"; \
             }; f"
+
+    ## git checkout:
+    co = checkout
+    cob = checkout -b
+
+    ## git cherry-pick:
+    cp = cherry-pick
+
+    ## git pull:
+    pull1 = "!git pull origin $(git current-branch)"
+
+    ## git rebase
+    rb = rebase
     rbi = "!f() { \
             git log --oneline \
                 | peco \
-                | cut -d " " -f 1 \
-                | xargs -I @ git rebase -i --autosquash "@"; \
+                | cut -d \" \" -f 1 \
+                | xargs -I @ git rebase -i --autosquash \"@\"; \
             }; f"
-    edit = commit --amend
-    co = checkout
-    cob = checkout -b
-    cbeta = checkout beta
-    crc = checkout rc
-    cdev = checkout develop
-    cma = checkout master
-    cp = cherry-pick
-    st = status
-    mg = merge
-    pma = pull origin master
+
+    ## Branch names:
     current-branch = rev-parse --abbrev-ref HEAD
-    brclean = !git branch --merged | grep -v \\* | xargs -I % git branch -d %
+
+    ## Undo:
+    uncommit = reset --soft HEAD~1
 
 [push]
 	default = current
