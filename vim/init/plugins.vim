@@ -49,6 +49,7 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'ghifarit53/tokyonight-vim'
 " Customize status bar
 Plug 'itchyny/lightline.vim'
+Plug 'maximbaz/lightline-ale'
 " Highlight words under cursor
 " Plug 'osyo-manga/vim-brightest'
 " display indent with mark
