@@ -33,6 +33,9 @@
     ## git pull:
     pull1 = "!git pull origin $(git current-branch)"
 
+    ## git push:
+    pushy = push --force-with-lease
+
     ## git rebase
     rb = rebase
     rbi = "!f() { \
