@@ -1,6 +1,7 @@
 # fish-shell
 fish/fishd.*
 fish/functions
+fish/themes
 fish/completions
 fish/fish_variables
 
