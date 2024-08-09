@@ -1,3 +1,5 @@
+scriptencoding utf-8
+
 set synmaxcol=200
 set timeoutlen=1000 ttimeoutlen=10
 

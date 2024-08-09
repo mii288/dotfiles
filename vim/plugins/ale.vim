@@ -1,3 +1,5 @@
+scriptencoding utf-8
+
 " PHP
 let g:php_phpcs_use_global = 1
 let g:ale_php_phpcs_standard = 'phpcs.xml'
