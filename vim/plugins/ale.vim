@@ -4,9 +4,11 @@ let g:ale_php_phpcs_standard = 'phpcs.xml'
 
 " JavaScript
 let g:ale_fixers = {
-\ 'javascript': ['eslint'],
-\ 'typescript': ['tslint'],
-\ 'vue': ['eslint'],
+\ 'javascript': ['eslint', 'prettier'],
+\ 'typescript': ['eslint', 'prettier'],
+\ 'css': ['stylelint'],
+\ 'astro': ['eslint', 'stylelint', 'prettier'],
+\ 'vue': ['eslint', 'prettier'],
 \ 'php': ['phpcbf'],
 \ }
 
@@ -26,5 +28,4 @@ let g:ale_lint_on_insert_leave = 0
 
 let g:ale_lint_delay = 1000
 
-" F8で修正
-nmap <F8> <Plug>(ale_fix)
+let g:ale_fix_on_save = 1
