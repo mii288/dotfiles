@@ -5,4 +5,5 @@ fish/themes
 fish/completions
 fish/fish_variables
 
+# vim
 vim/yankround
