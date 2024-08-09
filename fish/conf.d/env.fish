@@ -16,5 +16,5 @@ set -Ux fish_user_paths $HOME/.nodenv/bin $fish_user_paths
 
 # direnv
 if direnv -v &>/dev/null
-    eval (direnv hook bash)
+    direnv hook fish | source
 end
