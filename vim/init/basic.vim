@@ -1,5 +1,5 @@
 set synmaxcol=200
-set timeoutlen=1000 ttimeoutlen=0
+set timeoutlen=1000 ttimeoutlen=10
 
 " カーソルの速度
 set lazyredraw
