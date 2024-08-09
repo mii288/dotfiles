@@ -26,4 +26,3 @@ if executable('ag')
     " ffで検索できるようにする
     nnoremap ff :<C-u>Ag<Space>
 endif
-" }}}

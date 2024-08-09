@@ -42,25 +42,25 @@ let g:lightline.component_type = {
       \ }
 
 function! MyModified()
-    return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+    return &filetype =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
 endfunction
 
 function! MyReadonly()
-    return &ft !~? 'help\|vimfiler\|gundo' && &ro ? '⭤' : ''
+    return &filetype !~? 'help\|vimfiler\|gundo' && &readonly ? '⭤' : ''
 endfunction
 
 function! MyFilename()
     return ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
-        \ (&ft == 'vimfiler' ? vimfiler#get_status_string() :
-        \  &ft == 'unite' ? unite#get_status_string() :
-        \  &ft == 'vimshell' ? substitute(b:vimshell.current_dir,expand('~'),'~','') :
+        \ (&filetype == 'vimfiler' ? vimfiler#get_status_string() :
+        \  &filetype == 'unite' ? unite#get_status_string() :
+        \  &filetype == 'vimshell' ? substitute(b:vimshell.current_dir,expand('~'),'~','') :
         \ '' != expand('%:p') ? expand('%:p') : '[No Name]') .
         \ ('' != MyModified() ? ' ' . MyModified() : '')
 endfunction
 
 function! MyFugitive()
     try
-        if &ft !~? 'vimfiler\|gundo' && exists('*fugitive#head')
+        if &filetype !~? 'vimfiler\|gundo' && exists('*fugitive#head')
             let _ = fugitive#head()
             return strlen(_) ? '⭠ '._ : ''
         endif
@@ -78,7 +78,7 @@ function! MyFiletype()
 endfunction
 
 function! MyFileencoding()
-    return winwidth('.') > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
+    return winwidth('.') > 70 ? (strlen(&fileencoding) ? &fileencoding : &encoding) : ''
 endfunction
 
 function! MyMode()
