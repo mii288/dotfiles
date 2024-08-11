@@ -1,6 +1,3 @@
-fish_add_path /usr/local/sbin
-fish_add_path /usr/local/bin
-
 # brew
 if test -e /opt/homebrew/bin/brew
     eval (/opt/homebrew/bin/brew shellenv)
@@ -18,3 +15,6 @@ set -Ux fish_user_paths $HOME/.nodenv/bin $fish_user_paths
 if direnv -v &>/dev/null
     direnv hook fish | source
 end
+
+fish_add_path /usr/local/sbin
+fish_add_path /usr/local/bin
